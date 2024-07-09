@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/4ndSemester_Summer2024/PRJ301/PRJ301_BookShop/src/java/model/Book.java</file>
-            <file>file:/E:/4ndSemester_Summer2024/PRJ301/PRJ301_BookShop/src/java/controller/LoginServlet.java</file>
-            <file>file:/E:/4ndSemester_Summer2024/PRJ301/PRJ301_BookShop/web/view/Home.jsp</file>
-            <file>file:/E:/4ndSemester_Summer2024/PRJ301/PRJ301_BookShop/src/java/service/LoginService.java</file>
-            <file>file:/E:/4ndSemester_Summer2024/PRJ301/PRJ301_BookShop/src/java/filter/AuthorizationFilter.java</file>
-            <file>file:/E:/4ndSemester_Summer2024/PRJ301/PRJ301_BookShop/src/java/dao/BookDB.java</file>
-            <file>file:/E:/4ndSemester_Summer2024/PRJ301/PRJ301_BookShop/src/java/untils/CommonConstant.java</file>
+            <file>file:/C:/Users/LAPTOP/Desktop/PRJ301/PRJ301_BookShop/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/LAPTOP/Desktop/PRJ301/PRJ301_BookShop/src/java/controller/NewServlet.java</file>
+            <file>file:/C:/Users/LAPTOP/Desktop/PRJ301/PRJ301_BookShop/src/java/model/Book.java</file>
+            <file>file:/C:/Users/LAPTOP/Desktop/PRJ301/PRJ301_BookShop/web/view/Home.jsp</file>
         </group>
     </open-files>
 </project-private>
