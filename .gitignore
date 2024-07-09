@@ -1,1 +1,40 @@
-/build/
+# Ignore build and temporary files
+build/
+dist/
+temp/
+tmp/
+
+# Ignore logs
+*.log
+
+# Ignore compiled Java classes
+*.class
+
+# Ignore Ant build files
+build.xml
+*.war
+*.ear
+
+# Ignore IntelliJ IDEA files
+.idea/
+*.iml
+
+# Ignore Eclipse files
+.project
+.classpath
+.settings/
+
+# Ignore NetBeans files
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+# Ignore MacOS specific files
+.DS_Store
+
+# Ignore Windows specific files
+Thumbs.db
