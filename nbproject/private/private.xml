@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/LAPTOP/Desktop/PRJ301/PRJ301_BookShop/nbproject/build-impl.xml</file>
-            <file>file:/C:/Users/LAPTOP/Desktop/PRJ301/PRJ301_BookShop/src/java/controller/NewServlet.java</file>
-            <file>file:/C:/Users/LAPTOP/Desktop/PRJ301/PRJ301_BookShop/src/java/model/Book.java</file>
-            <file>file:/C:/Users/LAPTOP/Desktop/PRJ301/PRJ301_BookShop/web/view/Home.jsp</file>
+            <file>file:/C:/Users/admin/Documents/App%20Record/apps-code/backend/Java/Servlet-Jsp/PRJ301_BookShop/web/views/admin/includes/navbar.jsp</file>
+            <file>file:/C:/Users/admin/Documents/App%20Record/apps-code/backend/Java/Servlet-Jsp/PRJ301_BookShop/web/views/admin/add-customer.jsp</file>
+            <file>file:/C:/Users/admin/Documents/App%20Record/apps-code/backend/Java/Servlet-Jsp/PRJ301_BookShop/web/views/admin/includes/footer.jsp</file>
+            <file>file:/C:/Users/admin/Documents/App%20Record/apps-code/backend/Java/Servlet-Jsp/PRJ301_BookShop/web/views/admin/ecommerce.jsp</file>
         </group>
     </open-files>
 </project-private>
