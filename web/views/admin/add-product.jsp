@@ -34,18 +34,95 @@
 
         <jsp:include page="./includes/navbar.jsp" />
 
-        // Body here
         <main id="content" role="main" class="main">
+
             <div class="content container-fluid">
-                Hello dat
-            </div>
+
+                <div class="page-header">
+                    <div class="row align-items-center">
+                        <div class="col-sm mb-2 mb-sm-0">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb breadcrumb-no-gutter">
+                                    <li class="breadcrumb-item"><a class="breadcrumb-link" href="ecommerce-products.html">Products</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Add product</li>
+                                </ol>
+                            </nav>
+
+                            <h1 class="page-header-title">Create new product</h1>
+                        </div>
+                    </div>
+                    <!-- End Row -->
+                </div>
+
+                <form action="AddProductServlet" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="fullName">Full Name:</label>
+                        <input type="text" class="form-control" id="fullName" name="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="descript">Description:</label>
+                        <textarea class="form-control" id="descript" name="descript" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" class="form-control" id="quantity" name="quantity" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantitySold">Quantity Sold:</label>
+                        <input type="number" class="form-control" id="quantitySold" name="quantitySold" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categoryID">Category ID:</label>
+                        <input type="number" class="form-control" id="categoryID" name="categoryID" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price:</label>
+                        <input type="number" step="0.01" class="form-control" id="price" name="price" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="author">Author:</label>
+                        <input type="text" class="form-control" id="author" name="author" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="numberOfPage">Number of Pages:</label>
+                        <input type="number" class="form-control" id="numberOfPage" name="numberOfPage" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="publisher">Publisher:</label>
+                        <input type="text" class="form-control" id="publisher" name="publisher" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="imgFile">Image File:</label>
+                        <input type="file" class="form-control-file" id="imgFile" name="imgFile" accept="image/*" required onchange="previewImage(event)">
+                    </div>
+                    <div class="form-group text-center">
+                        <img id="imgPreview" src="" alt="Image Preview" class=" mx-auto" style="max-width: 50%; height: auto; display: none" >
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Product</button>
+                </form>
+        
         </main>
-        
+
         <jsp:include page="./includes/footer.jsp" />
-        
-        
+
+        <script>
+            function previewImage(event) {
+                var reader = new FileReader();
+                reader.onload = function () {
+                    var imgPreview = document.getElementById('imgPreview');
+                    imgPreview.src = reader.result;
+                    imgPreview.style.display = 'block';
+                };
+                var fileInput = event.target;
+                if (fileInput.files && fileInput.files[0]) {
+                    reader.readAsDataURL(fileInput.files[0]);
+                }
+            }
+        </script>
+
         <script src="assets\js\demo.js"></script>
-   
+
         <!-- JS Implementing Plugins -->
         <script src="assets\js\vendor.min.js"></script>
         <script src="assets\vendor\chart.js\dist\Chart.min.js"></script>

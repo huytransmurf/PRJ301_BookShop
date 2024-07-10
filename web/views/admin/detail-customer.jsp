@@ -27,6 +27,74 @@
 
         <!-- CSS Front Template -->
         <link rel="stylesheet" href="assets\css\theme.min.css?v=1.0" />
+
+        <style>
+            body {
+                background: linear-gradient(to right, #c5fdf2, #bdaef5);
+                font-family: Arial, sans-serif;
+            }
+            .profile-card {
+                max-width: 600px;
+                margin: 50px auto;
+                background-color: #ffffff;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.1);
+                padding: 30px;
+            }
+            .profile-img {
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+                object-fit: cover;
+                margin-bottom: 20px;
+                border: 5px solid #fff;
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            }
+            .profile-name {
+                font-size: 28px;
+                font-weight: bold;
+                color: #333;
+                margin-bottom: 10px;
+            }
+            .profile-email {
+                color: #6c757d;
+                margin-bottom: 20px;
+            }
+            .profile-details {
+                border-top: 1px solid #ddd;
+                padding-top: 20px;
+            }
+            .profile-details h4 {
+                margin-bottom: 15px;
+                font-size: 22px;
+                color: #333;
+            }
+            .profile-details ul {
+                list-style-type: none;
+                padding-left: 0;
+            }
+            .profile-details ul li {
+                padding: 5px 0;
+                color: #555;
+            }
+            .btn-edit-profile {
+                background-color: #007bff;
+                color: #ffffff;
+                border: none;
+                padding: 8px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+            .btn-edit-profile:hover {
+                background-color: #0056b3;
+            }
+            .edit-profile-form {
+                display: none;
+                margin-top: 20px;
+            }
+        </style>
     </head>
 
     <body class="footer-offset">
@@ -37,15 +105,53 @@
         // Body here
         <main id="content" role="main" class="main">
             <div class="content container-fluid">
-                Hello dat
+
+                <div class="profile-card">
+                    <div class="text-center">
+                        <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-img">
+                        <div class="profile-name">User Name</div>
+                        <div class="profile-email">Email: user@example.com</div>
+                        <button class="btn btn-edit-profile" id="btnEditProfile">Edit Profile</button>
+                    </div>
+                    <div class="edit-profile-form" id="editProfileForm">
+                        <form>
+                            <div class="form-group">
+                                <label for="fullName">Full Name:</label>
+                                <input type="text" class="form-control" id="fullName" value="User Full Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="age">Age:</label>
+                                <input type="number" class="form-control" id="age" value="30">
+                            </div>
+                            <div class="form-group">
+                                <label for="location">Location:</label>
+                                <input type="text" class="form-control" id="location" value="City, Country">
+                            </div>
+                            <div class="form-group">
+                                <label for="interests">Interests:</label>
+                                <textarea class="form-control" id="interests" rows="3">Reading, Traveling</textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </form>
+                    </div>
+                    <div class="profile-details">
+                        <h4>Profile Details</h4>
+                        <ul>
+                            <li><strong>Full Name:</strong> User Full Name</li>
+                            <li><strong>Age:</strong> 30 years</li>
+                            <li><strong>Location:</strong> City, Country</li>
+                            <li><strong>Interests:</strong> Reading, Traveling</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </main>
-        
+
         <jsp:include page="./includes/footer.jsp" />
-        
-        
+
+
         <script src="assets\js\demo.js"></script>
-   
+
         <!-- JS Implementing Plugins -->
         <script src="assets\js\vendor.min.js"></script>
         <script src="assets\vendor\chart.js\dist\Chart.min.js"></script>
@@ -195,6 +301,26 @@
                 document.write(
                         '<script src="./assets/vendor/babel-polyfill/polyfill.min.js"><\/script>'
                         );
+        </script>
+
+        <script>
+            document.getElementById('btnEditProfile').addEventListener('click', function () {
+                // Toggle display of edit profile form
+                var editForm = document.getElementById('editProfileForm');
+                editForm.style.display = (editForm.style.display === 'block') ? 'none' : 'block';
+
+                // Update form fields with current profile details (if needed)
+                var fullName = document.getElementById('fullName');
+                var age = document.getElementById('age');
+                var location = document.getElementById('location');
+                var interests = document.getElementById('interests');
+
+                // Replace default values with actual profile data here
+                fullName.value = "User Full Name";
+                age.value = "30";
+                location.value = "City, Country";
+                interests.value = "Reading, Traveling";
+            });
         </script>
     </body>
 </html>

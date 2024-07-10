@@ -1,4 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="model.*" %>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -27,6 +31,48 @@
 
         <!-- CSS Front Template -->
         <link rel="stylesheet" href="assets\css\theme.min.css?v=1.0" />
+        <style>
+            body {
+                background-color: #f8f9fa;
+                padding-top: 20px;
+            }
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            .order-card {
+                margin-bottom: 20px;
+                padding: 15px;
+                background-color: #ffffff;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            }
+            .order-details {
+                margin-top: 10px;
+                padding-top: 10px;
+                border-top: 1px solid #ddd;
+            }
+            .order-details ul {
+                list-style-type: none;
+                padding-left: 0;
+            }
+            .order-details ul li {
+                padding: 5px 0;
+                font-size: 14px;
+            }
+            .order-header {
+                background-color: #00CC99;
+                color: #ffffff;
+                padding: 10px;
+                border-top-left-radius: 8px;
+                border-top-right-radius: 8px;
+                margin-bottom: 10px;
+            }
+            .order-header h4 {
+                margin: 0;
+            }
+        </style>
     </head>
 
     <body class="footer-offset">
@@ -37,15 +83,45 @@
         // Body here
         <main id="content" role="main" class="main">
             <div class="content container-fluid">
-                Hello dat
-            </div>
+                <div class="order-header text-center">
+                    <h4>Order Details</h4>
+                </div>
+                <% if (request.getAttribute("orders") != null) {
+                    ArrayList<Order> orders = (ArrayList<Order>) request.getAttribute("orders");
+                    for (Order order : orders) {
+                %>
+                <div class="order-card">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h5>Order ID: <%= order.getId() %></h5>
+                            <p>Order Date: <%= order.getOrderDate() %></p>
+                            <p>Total Cost: $<%= order.getTotalCost() %></p>
+                        </div>
+                        <div class="col-md-4 text-right">
+                            <button type="button" class="btn btn-info btn-sm">Edit Order</button>
+                        </div>
+                    </div>
+                    <div class="order-details">
+                        <h6>Order Details</h6>
+                        <ul>
+                            <% ArrayList<OrderDetail> orderDetails = (ArrayList<OrderDetail>) request.getAttribute("orderDetails");
+                            for (OrderDetail detail : orderDetails) {
+                                if (detail.getOderID() == order.getId()) { %>
+                            <li>Product ID: <%= detail.getProductID() %></li>
+                            <li>Quantity: <%= detail.getQuantity() %></li>
+                            <li>Cost: $<%= detail.getCost() %> USD</li>
+                                <% } } %>
+                        </ul>
+                    </div>
+                </div>
+                <% } } %>            </div>
         </main>
-        
+
         <jsp:include page="./includes/footer.jsp" />
-        
-        
+
+
         <script src="assets\js\demo.js"></script>
-   
+
         <!-- JS Implementing Plugins -->
         <script src="assets\js\vendor.min.js"></script>
         <script src="assets\vendor\chart.js\dist\Chart.min.js"></script>

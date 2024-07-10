@@ -71,5 +71,4 @@ public class Order {
         return "Order{" + "id=" + id + ", userID=" + userID + ", orderDate=" + orderDate + ", expectedDate=" + expectedDate + ", oderStatusID=" + oderStatusID + ", totalCost=" + totalCost + '}';
     }
     
-    
 }
