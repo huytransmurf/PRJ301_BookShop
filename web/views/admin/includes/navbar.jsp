@@ -4,6 +4,7 @@
     Author     : admin
 --%>
 
+
 <div id="styleSwitcherDropdown" class="hs-unfold-content sidebar sidebar-bordered sidebar-box-shadow" style="width: 35rem;">
     <div class="card card-lg border-0 h-100">
         <div class="card-header align-items-start">
@@ -207,7 +208,6 @@
         <!-- End Footer -->
     </div>
 </div>
-<!-- End Builder -->
 
 <!-- Builder Toggle -->
 <div class="d-none d-md-block position-fixed bottom-0 right-0 mr-5 mb-10" style="z-index: 3;">
@@ -229,230 +229,7 @@
 </div>
 
 <div id="headerMain" class="d-none">
-    <header
-        id="header"
-        class="navbar navbar-expand-lg navbar-fixed navbar-height navbar-flush navbar-container navbar-bordered"
-        >
-        <div class="navbar-nav-wrap">
-            <div class="navbar-brand-wrapper">
-                <!-- Logo -->
-                <a class="navbar-brand" href="index.html" aria-label="Front">
-                    <img
-                        class="navbar-brand-logo"
-                        src="assets\svg\logos\logo.svg"
-                        alt="Logo"
-                        />
-                    <img
-                        class="navbar-brand-logo-mini"
-                        src="assets\svg\logos\logo-short.svg"
-                        alt="Logo"
-                        />
-                </a>
-                <!-- End Logo -->
-            </div>
-
-            <div class="navbar-nav-wrap-content-left">
-                <!-- Navbar Vertical Toggle -->
-                <button
-                    type="button"
-                    class="js-navbar-vertical-aside-toggle-invoker close mr-3"
-                    >
-                    <i
-                        class="tio-first-page navbar-vertical-aside-toggle-short-align"
-                        data-toggle="tooltip"
-                        data-placement="right"
-                        title="Collapse"
-                        ></i>
-                    <i
-                        class="tio-last-page navbar-vertical-aside-toggle-full-align"
-                        data-template='<div class="tooltip d-none d-sm-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>'
-                        data-toggle="tooltip"
-                        data-placement="right"
-                        title="Expand"
-                        ></i>
-                </button>
-                <!-- End Navbar Vertical Toggle -->
-
-                <!-- Search Form -->
-                <div class="d-none d-md-block">
-                    <form class="position-relative">
-                        <!-- Input Group -->
-                        <div
-                            class="input-group input-group-merge input-group-borderless input-group-hover-light navbar-input-group"
-                            >
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <i class="tio-search"></i>
-                                </div>
-                            </div>
-                            <input
-                                type="search"
-                                class="js-form-search form-control"
-                                placeholder="Search in front"
-                                aria-label="Search in front"
-                                data-hs-form-search-options='{
-                                "clearIcon": "#clearSearchResultsIcon",
-                                "dropMenuElement": "#searchDropdownMenu",
-                                "dropMenuOffset": 20,
-                                "toggleIconOnFocus": true,
-                                "activeClass": "focus"
-                                }'
-                                />
-                            <a class="input-group-append" href="javascript:;">
-                                <span class="input-group-text">
-                                    <i
-                                        id="clearSearchResultsIcon"
-                                        class="tio-clear"
-                                        style="display: none"
-                                        ></i>
-                                </span>
-                            </a>
-                        </div>
-                        <!-- End Input Group -->
-
-                        <!-- Card Search Content -->
-
-                        <!-- End Card Search Content -->
-                    </form>
-                </div>
-                <!-- End Search Form -->
-            </div>
-
-            <!-- Secondary Content -->
-
-            <div class="navbar-nav-wrap-content-right">
-                <!-- Navbar -->
-                <ul class="navbar-nav align-items-center flex-row">
-
-
-                    <li class="nav-item">
-                        <!-- Account -->
-                        <div class="hs-unfold">
-                            <a class="js-hs-unfold-invoker navbar-dropdown-account-wrapper" href="javascript:;" data-hs-unfold-options='{
-                               "target": "#accountNavbarDropdown",
-                               "type": "css-animation"
-                               }'>
-                                <div class="avatar avatar-sm avatar-circle">
-                                    <img class="avatar-img" src="assets\img\160x160\img6.jpg" alt="Image Description">
-                                    <span class="avatar-status avatar-sm-status avatar-status-success"></span>
-                                </div>
-                            </a>
-
-                            <div id="accountNavbarDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right navbar-dropdown-menu navbar-dropdown-account" style="width: 16rem;">
-                                <div class="dropdown-item-text">
-                                    <div class="media align-items-center">
-                                        <div class="avatar avatar-sm avatar-circle mr-2">
-                                            <img class="avatar-img" src="assets\img\160x160\img6.jpg" alt="Image Description">
-                                        </div>
-                                        <div class="media-body">
-                                            <span class="card-title h5">Mark Williams</span>
-                                            <span class="card-text">mark@example.com</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="dropdown-divider"></div>
-
-                                <!-- Unfold -->
-                                <div class="hs-unfold w-100">
-                                    <a class="js-hs-unfold-invoker navbar-dropdown-submenu-item dropdown-item d-flex align-items-center" href="javascript:;" data-hs-unfold-options='{
-                                       "target": "#navSubmenuPagesAccountDropdown1",
-                                       "event": "hover"
-                                       }'>
-                                        <span class="text-truncate pr-2" title="Set status">Set status</span>
-                                        <i class="tio-chevron-right navbar-dropdown-submenu-item-invoker ml-auto"></i>
-                                    </a>
-
-                                    <div id="navSubmenuPagesAccountDropdown1" class="hs-unfold-content hs-unfold-has-submenu dropdown-unfold dropdown-menu navbar-dropdown-sub-menu">
-                                        <a class="dropdown-item" href="#">
-                                            <span class="legend-indicator bg-success mr-1"></span>
-                                            <span class="text-truncate pr-2" title="Available">Available</span>
-                                        </a>
-                                        <a class="dropdown-item" href="#">
-                                            <span class="legend-indicator bg-danger mr-1"></span>
-                                            <span class="text-truncate pr-2" title="Busy">Busy</span>
-                                        </a>
-                                        <a class="dropdown-item" href="#">
-                                            <span class="legend-indicator bg-warning mr-1"></span>
-                                            <span class="text-truncate pr-2" title="Away">Away</span>
-                                        </a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">
-                                            <span class="text-truncate pr-2" title="Reset status">Reset status</span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- End Unfold -->
-
-                                <a class="dropdown-item" href="#">
-                                    <span class="text-truncate pr-2" title="Profile &amp; account">Profile &amp; account</span>
-                                </a>
-
-                                <a class="dropdown-item" href="#">
-                                    <span class="text-truncate pr-2" title="Settings">Settings</span>
-                                </a>
-
-                                <div class="dropdown-divider"></div>
-
-                                <a class="dropdown-item" href="#">
-                                    <div class="media align-items-center">
-                                        <div class="avatar avatar-sm avatar-dark avatar-circle mr-2">
-                                            <span class="avatar-initials">HS</span>
-                                        </div>
-                                        <div class="media-body">
-                                            <span class="card-title h5">Htmlstream <span class="badge badge-primary badge-pill text-uppercase ml-1">PRO</span></span>
-                                            <span class="card-text">hs.example.com</span>
-                                        </div>
-                                    </div>
-                                </a>
-
-                                <div class="dropdown-divider"></div>
-
-                                <!-- Unfold -->
-                                <div class="hs-unfold w-100">
-                                    <a class="js-hs-unfold-invoker navbar-dropdown-submenu-item dropdown-item d-flex align-items-center" href="javascript:;" data-hs-unfold-options='{
-                                       "target": "#navSubmenuPagesAccountDropdown2",
-                                       "event": "hover"
-                                       }'>
-                                        <span class="text-truncate pr-2" title="Customization">Customization</span>
-                                        <i class="tio-chevron-right navbar-dropdown-submenu-item-invoker  ml-auto"></i>
-                                    </a>
-
-                                    <div id="navSubmenuPagesAccountDropdown2" class="hs-unfold-content hs-unfold-has-submenu dropdown-unfold dropdown-menu navbar-dropdown-sub-menu">
-                                        <a class="dropdown-item" href="#">
-                                            <span class="text-truncate pr-2" title="Invite people">Invite people</span>
-                                        </a>
-                                        <a class="dropdown-item" href="#">
-                                            <span class="text-truncate pr-2" title="Analytics">Analytics</span>
-                                            <i class="tio-open-in-new"></i>
-                                        </a>
-                                        <a class="dropdown-item" href="#">
-                                            <span class="text-truncate pr-2" title="Customize Front">Customize Front</span>
-                                            <i class="tio-open-in-new"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- End Unfold -->
-
-                                <a class="dropdown-item" href="#">
-                                    <span class="text-truncate pr-2" title="Manage team">Manage team</span>
-                                </a>
-
-                                <div class="dropdown-divider"></div>
-
-                                <a class="dropdown-item" href="#">
-                                    <span class="text-truncate pr-2" title="Sign out">Sign out</span>
-                                </a>
-                            </div>
-                        </div>
-                        <!-- End Account -->
-                    </li>
-                </ul>
-                <!-- End Navbar -->
-            </div>
-            <!-- End Secondary Content -->
-        </div>
-    </header>
+  
 </div>
 <div id="headerFluid" class="d-none">
     <header
@@ -590,7 +367,7 @@
                                         <li class="nav-item">
                                             <a
                                                 class="nav-link active"
-                                                href="ecommerce.html"
+                                                href="admin.jsp"
                                                 title="Overview"
                                                 >
                                                 <span
@@ -618,7 +395,7 @@
                                                 <li class="nav-item">
                                                     <a
                                                         class="nav-link"
-                                                        href="ecommerce-products.html"
+                                                        href="list-product.jsp"
                                                         title="Products"
                                                         >
                                                         <span
@@ -630,7 +407,7 @@
                                                 <li class="nav-item">
                                                     <a
                                                         class="nav-link"
-                                                        href="ecommerce-product-details.html"
+                                                        href="detail-product.jsp"
                                                         title="Product Details"
                                                         >
                                                         <span
@@ -644,7 +421,7 @@
                                                 <li class="nav-item">
                                                     <a
                                                         class="nav-link"
-                                                        href="ecommerce-add-product.html"
+                                                        href="add-product.jsp"
                                                         title="Add Product"
                                                         >
                                                         <span
@@ -674,7 +451,7 @@
                                                 <li class="nav-item">
                                                     <a
                                                         class="nav-link"
-                                                        href="ecommerce-orders.html"
+                                                        href="list-order.jsp"
                                                         title="Orders"
                                                         >
                                                         <span
@@ -686,7 +463,7 @@
                                                 <li class="nav-item">
                                                     <a
                                                         class="nav-link"
-                                                        href="ecommerce-order-details.html"
+                                                        href="detail-order.jsp"
                                                         title="Order Details"
                                                         >
                                                         <span
@@ -716,7 +493,7 @@
                                                 <li class="nav-item">
                                                     <a
                                                         class="nav-link"
-                                                        href="ecommerce-customers.html"
+                                                        href="list-customer.jsp"
                                                         title="Customers"
                                                         >
                                                         <span
@@ -728,7 +505,7 @@
                                                 <li class="nav-item">
                                                     <a
                                                         class="nav-link"
-                                                        href="ecommerce-customer-details.html"
+                                                        href="detail-customer.jsp"
                                                         title="Customer Details"
                                                         >
                                                         <span
@@ -742,7 +519,7 @@
                                                 <li class="nav-item">
                                                     <a
                                                         class="nav-link"
-                                                        href="ecommerce-add-customers.html"
+                                                        href="add-customer.jsp"
                                                         title="Add Customers"
                                                         >
                                                         <span
@@ -757,7 +534,7 @@
                                         <li class="nav-item">
                                             <a
                                                 class="nav-link"
-                                                href="ecommerce-manage-reviews.html"
+                                                href="manage-review.jsp"
                                                 title="Manage Reviews"
                                                 >
                                                 <span

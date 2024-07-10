@@ -31,21 +31,479 @@
 
     <body class="footer-offset">
         <script src="assets\vendor\hs-navbar-vertical-aside\hs-navbar-vertical-aside-mini-cache.js"></script>
+        <script src="assets\js\demo.js"></script>
 
         <jsp:include page="./includes/navbar.jsp" />
 
-        // Body here
         <main id="content" role="main" class="main">
+            <!-- Content -->
             <div class="content container-fluid">
-                Hello dat
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="row align-items-center mb-3">
+                        <div class="col-sm mb-2 mb-sm-0">
+                            <h1 class="page-header-title">Products <span class="badge badge-soft-dark ml-2">72,031</span></h1>
+                        </div>
+
+                        <div class="col-sm-auto">
+                            <a class="btn btn-primary" href="ecommerce-add-product.html">Add product</a>
+                        </div>
+                    </div>
+                    <!-- End Row -->
+
+                    <!-- Nav Scroller -->
+                    <div class="js-nav-scroller hs-nav-scroller-horizontal">
+                        <span class="hs-nav-scroller-arrow-prev" style="display: none;">
+                            <a class="hs-nav-scroller-arrow-link" href="javascript:;">
+                                <i class="tio-chevron-left"></i>
+                            </a>
+                        </span>
+
+                        <span class="hs-nav-scroller-arrow-next" style="display: none;">
+                            <a class="hs-nav-scroller-arrow-link" href="javascript:;">
+                                <i class="tio-chevron-right"></i>
+                            </a>
+                        </span>
+
+                        <!-- Nav -->
+                        <ul class="nav nav-tabs page-header-tabs" id="pageHeaderTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">All products</a>
+                            </li>
+                        </ul>
+                        <!-- End Nav -->
+                    </div>
+                    <!-- End Nav Scroller -->
+                </div>
+                <!-- End Page Header -->
+
+                <div class="row justify-content-end mb-3">
+                    <div class="col-lg">
+                        <!-- Datatable Info -->
+                        <div id="datatableCounterInfo" style="display: none;">
+                            <div class="d-sm-flex justify-content-lg-end align-items-sm-center">
+                                <span class="d-block d-sm-inline-block font-size-sm mr-3 mb-2 mb-sm-0">
+                                    <span id="datatableCounter">0</span>
+                                    Selected
+                                </span>
+                                <a class="btn btn-sm btn-outline-danger mb-2 mb-sm-0 mr-2" href="java1script:;">
+                                    <i class="tio-delete-outlined"></i> Delete
+                                </a>
+
+                            </div>
+                        </div>
+                        <!-- End Datatable Info -->
+                    </div>
+                </div>
+                <!-- End Row -->
+
+                <!-- Card -->
+                <div class="card">
+                    <!-- Header -->
+
+                    <!-- End Header -->
+
+                    <!-- Table -->
+                    <div class="table-responsive datatable-custom">
+                        <table id="datatable" class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table" data-hs-datatables-options='{
+                               "columnDefs": [{
+                               "targets": [0, 4, 9],
+                               "width": "5%",
+                               "orderable": false
+                               }],
+                               "order": [],
+                               "info": {
+                               "totalQty": "#datatableWithPaginationInfoTotalQty"
+                               },
+                               "search": "#datatableSearch",
+                               "entries": "#datatableEntries",
+                               "pageLength": 12,
+                               "isResponsive": false,
+                               "isShowPaging": false,
+                               "pagination": "datatablePagination"
+                               }'>
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col" class="table-column-pr-0">
+                                    </th>
+                                    <th class="table-column-pl-0">Product</th>
+                                    <th>Type</th>
+                                    <th>Vendor</th>
+                                    <th>Stocks</th>
+                                    <th>SKU</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Variants</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td class="table-column-pr-0">
+                                        
+                                    </td>
+                                    <td class="table-column-pl-0">
+                                        <a class="media align-items-center" href="ecommerce-product-details.html">
+                                            <img class="avatar avatar-lg mr-3" src="assets\img\400x400\img4.jpg" alt="Image Description">
+                                            <div class="media-body">
+                                                <h5 class="text-hover-primary mb-0">Photive wireless speakers</h5>
+                                            </div>
+                                        </a>
+                                    </td>
+                                    <td>Electronics</td>
+                                    <td>Google</td>
+                                    <td>
+                                        <label class="toggle-switch toggle-switch-sm" for="stocksCheckbox1">
+                                            <input type="checkbox" class="toggle-switch-input" id="stocksCheckbox1" checked="">
+                                            <span class="toggle-switch-label">
+                                                <span class="toggle-switch-indicator"></span>
+                                            </span>
+                                        </label>
+                                    </td>
+                                    <td>2384741241</td>
+                                    <td>$65</td>
+                                    <td>60</td>
+                                    <td>2</td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <a class="btn btn-sm btn-warning " href="ecommerce-product-details.html" style="margin-right: 5px;">
+                                                <i class="tio-edit"></i> Edit
+                                            </a>
+                                               
+                                             <a class="btn btn-sm btn-danger me-2" href="ecommerce-product-details.html">
+                                                <i class="tio-edit"></i> Delete
+                                            </a>
+                                            <!-- End Unfold -->
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-column-pr-0">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="productsCheck2">
+                                            <label class="custom-control-label" for="productsCheck2"></label>
+                                        </div>
+                                    </td>
+                                    <td class="table-column-pl-0">
+                                        <a class="media align-items-center" href="ecommerce-product-details.html">
+                                            <img class="avatar avatar-lg mr-3" src="assets\img\400x400\img26.jpg" alt="Image Description">
+                                            <div class="media-body">
+                                                <h5 class="text-hover-primary mb-0">Topman shoe</h5>
+                                            </div>
+                                        </a>
+                                    </td>
+                                    <td>Shoes</td>
+                                    <td>Topman</td>
+                                    <td>
+                                        <label class="toggle-switch toggle-switch-sm" for="stocksCheckbox2">
+                                            <input type="checkbox" class="toggle-switch-input" id="stocksCheckbox2" checked="">
+                                            <span class="toggle-switch-label">
+                                                <span class="toggle-switch-indicator"></span>
+                                            </span>
+                                        </label>
+                                    </td>
+                                    <td>4124123847</td>
+                                    <td>$21</td>
+                                    <td>125</td>
+                                    <td>4</td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <a class="btn btn-sm btn-white" href="ecommerce-product-details.html">
+                                                <i class="tio-edit"></i> Edit
+                                            </a>
+
+                                            <!-- Unfold -->
+                                            <div class="hs-unfold btn-group">
+                                                <a class="js-hs-unfold-invoker btn btn-icon btn-sm btn-white dropdown-toggle dropdown-toggle-empty" href="javascript:;" data-hs-unfold-options='{
+                                                   "target": "#productsEditDropdown2",
+                                                   "type": "css-animation",
+                                                   "smartPositionOffEl": "#datatable"
+                                                   }'></a>
+
+                                                <div id="productsEditDropdown2" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right mt-1">
+                                                    <a class="dropdown-item" href="#">
+                                                        <i class="tio-delete-outlined dropdown-item-icon"></i> Delete
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                            <!-- End Unfold -->
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-column-pr-0">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="productsCheck3">
+                                            <label class="custom-control-label" for="productsCheck3"></label>
+                                        </div>
+                                    </td>
+                                    <td class="table-column-pl-0">
+                                        <a class="media align-items-center" href="ecommerce-product-details.html">
+                                            <img class="avatar avatar-lg mr-3" src="assets\img\400x400\img25.jpg" alt="Image Description">
+                                            <div class="media-body">
+                                                <h5 class="text-hover-primary mb-0">RayBan black sunglasses</h5>
+                                            </div>
+                                        </a>
+                                    </td>
+                                    <td>Accessories</td>
+                                    <td>RayBan</td>
+                                    <td>
+                                        <label class="toggle-switch toggle-switch-sm" for="stocksCheckbox3">
+                                            <input type="checkbox" class="toggle-switch-input" id="stocksCheckbox3" checked="">
+                                            <span class="toggle-switch-label">
+                                                <span class="toggle-switch-indicator"></span>
+                                            </span>
+                                        </label>
+                                    </td>
+                                    <td>8472341241</td>
+                                    <td>$37</td>
+                                    <td>42</td>
+                                    <td>1</td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <a class="btn btn-sm btn-white" href="ecommerce-product-details.html">
+                                                <i class="tio-edit"></i> Edit
+                                            </a>
+
+                                            <!-- Unfold -->
+                                            <div class="hs-unfold btn-group">
+                                                <a class="js-hs-unfold-invoker btn btn-icon btn-sm btn-white dropdown-toggle dropdown-toggle-empty" href="javascript:;" data-hs-unfold-options='{
+                                                   "target": "#productsEditDropdown3",
+                                                   "type": "css-animation",
+                                                   "smartPositionOffEl": "#datatable"
+                                                   }'></a>
+
+                                                <div id="productsEditDropdown3" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right mt-1">
+                                                    <a class="dropdown-item" href="#">
+                                                        <i class="tio-delete-outlined dropdown-item-icon"></i> Delete
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                            <!-- End Unfold -->
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-column-pr-0">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="productsCheck4">
+                                            <label class="custom-control-label" for="productsCheck4"></label>
+                                        </div>
+                                    </td>
+                                    <td class="table-column-pl-0">
+                                        <a class="media align-items-center" href="ecommerce-product-details.html">
+                                            <img class="avatar avatar-lg mr-3" src="assets\img\400x400\img6.jpg" alt="Image Description">
+                                            <div class="media-body">
+                                                <h5 class="text-hover-primary mb-0">Mango Women's shoe</h5>
+                                            </div>
+                                        </a>
+                                    </td>
+                                    <td>Shoes</td>
+                                    <td>Mango</td>
+                                    <td>
+                                        <label class="toggle-switch toggle-switch-sm" for="stocksCheckbox4">
+                                            <input type="checkbox" class="toggle-switch-input" id="stocksCheckbox4">
+                                            <span class="toggle-switch-label">
+                                                <span class="toggle-switch-indicator"></span>
+                                            </span>
+                                        </label>
+                                    </td>
+                                    <td>2412384741</td>
+                                    <td>$65</td>
+                                    <td>76</td>
+                                    <td>3</td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <a class="btn btn-sm btn-white" href="ecommerce-product-details.html">
+                                                <i class="tio-edit"></i> Edit
+                                            </a>
+
+                                            <!-- Unfold -->
+                                            <div class="hs-unfold btn-group">
+                                                <a class="js-hs-unfold-invoker btn btn-icon btn-sm btn-white dropdown-toggle dropdown-toggle-empty" href="javascript:;" data-hs-unfold-options='{
+                                                   "target": "#productsEditDropdown4",
+                                                   "type": "css-animation",
+                                                   "smartPositionOffEl": "#datatable"
+                                                   }'></a>
+
+                                                <div id="productsEditDropdown4" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right mt-1">
+                                                    <a class="dropdown-item" href="#">
+                                                        <i class="tio-delete-outlined dropdown-item-icon"></i> Delete
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                            <!-- End Unfold -->
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="table-column-pr-0">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="productsCheck5">
+                                            <label class="custom-control-label" for="productsCheck5"></label>
+                                        </div>
+                                    </td>
+                                    <td class="table-column-pl-0">
+                                        <a class="media align-items-center" href="ecommerce-product-details.html">
+                                            <img class="avatar avatar-lg mr-3" src="assets\img\400x400\img3.jpg" alt="Image Description">
+                                            <div class="media-body">
+                                                <h5 class="text-hover-primary mb-0">Calvin Klein t-shirts</h5>
+                                            </div>
+                                        </a>
+                                    </td>
+                                    <td>Clothing</td>
+                                    <td>Calvin Klein</td>
+                                    <td>
+                                        <label class="toggle-switch toggle-switch-sm" for="stocksCheckbox5">
+                                            <input type="checkbox" class="toggle-switch-input" id="stocksCheckbox5">
+                                            <span class="toggle-switch-label">
+                                                <span class="toggle-switch-indicator"></span>
+                                            </span>
+                                        </label>
+                                    </td>
+                                    <td>8234741241</td>
+                                    <td>$89</td>
+                                    <td>99</td>
+                                    <td>7</td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <a class="btn btn-sm btn-white" href="ecommerce-product-details.html">
+                                                <i class="tio-edit"></i> Edit
+                                            </a>
+
+                                            <!-- Unfold -->
+                                            <div class="hs-unfold btn-group">
+                                                <a class="js-hs-unfold-invoker btn btn-icon btn-sm btn-white dropdown-toggle dropdown-toggle-empty" href="javascript:;" data-hs-unfold-options='{
+                                                   "target": "#productsEditDropdown5",
+                                                   "type": "css-animation",
+                                                   "smartPositionOffEl": "#datatable"
+                                                   }'></a>
+
+                                                <div id="productsEditDropdown5" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right mt-1">
+                                                    <a class="dropdown-item" href="#">
+                                                        <i class="tio-delete-outlined dropdown-item-icon"></i> Delete
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                            <!-- End Unfold -->
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- End Table -->
+
+                    <!-- Footer -->
+                    <div class="card-footer">
+                        <!-- Pagination -->
+                        <div class="row justify-content-center justify-content-sm-between align-items-sm-center">
+                            <div class="col-sm mb-2 mb-sm-0">
+                                <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
+                                    <span class="mr-2">Showing:</span>
+
+                                    <!-- Select -->
+                                    <select id="datatableEntries" class="js-select2-custom" data-hs-select2-options='{
+                                            "minimumResultsForSearch": "Infinity",
+                                            "customClass": "custom-select custom-select-sm custom-select-borderless",
+                                            "dropdownAutoWidth": true,
+                                            "width": true
+                                            }'>
+                                        <option value="12" selected="">12</option>
+                                        <option value="14">14</option>
+                                        <option value="16">16</option>
+                                        <option value="18">18</option>
+                                    </select>
+                                    <!-- End Select -->
+
+                                    <span class="text-secondary mr-2">of</span>
+
+                                    <!-- Pagination Quantity -->
+                                    <span id="datatableWithPaginationInfoTotalQty"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-auto">
+                                <div class="d-flex justify-content-center justify-content-sm-end">
+                                    <!-- Pagination -->
+                                    <nav id="datatablePagination" aria-label="Activity pagination"></nav>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Pagination -->
+                    </div>
+                    <!-- End Footer -->
+                </div>
+                <!-- End Card -->
             </div>
+            <!-- End Content -->
+
+            <!-- Footer -->
+
+            <div class="footer">
+                <div class="row justify-content-between align-items-center">
+                    <div class="col">
+                        <p class="font-size-sm mb-0">&copy; Front. <span class="d-none d-sm-inline-block">2020 Htmlstream.</span></p>
+                    </div>
+                    <div class="col-auto">
+                        <div class="d-flex justify-content-end">
+                            <!-- List Dot -->
+                            <ul class="list-inline list-separator">
+                                <li class="list-inline-item">
+                                    <a class="list-separator-link" href="#">FAQ</a>
+                                </li>
+
+                                <li class="list-inline-item">
+                                    <a class="list-separator-link" href="#">License</a>
+                                </li>
+
+                                <li class="list-inline-item">
+                                    <!-- Keyboard Shortcuts Toggle -->
+                                    <div class="hs-unfold">
+                                        <a class="js-hs-unfold-invoker btn btn-icon btn-ghost-secondary rounded-circle" href="javascript:;" data-hs-unfold-options='{
+                                           "target": "#keyboardShortcutsSidebar",
+                                           "type": "css-animation",
+                                           "animationIn": "fadeInRight",
+                                           "animationOut": "fadeOutRight",
+                                           "hasOverlay": true,
+                                           "smartPositionOff": true
+                                           }'>
+                                            <i class="tio-command-key"></i>
+                                        </a>
+                                    </div>
+                                    <!-- End Keyboard Shortcuts Toggle -->
+                                </li>
+                            </ul>
+                            <!-- End List Dot -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- End Footer -->
         </main>
-        
+
         <jsp:include page="./includes/footer.jsp" />
-        
-        
+
+
         <script src="assets\js\demo.js"></script>
-   
+
         <!-- JS Implementing Plugins -->
         <script src="assets\js\vendor.min.js"></script>
         <script src="assets\vendor\chart.js\dist\Chart.min.js"></script>
@@ -54,8 +512,7 @@
         <!-- JS Front -->
         <script src="assets\js\theme.min.js"></script>
 
-        <!-- JS Plugins Init. -->
-        <script>
+     <script>
             $(document).on("ready", function () {
                 // ONLY DEV
                 // =======================================================
