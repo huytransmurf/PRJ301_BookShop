@@ -4,41 +4,51 @@
  */
 package model;
 
-/**
- *
- * @author LAPTOP ACER
- */
 public class Product {
-    private int id;
-    private String fullName, descript;
-    private int quantity, quantitySold;
-    private String imgUrl;
+
+    private int productID;
+    private boolean bestSeller;
+    private String fullName;
+    private String description;
+    private int quantity;
+    private int quantitySold;
+    private String imageURL;
     private int categoryID;
     private double price;
-    private String author;
-    private int numberOfPage;
-    private String publisher;
+    private int discount;
 
-    public Product(int id, String fullName, String descript, int quantity, int quantitySold, String imgUrl, int categoryID, double price, String author, int numberOfPage, String publisher) {
-        this.id = id;
+    // Constructors
+    public Product() {
+    }
+
+    public Product(boolean bestSeller, String fullName, String description, int quantity, int quantitySold,
+            String imageURL, int categoryID, double price, int discount) {
+        this.bestSeller = bestSeller;
         this.fullName = fullName;
-        this.descript = descript;
+        this.description = description;
         this.quantity = quantity;
         this.quantitySold = quantitySold;
-        this.imgUrl = imgUrl;
+        this.imageURL = imageURL;
         this.categoryID = categoryID;
         this.price = price;
-        this.author = author;
-        this.numberOfPage = numberOfPage;
-        this.publisher = publisher;
+        this.discount = discount;
     }
 
-    public int getId() {
-        return id;
+    // Getters and setters
+    public int getProductID() {
+        return productID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setProductID(int productID) {
+        this.productID = productID;
+    }
+
+    public boolean isBestSeller() {
+        return bestSeller;
+    }
+
+    public void setBestSeller(boolean bestSeller) {
+        this.bestSeller = bestSeller;
     }
 
     public String getFullName() {
@@ -49,12 +59,12 @@ public class Product {
         this.fullName = fullName;
     }
 
-    public String getDescript() {
-        return descript;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescript(String descript) {
-        this.descript = descript;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getQuantity() {
@@ -73,12 +83,12 @@ public class Product {
         this.quantitySold = quantitySold;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
+    public String getImageURL() {
+        return imageURL;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public int getCategoryID() {
@@ -97,34 +107,28 @@ public class Product {
         this.price = price;
     }
 
-    public String getAuthor() {
-        return author;
+    public int getDiscount() {
+        return discount;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setDiscount(int discount) {
+        this.discount = discount;
     }
 
-    public int getNumberOfPage() {
-        return numberOfPage;
-    }
-
-    public void setNumberOfPage(int numberOfPage) {
-        this.numberOfPage = numberOfPage;
-    }
-
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
-
+    // toString method
     @Override
     public String toString() {
-        return "Product{" + "id=" + id + ", fullName=" + fullName + ", descript=" + descript + ", quantity=" + quantity + ", quantitySold=" + quantitySold + ", imgUrl=" + imgUrl + ", categoryID=" + categoryID + ", price=" + price + ", author=" + author + ", numberOfPage=" + numberOfPage + ", publisher=" + publisher + '}';
+        return "Product{"
+                + "productID=" + productID
+                + ", bestSeller=" + bestSeller
+                + ", fullName='" + fullName + '\''
+                + ", description='" + description + '\''
+                + ", quantity=" + quantity
+                + ", quantitySold=" + quantitySold
+                + ", imageURL='" + imageURL + '\''
+                + ", categoryID=" + categoryID
+                + ", price=" + price
+                + ", discount=" + discount
+                + '}';
     }
-    
-    
 }
