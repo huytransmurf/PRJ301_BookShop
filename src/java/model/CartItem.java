@@ -7,6 +7,9 @@ public class CartItem {
     private int cartID;
     private int productID;
 
+    public CartItem() {
+    }
+
     public CartItem(int id, int quantity, double totalCost, int cartID, int productID) {
         this.id = id;
         this.quantity = quantity;

@@ -1,23 +1,21 @@
-
 package model;
 
 public class User {
     private int id;
-    private String firstName, LastName;
+    private String firstName;
+    private String lastName;
     private String address;
     private String role;
     private String avatarURL;
 
-    public User(int id, String firstName, String LastName, String address, String role, String avatarURL) {
+    public User(int id, String firstName, String lastName, String address, String role, String avatarURL) {
         this.id = id;
         this.firstName = firstName;
-        this.LastName = LastName;
+        this.lastName = lastName;
         this.address = address;
         this.role = role;
         this.avatarURL = avatarURL;
     }
-
-    
 
     public int getId() {
         return id;
@@ -36,19 +34,11 @@ public class User {
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
-    public void setLastName(String LastName) {
-        this.LastName = LastName;
-    }
-
-    public String getAvatarURL() {
-        return avatarURL;
-    }
-
-    public void setAvatarURL(String avatarURL) {
-        this.avatarURL = avatarURL;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getAddress() {
@@ -67,11 +57,23 @@ public class User {
         this.role = role;
     }
 
-    @Override
-    public String toString() {
-        return "User{" + "id=" + id + ", firstName=" + firstName + ", LastName=" + LastName + ", address=" + address + ", role=" + role + ", avatarURL=" + avatarURL + '}';
+    public String getAvatarURL() {
+        return avatarURL;
     }
 
-    
-    
+    public void setAvatarURL(String avatarURL) {
+        this.avatarURL = avatarURL;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", role='" + role + '\'' +
+                ", avatarURL='" + avatarURL + '\'' +
+                '}';
+    }
 }

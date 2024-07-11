@@ -4,9 +4,14 @@ public class OrderStatus {
     private int id;
     private String fullName;
 
+    
+    
     public OrderStatus(int id, String fullName) {
         this.id = id;
         this.fullName = fullName;
+    }
+
+    public OrderStatus() {
     }
 
     public int getId() {

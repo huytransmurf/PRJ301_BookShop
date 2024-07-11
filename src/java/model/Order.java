@@ -1,20 +1,24 @@
-
 package model;
 
 import java.util.Date;
 
 public class Order {
-    private int id, userID;
-    private Date orderDate, expectedDate;
-    private int oderStatusID;
+    private int id;
+    private int userID;
+    private Date orderDate;
+    private Date expectedDate;
+    private int orderStatusID;
     private double totalCost;
 
-    public Order(int id, int userID, Date orderDate, Date expectedDate, int oderStatusID, double totalCost) {
+    public Order() {
+    }
+
+    public Order(int id, int userID, Date orderDate, Date expectedDate, int orderStatusID, double totalCost) {
         this.id = id;
         this.userID = userID;
         this.orderDate = orderDate;
         this.expectedDate = expectedDate;
-        this.oderStatusID = oderStatusID;
+        this.orderStatusID = orderStatusID;
         this.totalCost = totalCost;
     }
 
@@ -50,12 +54,12 @@ public class Order {
         this.expectedDate = expectedDate;
     }
 
-    public int getOderStatusID() {
-        return oderStatusID;
+    public int getOrderStatusID() {
+        return orderStatusID;
     }
 
-    public void setOderStatusID(int oderStatusID) {
-        this.oderStatusID = oderStatusID;
+    public void setOrderStatusID(int orderStatusID) {
+        this.orderStatusID = orderStatusID;
     }
 
     public double getTotalCost() {
@@ -68,7 +72,14 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" + "id=" + id + ", userID=" + userID + ", orderDate=" + orderDate + ", expectedDate=" + expectedDate + ", oderStatusID=" + oderStatusID + ", totalCost=" + totalCost + '}';
+        return "Order{" +
+                "id=" + id +
+                ", userID=" + userID +
+                ", orderDate=" + orderDate +
+                ", expectedDate=" + expectedDate +
+                ", orderStatusID=" + orderStatusID +
+                ", totalCost=" + totalCost +
+                '}';
     }
-    
+
 }

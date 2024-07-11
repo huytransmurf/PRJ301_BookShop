@@ -1,20 +1,19 @@
-
 package model;
 
 public class OrderDetail {
-    private int id, oderID, productID;
+    private int id;
+    private int orderID;
+    private int productID;
     private int quantity;
     private double cost;
 
-    public OrderDetail(int id, int oderID, int productID, int quantity, double cost) {
+    public OrderDetail(int id, int orderID, int productID, int quantity, double cost) {
         this.id = id;
-        this.oderID = oderID;
+        this.orderID = orderID;
         this.productID = productID;
         this.quantity = quantity;
         this.cost = cost;
     }
-
-
 
     public int getId() {
         return id;
@@ -24,12 +23,12 @@ public class OrderDetail {
         this.id = id;
     }
 
-    public int getOderID() {
-        return oderID;
+    public int getOrderID() {
+        return orderID;
     }
 
-    public void setOderID(int oderID) {
-        this.oderID = oderID;
+    public void setOrderID(int orderID) {
+        this.orderID = orderID;
     }
 
     public int getProductID() {
@@ -58,9 +57,12 @@ public class OrderDetail {
 
     @Override
     public String toString() {
-        return "OrderDetail{" + "id=" + id + ", oderID=" + oderID + ", productID=" + productID + ", quantity=" + quantity + ", cost=" + cost + '}';
+        return "OrderDetail{" +
+                "id=" + id +
+                ", orderID=" + orderID +
+                ", productID=" + productID +
+                ", quantity=" + quantity +
+                ", cost=" + cost +
+                '}';
     }
-
-
-    
 }
