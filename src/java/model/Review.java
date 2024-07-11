@@ -1,14 +1,14 @@
-
 package model;
 
 public class Review {
     private int id;
-    private String descript;
-    private int userID, productID;
+    private String description;
+    private int userID;
+    private int productID;
 
-    public Review(int id, String descript, int userID, int productID) {
+    public Review(int id, String description, int userID, int productID) {
         this.id = id;
-        this.descript = descript;
+        this.description = description;
         this.userID = userID;
         this.productID = productID;
     }
@@ -21,12 +21,12 @@ public class Review {
         this.id = id;
     }
 
-    public String getDescript() {
-        return descript;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescript(String descript) {
-        this.descript = descript;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getUserID() {
@@ -47,7 +47,11 @@ public class Review {
 
     @Override
     public String toString() {
-        return "Review{" + "id=" + id + ", descript=" + descript + ", userID=" + userID + ", productID=" + productID + '}';
+        return "Review{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", userID=" + userID +
+                ", productID=" + productID +
+                '}';
     }
-    
 }

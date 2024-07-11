@@ -22,11 +22,11 @@ public class Category {
         this.id = id;
     }
 
-    public String getName() {
+    public String getFullName() {
         return fullName;
     }
 
-    public void setName(String name) {
+    public void setFullName(String name) {
         this.fullName = name;
     }
 

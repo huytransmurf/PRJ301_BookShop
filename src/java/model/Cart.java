@@ -4,6 +4,10 @@ package model;
 public class Cart {
     private int id, userID;
 
+    public Cart() {
+    }
+
+   
     public Cart(int id, int userID) {
         this.id = id;
         this.userID = userID;
