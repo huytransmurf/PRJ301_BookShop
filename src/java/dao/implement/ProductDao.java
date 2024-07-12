@@ -153,7 +153,7 @@ public class ProductDao extends Connector implements IProductDao {
     public List<Product> getOrganicProducts(int category) {
         List<Product> result = new ArrayList<>();
         try {
-            String query = "select  top 8 * from Product\n"
+            String query = "select  top 8 * from Product"
                     + "	where CategoryID = ?";
             PreparedStatement ps = getConnect().prepareStatement(query);
             ps.setInt(1, category);
@@ -235,5 +235,51 @@ public class ProductDao extends Connector implements IProductDao {
             System.out.println("Error get bestseller!!");
         }
         return result;
+    }
+
+    public int getTotalProductCount() {
+        int totalCount = 0;
+        String query = "SELECT COUNT(*) FROM Product";
+
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                totalCount = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching total product count: " + e.getMessage());
+        }
+
+        return totalCount;
+    }
+
+    public List<Product> getPaginatedProducts(int offset, int limit) {
+        List<Product> products = new ArrayList<>();
+        String query = "SELECT * FROM [Product] ORDER BY ProductID OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, offset);
+            stmt.setInt(2, limit);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Product product = new Product();
+                product.setProductID(rs.getInt("ProductID"));
+                product.setBestSeller(rs.getBoolean("isBestSeller"));
+                product.setFullName(rs.getString("FullName"));
+                product.setDescription(rs.getString("Description"));
+                product.setQuantity(rs.getInt("Quantity"));
+                product.setQuantitySold(rs.getInt("QuantitySold"));
+                product.setImageURL(rs.getString("ImageURL"));
+                product.setCategoryID(rs.getInt("CategoryID"));
+                product.setPrice(rs.getDouble("Price"));
+                product.setDiscount(rs.getInt("discount"));
+
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching paginated products: " + e.getMessage());
+        }
+
+        return products;
     }
 }
