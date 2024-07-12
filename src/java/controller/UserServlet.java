@@ -117,7 +117,7 @@ public class UserServlet extends HttpServlet {
             request.setAttribute("users", users);
         request.setAttribute("currentPage", currentPage);
         request.setAttribute("totalPages", totalPages);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/list-customer.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/user/list-customer.jsp");
         dispatcher.forward(request, response);
     }
 
