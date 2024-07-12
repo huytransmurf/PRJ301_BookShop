@@ -66,7 +66,7 @@ public class ReviewDao extends Connector implements GenericDao<Review> {
     }
 
     @Override
-    public void insert(Review review) {
+    public boolean insert(Review review) {
         String query = "INSERT INTO Review (Description, UserID, ProductID) VALUES (?, ?, ?)";
 
         try (Connection conn = getConnect();
@@ -78,14 +78,16 @@ public class ReviewDao extends Connector implements GenericDao<Review> {
             stmt.executeUpdate();
 
             System.out.println("Review inserted successfully.");
+            return true;
 
         } catch (SQLException e) {
             System.out.println("Error inserting review: " + e.getMessage());
         }
+        return false;
     }
 
     @Override
-    public void update(Review review) {
+    public boolean update(Review review) {
         String query = "UPDATE Review SET Description = ?, UserID = ?, ProductID = ? WHERE ReviewID = ?";
 
         try (Connection conn = getConnect();
@@ -98,14 +100,16 @@ public class ReviewDao extends Connector implements GenericDao<Review> {
             stmt.executeUpdate();
 
             System.out.println("Review updated successfully.");
+            return true;
 
         } catch (SQLException e) {
             System.out.println("Error updating review with ID " + review.getId() + ": " + e.getMessage());
         }
+        return false;
     }
 
     @Override
-    public void delete(int id) {
+    public boolean delete(int id) {
         String query = "DELETE FROM Review WHERE ReviewID = ?";
 
         try (Connection conn = getConnect();
@@ -115,9 +119,11 @@ public class ReviewDao extends Connector implements GenericDao<Review> {
             stmt.executeUpdate();
 
             System.out.println("Review deleted successfully.");
+            return true;
 
         } catch (SQLException e) {
             System.out.println("Error deleting review with ID " + id + ": " + e.getMessage());
         }
+        return false;
     }
 }

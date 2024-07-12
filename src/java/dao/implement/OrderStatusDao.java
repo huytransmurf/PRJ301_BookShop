@@ -60,7 +60,7 @@ public class OrderStatusDao extends Connector implements GenericDao<OrderStatus>
     }
 
     @Override
-    public void insert(OrderStatus orderStatus) {
+    public boolean insert(OrderStatus orderStatus) {
         String query = "INSERT INTO OrderStatus (FullName) VALUES (?)";
 
         try (Connection conn = getConnect();
@@ -70,14 +70,16 @@ public class OrderStatusDao extends Connector implements GenericDao<OrderStatus>
             stmt.executeUpdate();
 
             System.out.println("OrderStatus inserted successfully.");
+            return true;
 
         } catch (SQLException e) {
             System.out.println("Error inserting order status: " + e.getMessage());
         }
+        return false;
     }
 
     @Override
-    public void update(OrderStatus orderStatus) {
+    public boolean update(OrderStatus orderStatus) {
         String query = "UPDATE OrderStatus SET FullName = ? WHERE OrderStatusID = ?";
 
         try (Connection conn = getConnect();
@@ -88,14 +90,16 @@ public class OrderStatusDao extends Connector implements GenericDao<OrderStatus>
             stmt.executeUpdate();
 
             System.out.println("OrderStatus updated successfully.");
+            return true;
 
         } catch (SQLException e) {
             System.out.println("Error updating order status with ID " + orderStatus.getId() + ": " + e.getMessage());
         }
+        return false;
     }
 
     @Override
-    public void delete(int id) {
+    public boolean delete(int id) {
         String query = "DELETE FROM OrderStatus WHERE OrderStatusID = ?";
 
         try (Connection conn = getConnect();
@@ -105,9 +109,11 @@ public class OrderStatusDao extends Connector implements GenericDao<OrderStatus>
             stmt.executeUpdate();
 
             System.out.println("OrderStatus deleted successfully.");
+            return true;
 
         } catch (SQLException e) {
             System.out.println("Error deleting order status with ID " + id + ": " + e.getMessage());
         }
+        return false;
     }
 }
