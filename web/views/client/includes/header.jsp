@@ -25,15 +25,15 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
         <!-- Libraries Stylesheet -->
-        <link type="text/css" href="${pageContext.request.contextPath}/views/client/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-        <link type="text/css" href="${pageContext.request.contextPath}/views/client/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link type="text/css" href="${pageContext.request.contextPath}/views/client/asset/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+        <link type="text/css" href="${pageContext.request.contextPath}/views/client/asset/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
 
         <!-- Customized Bootstrap Stylesheet -->
-        <link type="text/css" href="${pageContext.request.contextPath}/views/client/css/bootstrap.min.css" rel="stylesheet">
+        <link type="text/css" href="${pageContext.request.contextPath}/views/client/asset/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Template Stylesheet -->
-        <link type="text/css" href="${pageContext.request.contextPath}/views/client/css/style.css" rel="stylesheet">
+        <link type="text/css" href="${pageContext.request.contextPath}/views/client/asset/css/style.css" rel="stylesheet">
     </head>
 
     <body>
@@ -62,14 +62,14 @@
             </div>
             <div class="container px-0">
                 <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                    <a href="index.jsp" class="navbar-brand"><h1 class="text-primary display-6">Fruitables</h1></a>
+                    <a href="Home" class="navbar-brand"><h1 class="text-primary display-6">Fruitables</h1></a>
                     <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="fa fa-bars text-primary"></span>
                     </button>
                     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
-                            <a href="index.jsp" class="nav-item nav-link">Home</a>
-                            <a href="shop.jsp" class="nav-item nav-link">Shop</a>
+                            <a href="${pageContext.request.contextPath}/Home" class="nav-item nav-link">Home</a>
+                            <a href="${pageContext.request.contextPath}/Shop" class="nav-item nav-link">Shop</a>
                             <a href="shop-detail.jsp" class="nav-item nav-link">Shop Detail</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
