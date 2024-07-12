@@ -27,9 +27,13 @@ public class HomeController extends HttpServlet {
         List<Product> organicFruits = new ProductDao().getOrganicFruits();
         List<Product> freshVegetables = new ProductDao().getFreshVegetables();
         List<Product> bestSellers = new ProductDao().getBestSeller();
+        List<Product> organicVegetables = new ProductDao().getOrganicVegetables();
+        List<Product> organicNuts = new ProductDao().getOrganicNuts();
         request.setAttribute("organicFruits", organicFruits);
         request.setAttribute("freshVegetables", freshVegetables);
         request.setAttribute("bestSellers", bestSellers);
-        request.getRequestDispatcher("views/client/home.jsp").include(request, response);
+        request.setAttribute("organicVegetables", organicVegetables);
+        request.setAttribute("organicNuts", organicNuts);
+        request.getRequestDispatcher("views/client/home.jsp").forward(request, response);
     }
 }
