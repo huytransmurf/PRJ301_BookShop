@@ -149,4 +149,91 @@ public class ProductDao extends Connector implements IProductDao {
         return false;
     }
 
+    @Override
+    public List<Product> getOrganicProducts(int category) {
+        List<Product> result = new ArrayList<>();
+        try {
+            String query = "select  top 8 * from Product\n"
+                    + "	where CategoryID = ?";
+            PreparedStatement ps = getConnect().prepareStatement(query);
+            ps.setInt(1, category);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product product = new Product();
+                product.setProductID(rs.getInt("ProductID"));
+                product.setBestSeller(rs.getBoolean("isBestSeller"));
+                product.setFullName(rs.getString("FullName"));
+                product.setDescription(rs.getString("Description"));
+                product.setQuantity(rs.getInt("Quantity"));
+                product.setQuantitySold(rs.getInt("QuantitySold"));
+                product.setImageURL(rs.getString("ImageURL"));
+                product.setCategoryID(rs.getInt("CategoryID"));
+                product.setPrice(rs.getDouble("Price"));
+                product.setDiscount(rs.getInt("discount"));
+
+                result.add(product);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error get organic products!!");
+        }
+        return result;
+    }
+
+    @Override
+    public List<Product> getFreshVegetables() {
+        List<Product> result = new ArrayList<>();
+        try {
+            String query = "select  top 10 * from Product\n"
+                    + "	where CategoryID = 3";
+            PreparedStatement ps = getConnect().prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product product = new Product();
+                product.setProductID(rs.getInt("ProductID"));
+                product.setBestSeller(rs.getBoolean("isBestSeller"));
+                product.setFullName(rs.getString("FullName"));
+                product.setDescription(rs.getString("Description"));
+                product.setQuantity(rs.getInt("Quantity"));
+                product.setQuantitySold(rs.getInt("QuantitySold"));
+                product.setImageURL(rs.getString("ImageURL"));
+                product.setCategoryID(rs.getInt("CategoryID"));
+                product.setPrice(rs.getDouble("Price"));
+                product.setDiscount(rs.getInt("discount"));
+
+                result.add(product);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error get fresh vegetables!!");
+        }
+        return result;
+    }
+
+    @Override
+    public List<Product> getBestSeller() {
+        List<Product> result = new ArrayList<>();
+        try {
+            String query = "select  top 8 * from Product\n"
+                    + "	where isBestSeller = 1";
+            PreparedStatement ps = getConnect().prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product product = new Product();
+                product.setProductID(rs.getInt("ProductID"));
+                product.setBestSeller(rs.getBoolean("isBestSeller"));
+                product.setFullName(rs.getString("FullName"));
+                product.setDescription(rs.getString("Description"));
+                product.setQuantity(rs.getInt("Quantity"));
+                product.setQuantitySold(rs.getInt("QuantitySold"));
+                product.setImageURL(rs.getString("ImageURL"));
+                product.setCategoryID(rs.getInt("CategoryID"));
+                product.setPrice(rs.getDouble("Price"));
+                product.setDiscount(rs.getInt("discount"));
+
+                result.add(product);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error get bestseller!!");
+        }
+        return result;
+    }
 }
