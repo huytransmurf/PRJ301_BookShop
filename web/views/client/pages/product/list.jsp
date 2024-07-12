@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:include page="includes/header.jsp" />
+<jsp:include page="/views/client/includes/header.jsp"/>
 
 <div class="container-fluid page-header py-5">
             <h1 class="text-center text-white display-6">Shop</h1>
@@ -356,4 +356,4 @@
         </div>
         <!-- Fruits Shop End-->
     
-<jsp:include page="includes/footer.jsp" />
+<jsp:include page="/views/client/includes/footer.jsp" />

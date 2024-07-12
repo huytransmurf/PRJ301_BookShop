@@ -46,15 +46,15 @@
                 <div id="carouselId" class="carousel slide position-relative" data-bs-ride="carousel">
                     <div class="carousel-inner" role="listbox">
                         <div class="carousel-item active rounded">
-                            <img src="${pageContext.request.contextPath}/views/client/img/hero-img-1.png" class="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide">
+                            <img src="${pageContext.request.contextPath}/views/client/asset/img/hero-img-1.png" class="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide">
                             <a href="/PRJ301_BookShop/NewServlet" class="btn px-4 py-2 text-white rounded">Fruits</a>
                         </div>
                         <div class="carousel-item rounded">
-                            <img src="${pageContext.request.contextPath}/views/client/img/hero-img-2.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
+                            <img src="${pageContext.request.contextPath}/views/client/asset/img/hero-img-2.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
                             <a href="/PRJ301_BookShop/NewServlet" class="btn px-4 py-2 text-white rounded">Vegetables</a>
                         </div>
                         <div class="carousel-item rounded">
-                            <img src="${pageContext.request.contextPath}/views/client/img/hero-img-2.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
+                            <img src="${pageContext.request.contextPath}/views/client/asset/img/hero-img-2.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
                             <a href="/PRJ301_BookShop/NewServlet" class="btn px-4 py-2 text-white rounded">Nuts</a>
                         </div>
                     </div>
@@ -166,7 +166,7 @@
                                         <a href="/PRJ301_BookShop/">
                                             <div class="rounded position-relative fruite-item">
                                                 <div class="fruite-img">
-                                                    <img src="${pageContext.request.contextPath}/views/client/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                                    <img src="${pageContext.request.contextPath}/views/client/asset/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
                                                 </div>
                                                 <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruit</div>
                                                 <div class="p-4 border border-secondary border-top-0 rounded-bottom">
@@ -193,7 +193,7 @@
                                     <div class="col-md-6 col-lg-4 col-xl-3">
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
-                                                <img src="${pageContext.request.contextPath}/views/client/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                                <img src="${pageContext.request.contextPath}/views/client/asset/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Vegetable</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
@@ -219,7 +219,7 @@
                                     <div class="col-md-6 col-lg-4 col-xl-3">
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
-                                                <img src="${pageContext.request.contextPath}/views/client/img/fruite-item-1.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                                <img src="${pageContext.request.contextPath}/views/asset/client/asset/img/fruite-item-1.jpg" class="img-fluid w-100 rounded-top" alt="">
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
@@ -233,102 +233,6 @@
                                         </div>
                                     </div>
                                 </c:forEach>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="tab-4" class="tab-pane fade show p-0">
-                    <div class="row g-4">
-                        <div class="col-lg-12">
-                            <div class="row g-4">
-                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="${pageContext.request.contextPath}/views/client/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                        </div>
-                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>Grapes</h4>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="img/fruite-item-4.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                        </div>
-                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>Apricots</h4>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="tab-5" class="tab-pane fade show p-0">
-                    <div class="row g-4">
-                        <div class="col-lg-12">
-                            <div class="row g-4">
-                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="${pageContext.request.contextPath}/views/client/img/fruite-item-3.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                        </div>
-                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>Banana</h4>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="${pageContext.request.contextPath}/views/client/img/fruite-item-2.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                        </div>
-                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>Raspberries</h4>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="${pageContext.request.contextPath}/views/client/img/fruite-item-1.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                        </div>
-                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>Oranges</h4>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -347,7 +251,7 @@
             <div class="col-md-6 col-lg-4">
                 <a href="#">
                     <div class="service-item bg-secondary rounded border border-secondary">
-                        <img src="${pageContext.request.contextPath}/views/client/img/featur-1.jpg" class="img-fluid rounded-top w-100" alt="">
+                        <img src="${pageContext.request.contextPath}/views/client/asset/img/featur-1.jpg" class="img-fluid rounded-top w-100" alt="">
                         <div class="px-4 rounded-bottom">
                             <div class="service-content bg-primary text-center p-4 rounded">
                                 <h5 class="text-white">Fresh Apples</h5>
@@ -360,7 +264,7 @@
             <div class="col-md-6 col-lg-4">
                 <a href="#">
                     <div class="service-item bg-dark rounded border border-dark">
-                        <img src="${pageContext.request.contextPath}/views/client/img/featur-2.jpg" class="img-fluid rounded-top w-100" alt="">
+                        <img src="${pageContext.request.contextPath}/views/client/asset/img/featur-2.jpg" class="img-fluid rounded-top w-100" alt="">
                         <div class="px-4 rounded-bottom">
                             <div class="service-content bg-light text-center p-4 rounded">
                                 <h5 class="text-primary">Tasty Fruits</h5>
@@ -373,7 +277,7 @@
             <div class="col-md-6 col-lg-4">
                 <a href="#">
                     <div class="service-item bg-primary rounded border border-primary">
-                        <img src="${pageContext.request.contextPath}/views/client/img/featur-3.jpg" class="img-fluid rounded-top w-100" alt="">
+                        <img src="${pageContext.request.contextPath}/views/client/asset/img/featur-3.jpg" class="img-fluid rounded-top w-100" alt="">
                         <div class="px-4 rounded-bottom">
                             <div class="service-content bg-secondary text-center p-4 rounded">
                                 <h5 class="text-white">Exotic Vegitable</h5>
@@ -398,7 +302,7 @@
                 <div class="border border-primary rounded position-relative vesitable-item">
                     <a href="/PRJ301_BookShop/NewServlet">
                         <div class="vesitable-img">
-                            <img src="${pageContext.request.contextPath}/views/client/img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
+                            <img src="${pageContext.request.contextPath}/views/asset/client/img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
                         </div>
                         <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
                         <div class="p-4 rounded-bottom">
@@ -461,7 +365,7 @@
                     <div class="p-4 rounded bg-light">
                         <div class="row align-items-center">
                             <div class="col-6">
-                                <img src="${pageContext.request.contextPath}/views/client/img/best-product-1.jpg" class="img-fluid rounded-circle w-100" alt="">
+                                <img src="${pageContext.request.contextPath}/views/client/asset/img/best-product-1.jpg" class="img-fluid rounded-circle w-100" alt="">
                             </div>
                             <div class="col-6">
                                 <a href="/PRJ301_BookShop/NewServlet" class="h5">${p.fullName}</a>
@@ -542,7 +446,7 @@
                     </div>
                     <div class="d-flex align-items-center flex-nowrap">
                         <div class="bg-secondary rounded">
-                            <img src="${pageContext.request.contextPath}/views/client/img/testimonial-1.jpg" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
+                            <img src="${pageContext.request.contextPath}/views/client/asset/img/testimonial-1.jpg" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
                         </div>
                         <div class="ms-4 d-block">
                             <h4 class="text-dark">Client Name</h4>
@@ -567,7 +471,7 @@
                     </div>
                     <div class="d-flex align-items-center flex-nowrap">
                         <div class="bg-secondary rounded">
-                            <img src="${pageContext.request.contextPath}/views/client/img/testimonial-1.jpg" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
+                            <img src="${pageContext.request.contextPath}/views/client/asset/img/testimonial-1.jpg" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
                         </div>
                         <div class="ms-4 d-block">
                             <h4 class="text-dark">Client Name</h4>
@@ -592,7 +496,7 @@
                     </div>
                     <div class="d-flex align-items-center flex-nowrap">
                         <div class="bg-secondary rounded">
-                            <img src="${pageContext.request.contextPath}/views/client/img/testimonial-1.jpg" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
+                            <img src="${pageContext.request.contextPath}/views/client/asset/img/testimonial-1.jpg" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
                         </div>
                         <div class="ms-4 d-block">
                             <h4 class="text-dark">Client Name</h4>
