@@ -8,7 +8,7 @@
 <jsp:include page="../includes/navbar.jsp" />
 <% 
     ReviewDao reviewDao = new ReviewDao();    
-    ProductDao productDao = new ProductDao();
+    ProductDao reviewDao = new ReviewDao();
     List<Review> reviews = reviewDao.getAll();
     request.setAttribute("reviews", reviews);
 %>
@@ -29,7 +29,7 @@
                 </thead>
                 <tbody>
                     <c:forEach var="review" items="${reviews}">
-                        <c:set var="product" value="${productDao.getById(review.productID)}" />
+                        <c:set var="product" value="${productDao.getById(review.productId)}" />
                         <tr>
                             <td><c:out value="${review.id}" /></td>
                             <td><c:out value="${product.fullName}" /></td>

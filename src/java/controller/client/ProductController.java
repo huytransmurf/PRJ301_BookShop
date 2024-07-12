@@ -1,4 +1,4 @@
-package controller;
+package controller.client;
 
 import dao.implement.ProductDao;
 import jakarta.servlet.RequestDispatcher;
