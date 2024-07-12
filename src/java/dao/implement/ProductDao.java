@@ -183,7 +183,7 @@ public class ProductDao extends Connector implements IProductDao {
         List<Product> result = new ArrayList<>();
         try {
             String query = "select  top 10 * from Product\n"
-                    + "	where CategoryID = 3";
+                    + "	where CategoryID = 2";
             PreparedStatement ps = getConnect().prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -211,7 +211,7 @@ public class ProductDao extends Connector implements IProductDao {
     public List<Product> getBestSeller() {
         List<Product> result = new ArrayList<>();
         try {
-            String query = "select  top 8 * from Product\n"
+            String query = "select top 9 * from Product\n"
                     + "	where isBestSeller = 1";
             PreparedStatement ps = getConnect().prepareStatement(query);
             ResultSet rs = ps.executeQuery();
@@ -338,5 +338,12 @@ public class ProductDao extends Connector implements IProductDao {
             System.out.println("Error get organic Nuts!!");
         }
         return result;
+    }
+    
+    public static void main(String[] args) {
+        List<Product> list = new ProductDao().getAll();
+        for (Product product : list) {
+            System.out.println(product);
+        }
     }
 }
