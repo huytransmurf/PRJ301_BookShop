@@ -1,4 +1,3 @@
-
 package controller;
 
 import dao.implement.ProductDao;
@@ -8,7 +7,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
+import java.util.List;
+import model.Product;
 
 @WebServlet(name = "ProductServlet", urlPatterns = {"/ProductServlet"})
 public class ProductServlet extends HttpServlet {
@@ -16,18 +16,18 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String action = request.getParameter("action");
-
+        String action;
+        action = request.getParameter("action");
+        if (action == null) {
+            action = "loadHome";
+        }
         switch (action) {
-            case "list" ->
-                getListProducts(request, response);
-
-            case "detail" ->
+            case "loadHome":
+                loadHome(request, response);
+                break;
+            case "loadShop":
                 getProductById(request, response);
-
-            default -> {
-                // Continue
-            }
+                break;
         }
     }
 
@@ -69,9 +69,21 @@ public class ProductServlet extends HttpServlet {
         // Continue ...
     }
 
-    private void getListProducts(HttpServletRequest request, HttpServletResponse response) {
-
-        // Continue ...
+    private void loadHome(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int category;
+        try {
+            category = Integer.parseInt(request.getParameter("category"));
+        } catch (Exception e) {
+            category = 1;
+        }
+        List<Product> organicProducts = new ProductDao().getOrganicProducts(category);
+        List<Product> freshVegetables = new ProductDao().getFreshVegetables();
+        List<Product> bestSellers = new ProductDao().getBestSeller();
+        request.setAttribute("organicProducts", organicProducts);
+        request.setAttribute("freshVegetables", freshVegetables);
+        request.setAttribute("bestSellers", bestSellers);
+        request.getRequestDispatcher("views/client/index.jsp").include(request, response);
     }
 
     private void getProductById(HttpServletRequest request, HttpServletResponse response) {
