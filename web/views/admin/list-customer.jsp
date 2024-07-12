@@ -1,200 +1,156 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <!-- Required Meta Tags Always Come First -->
-        <meta charset="utf-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-            />
 
-        <!-- Title -->
-        <title>FRUIT SHOP | Dashboard Admin</title>
 
-        <!-- Favicon -->
-        <link rel="shortcut icon" href="favicon.ico" />
+<jsp:include page="./includes/navbar.jsp" />
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-        <!-- Font -->
-        <link
-            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap"
-            rel="stylesheet"
-            />
 
-        <!-- CSS Implementing Plugins -->
-        <link rel="stylesheet" href="assets\css\vendor.min.css" />
-        <link rel="stylesheet" href="assets\vendor\icon-set\style.css" />
 
-        <!-- CSS Front Template -->
-        <link rel="stylesheet" href="assets\css\theme.min.css?v=1.0" />
-    </head>
+<main id="content" role="main" class="main">
+    <!-- Content -->
+    <div class="content container-fluid">
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="row align-items-center mb-3">
+                <div class="col-sm mb-2 mb-sm-0">
+                    <h1 class="page-header-title">Products <span class="badge badge-soft-dark ml-2">72,031</span></h1>
+                </div>
 
-    <body class="footer-offset">
-        <script src="assets\vendor\hs-navbar-vertical-aside\hs-navbar-vertical-aside-mini-cache.js"></script>
-
-        <jsp:include page="./includes/navbar.jsp" />
-
-        // Body here
-        <main id="content" role="main" class="main">
-            <div class="content container-fluid">
-                Hello dat
+                <div class="col-sm-auto">
+                    <a class="btn btn-primary" href="ecommerce-add-product.html">Add product</a>
+                </div>
             </div>
-        </main>
-        
-        <jsp:include page="./includes/footer.jsp" />
-        
-        
-        <script src="assets\js\demo.js"></script>
-   
-        <!-- JS Implementing Plugins -->
-        <script src="assets\js\vendor.min.js"></script>
-        <script src="assets\vendor\chart.js\dist\Chart.min.js"></script>
-        <script src="assets\vendor\chartjs-chart-matrix\dist\chartjs-chart-matrix.min.js"></script>
+            <!-- End Row -->
 
-        <!-- JS Front -->
-        <script src="assets\js\theme.min.js"></script>
+            <!-- Nav Scroller -->
+            <div class="js-nav-scroller hs-nav-scroller-horizontal">
+                <span class="hs-nav-scroller-arrow-prev" style="display: none;">
+                    <a class="hs-nav-scroller-arrow-link" href="javascript:;">
+                        <i class="tio-chevron-left"></i>
+                    </a>
+                </span>
 
-        <!-- JS Plugins Init. -->
-        <script>
-            $(document).on("ready", function () {
-                // ONLY DEV
-                // =======================================================
+                <span class="hs-nav-scroller-arrow-next" style="display: none;">
+                    <a class="hs-nav-scroller-arrow-link" href="javascript:;">
+                        <i class="tio-chevron-right"></i>
+                    </a>
+                </span>
 
-                if (window.localStorage.getItem("hs-builder-popover") === null) {
-                    $("#builderPopover")
-                            .popover("show")
-                            .on("shown.bs.popover", function () {
-                                $(".popover").last().addClass("popover-dark");
-                            });
+                <!-- Nav -->
+                <ul class="nav nav-tabs page-header-tabs" id="pageHeaderTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">All productas</a>
+                    </li>
+                </ul>
+                <!-- End Nav -->
+            </div>
+            <!-- End Nav Scroller -->
+        </div>
+        <!-- End Page Header -->
 
-                    $(document).on("click", "#closeBuilderPopover", function () {
-                        window.localStorage.setItem("hs-builder-popover", true);
-                        $("#builderPopover").popover("dispose");
-                    });
-                } else {
-                    $("#builderPopover").on("show.bs.popover", function () {
-                        return false;
-                    });
-                }
 
-                // END ONLY DEV
-                // =======================================================
+        <!-- End Row -->
 
-                // BUILDER TOGGLE INVOKER
-                // =======================================================
-                $(".js-navbar-vertical-aside-toggle-invoker").click(function () {
-                    $(".js-navbar-vertical-aside-toggle-invoker i").tooltip("hide");
-                });
+        <!-- Card -->
+        <div class="card">
+            <!-- Header -->
+            <!-- End Header -->
 
-                // INITIALIZATION OF MEGA MENU
-                // =======================================================
-                var megaMenu = new HSMegaMenu($(".js-mega-menu"), {
-                    desktop: {
-                        position: "left",
-                    },
-                }).init();
+            <!-- Table -->
+            <div class="table-responsive datatable-custom">
+                <table id="datatable" class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="table-column-pr-0"></th>
+                            <th>ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Address</th>
+                            <th>Role</th>
+                            <th>Avatar</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="user" items="${users}">
+                            <tr>
+                                <td class="table-column-pr-0"></td>
+                                <td>${user.id}</td>
+                                <td>${user.firstName}</td>
+                                <td>${user.lastName}</td>
+                                <td>${user.address}</td>
+                                <td>${user.role}</td>
+                                <td>
+                                    <img class="avatar avatar-lg" src="https://cdn.tuoitre.vn/zoom/700_700/471584752817336320/2024/6/3/doraemon-3-17173722166781704981911-30-9-657-1207-crop-1717372336444425413969.jpeg" alt="Avatar">
+                                </td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <a class="btn btn-sm btn-warning" href="user-details.jsp?id=${user.id}" style="margin-right: 5px;">
+                                            <i class="tio-edit"></i> Edit
+                                        </a>
+                                        <a class="btn btn-sm btn-danger" href="user-delete.jsp?id=${user.id}">
+                                            <i class="tio-delete"></i> Delete
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+            <!-- End Table -->
 
-                // INITIALIZATION OF NAVBAR VERTICAL NAVIGATION
-                // =======================================================
-                var sidebar = $(".js-navbar-vertical-aside").hsSideNav();
+            <div class="card-footer">
+                <!-- Pagination -->
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-auto">
+                        <div class="d-flex align-items-center">
+                            <nav aria-label="Pagination">
+                                <ul class="pagination mb-0">
+                                    <!-- Previous Page -->
+                                    <c:if test="${currentPage > 1}">
+                                        <li class="page-item">
+                                            <a class="page-link" href="UserServlet?action=list-users-admin&page=${currentPage - 1}" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                    </c:if>
 
-                // INITIALIZATION OF TOOLTIP IN NAVBAR VERTICAL MENU
-                // =======================================================
-                $(".js-nav-tooltip-link").tooltip({boundary: "window"});
+                                    <!-- Page Numbers -->
+                                    <c:forEach var="page" begin="1" end="${totalPages}">
+                                        <li class="page-item <c:if test="${page == currentPage}">active</c:if>">
+                                            <a class="page-link" href="UserServlet?action=list-users-admin&page=${page}">${page}</a>
+                                        </li>
+                                    </c:forEach>
 
-                $(".js-nav-tooltip-link").on("show.bs.tooltip", function (e) {
-                    if (!$("body").hasClass("navbar-vertical-aside-mini-mode")) {
-                        return false;
-                    }
-                });
+                                    <!-- Next Page -->
+                                    <c:if test="${currentPage < totalPages}">
+                                        <li class="page-item">
+                                            <a class="page-link" href="UserServlet?action=list-users-admin&page=${currentPage - 1}" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </c:if>
+                                </ul>
+                            </nav>
+                            <!-- End Pagination Controls -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Footer -->
+        </div>
+        <!-- End Card -->
+    </div>
+    <!-- End Content -->
 
-                // INITIALIZATION OF UNFOLD
-                // =======================================================
-                $(".js-hs-unfold-invoker").each(function () {
-                    var unfold = new HSUnfold($(this)).init();
-                });
+    <!-- Footer -->
 
-                // INITIALIZATION OF FORM SEARCH
-                // =======================================================
-                $(".js-form-search").each(function () {
-                    new HSFormSearch($(this)).init();
-                });
 
-                // INITIALIZATION OF SELECT2
-                // =======================================================
-                $(".js-select2-custom").each(function () {
-                    var select2 = $.HSCore.components.HSSelect2.init($(this));
-                });
 
-                // INITIALIZATION OF DATERANGEPICKER
-                // =======================================================
-                $(".js-daterangepicker").daterangepicker();
 
-                $(".js-daterangepicker-times").daterangepicker({
-                    timePicker: true,
-                    startDate: moment().startOf("hour"),
-                    endDate: moment().startOf("hour").add(32, "hour"),
-                    locale: {
-                        format: "M/DD hh:mm A",
-                    },
-                });
+    <!-- End Footer -->
 
-                var start = moment();
-                var end = moment();
+    <jsp:include page="./includes/footer.jsp" />
 
-                function cb(start, end) {
-                    $(
-                            "#js-daterangepicker-predefined .js-daterangepicker-predefined-preview"
-                            ).html(start.format("MMM D") + " - " + end.format("MMM D, YYYY"));
-                }
+</main>
 
-                $("#js-daterangepicker-predefined").daterangepicker(
-                        {
-                            startDate: start,
-                            endDate: end,
-                            ranges: {
-                                Today: [moment(), moment()],
-                                Yesterday: [
-                                    moment().subtract(1, "days"),
-                                    moment().subtract(1, "days"),
-                                ],
-                                "Last 7 Days": [moment().subtract(6, "days"), moment()],
-                                "Last 30 Days": [moment().subtract(29, "days"), moment()],
-                                "This Month": [
-                                    moment().startOf("month"),
-                                    moment().endOf("month"),
-                                ],
-                                "Last Month": [
-                                    moment().subtract(1, "month").startOf("month"),
-                                    moment().subtract(1, "month").endOf("month"),
-                                ],
-                            },
-                        },
-                        cb
-                        );
-
-                cb(start, end);
-
-                // INITIALIZATION OF CHARTJS
-                // =======================================================
-                $(".js-chart").each(function () {
-                    $.HSCore.components.HSChartJS.init($(this));
-                });
-
-                // INITIALIZATION OF JVECTORMAP
-                // =======================================================
-                $(".js-jvectormap").each(function () {
-                    var jVectorMap = $.HSCore.components.HSJVectorMap.init($(this));
-                });
-            });
-        </script>
-
-        <!-- IE Support -->
-        <script>
-            if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent))
-                document.write(
-                        '<script src="./assets/vendor/babel-polyfill/polyfill.min.js"><\/script>'
-                        );
-        </script>
-    </body>
-</html>

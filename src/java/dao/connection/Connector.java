@@ -5,7 +5,7 @@
 package dao.connection;
 import java.sql.*;
 
-import config.DatabaseInfo;
+import configuration.DatabaseInfo;
 
 /**
  *
