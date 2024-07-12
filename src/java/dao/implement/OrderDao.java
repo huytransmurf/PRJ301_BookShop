@@ -68,7 +68,7 @@ public class OrderDao extends Connector implements GenericDao<Order> {
     }
 
     @Override
-    public void insert(Order order) {
+    public boolean insert(Order order) {
         String query = "INSERT INTO [Order] (UserID, OrderDate, ExpectedDate, OrderStatusID, TotalCost) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = getConnect();
@@ -82,14 +82,16 @@ public class OrderDao extends Connector implements GenericDao<Order> {
             stmt.executeUpdate();
 
             System.out.println("Order inserted successfully.");
+            return true;
 
         } catch (SQLException e) {
             System.out.println("Error inserting order: " + e.getMessage());
         }
+        return false;
     }
 
     @Override
-    public void update(Order order) {
+    public boolean update(Order order) {
         String query = "UPDATE [Order] SET UserID = ?, OrderDate = ?, ExpectedDate = ?, OrderStatusID = ?, TotalCost = ? WHERE OrderID = ?";
 
         try (Connection conn = getConnect();
@@ -104,14 +106,16 @@ public class OrderDao extends Connector implements GenericDao<Order> {
             stmt.executeUpdate();
 
             System.out.println("Order updated successfully.");
+            return true;
 
         } catch (SQLException e) {
             System.out.println("Error updating order with ID " + order.getId() + ": " + e.getMessage());
         }
+        return false;
     }
 
     @Override
-    public void delete(int id) {
+    public boolean delete(int id) {
         String query = "DELETE FROM [Order] WHERE OrderID = ?";
 
         try (Connection conn = getConnect();
@@ -121,9 +125,11 @@ public class OrderDao extends Connector implements GenericDao<Order> {
             stmt.executeUpdate();
 
             System.out.println("Order deleted successfully.");
+            return true;
 
         } catch (SQLException e) {
             System.out.println("Error deleting order with ID " + id + ": " + e.getMessage());
         }
+        return false;
     }
 }

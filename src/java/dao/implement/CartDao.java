@@ -17,9 +17,7 @@ public class CartDao extends Connector implements GenericDao<Cart> {
         List<Cart> carts = new ArrayList<>();
         String query = "SELECT * FROM Cart";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
                 Cart cart = new Cart();
@@ -40,8 +38,7 @@ public class CartDao extends Connector implements GenericDao<Cart> {
         Cart cart = null;
         String query = "SELECT * FROM Cart WHERE CartID = ?";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -60,54 +57,58 @@ public class CartDao extends Connector implements GenericDao<Cart> {
     }
 
     @Override
-    public void insert(Cart cart) {
+    public boolean insert(Cart cart) {
         String query = "INSERT INTO Cart (UserID) VALUES (?)";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setInt(1, cart.getUserID());
             stmt.executeUpdate();
 
             System.out.println("Cart inserted successfully.");
+            return true;
 
         } catch (SQLException e) {
             System.out.println("Error inserting cart: " + e.getMessage());
         }
+        return false;
     }
 
     @Override
-    public void update(Cart cart) {
+    public boolean update(Cart cart) {
         String query = "UPDATE Cart SET UserID = ? WHERE CartID = ?";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setInt(1, cart.getUserID());
             stmt.setInt(2, cart.getId());
             stmt.executeUpdate();
 
             System.out.println("Cart updated successfully.");
+            return true;
 
         } catch (SQLException e) {
             System.out.println("Error updating cart with ID " + cart.getId() + ": " + e.getMessage());
         }
+        return true;
+
     }
 
     @Override
-    public void delete(int id) {
+    public boolean delete(int id) {
         String query = "DELETE FROM Cart WHERE CartID = ?";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setInt(1, id);
             stmt.executeUpdate();
 
             System.out.println("Cart deleted successfully.");
+            return true;
 
         } catch (SQLException e) {
             System.out.println("Error deleting cart with ID " + id + ": " + e.getMessage());
         }
+        return false;
     }
 }

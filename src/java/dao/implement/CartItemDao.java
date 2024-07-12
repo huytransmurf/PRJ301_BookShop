@@ -66,7 +66,7 @@ public class CartItemDao extends Connector implements GenericDao<CartItem> {
     }
 
     @Override
-    public void insert(CartItem cartItem) {
+    public boolean insert(CartItem cartItem) {
         String query = "INSERT INTO CartItem (Quantity, TotalCost, CartID, ProductID) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = getConnect();
@@ -79,14 +79,15 @@ public class CartItemDao extends Connector implements GenericDao<CartItem> {
             stmt.executeUpdate();
 
             System.out.println("Cart item inserted successfully.");
-
+            return true;
         } catch (SQLException e) {
             System.out.println("Error inserting cart item: " + e.getMessage());
         }
+        return false;
     }
 
     @Override
-    public void update(CartItem cartItem) {
+    public boolean update(CartItem cartItem) {
         String query = "UPDATE CartItem SET Quantity = ?, TotalCost = ?, CartID = ?, ProductID = ? WHERE CartItemID = ?";
 
         try (Connection conn = getConnect();
@@ -100,14 +101,15 @@ public class CartItemDao extends Connector implements GenericDao<CartItem> {
             stmt.executeUpdate();
 
             System.out.println("Cart item updated successfully.");
-
+            return true;
         } catch (SQLException e) {
             System.out.println("Error updating cart item with ID " + cartItem.getId() + ": " + e.getMessage());
         }
+        return false;
     }
 
     @Override
-    public void delete(int id) {
+    public boolean delete(int id) {
         String query = "DELETE FROM CartItem WHERE CartItemID = ?";
 
         try (Connection conn = getConnect();
@@ -117,9 +119,10 @@ public class CartItemDao extends Connector implements GenericDao<CartItem> {
             stmt.executeUpdate();
 
             System.out.println("Cart item deleted successfully.");
-
+            return true;
         } catch (SQLException e) {
             System.out.println("Error deleting cart item with ID " + id + ": " + e.getMessage());
         }
+        return false;
     }
 }

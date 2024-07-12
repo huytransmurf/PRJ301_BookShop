@@ -78,7 +78,7 @@ public class ProductDao extends Connector implements IProductDao {
     }
 
     @Override
-    public void insert(Product product) {
+    public boolean insert(Product product) {
         String query = "INSERT INTO Product (isBestSeller, FullName, Description, Quantity, QuantitySold, ImageURL, CategoryID, Price, discount) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -96,14 +96,16 @@ public class ProductDao extends Connector implements IProductDao {
 
             stmt.executeUpdate();
             System.out.println("Product inserted successfully.");
+            return true;
 
         } catch (SQLException e) {
             System.out.println("Error inserting product: " + e.getMessage());
         }
+        return false;
     }
 
     @Override
-    public void update(Product product) {
+    public boolean update(Product product) {
         String query = "UPDATE Product SET isBestSeller=?, FullName=?, Description=?, Quantity=?, QuantitySold=?, "
                 + "ImageURL=?, CategoryID=?, Price=?, discount=? WHERE ProductID=?";
 
@@ -122,14 +124,16 @@ public class ProductDao extends Connector implements IProductDao {
 
             stmt.executeUpdate();
             System.out.println("Product updated successfully.");
+            return true;
 
         } catch (SQLException e) {
             System.out.println("Error updating product: " + e.getMessage());
         }
+        return false;
     }
 
     @Override
-    public void delete(int id) {
+    public boolean delete(int id) {
         String query = "DELETE FROM Product WHERE ProductID = ?";
 
         try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -137,10 +141,12 @@ public class ProductDao extends Connector implements IProductDao {
             stmt.setInt(1, id);
             stmt.executeUpdate();
             System.out.println("Product with ID " + id + " deleted successfully.");
+            return true;
 
         } catch (SQLException e) {
             System.out.println("Error deleting product with ID " + id + ": " + e.getMessage());
         }
+        return false;
     }
 
 }

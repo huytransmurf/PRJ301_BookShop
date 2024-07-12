@@ -17,9 +17,7 @@ public class CategoryDao extends Connector implements GenericDao<Category> {
         List<Category> categories = new ArrayList<>();
         String query = "SELECT * FROM Category";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
                 Category category = new Category();
@@ -41,8 +39,7 @@ public class CategoryDao extends Connector implements GenericDao<Category> {
         Category category = null;
         String query = "SELECT * FROM Category WHERE CategoryID = ?";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -62,29 +59,28 @@ public class CategoryDao extends Connector implements GenericDao<Category> {
     }
 
     @Override
-    public void insert(Category category) {
+    public boolean insert(Category category) {
         String query = "INSERT INTO Category (FullName, Description) VALUES (?, ?)";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, category.getFullName());
             stmt.setString(2, category.getDescript());
             stmt.executeUpdate();
 
             System.out.println("Category inserted successfully.");
-
+            return true;
         } catch (SQLException e) {
             System.out.println("Error inserting category: " + e.getMessage());
         }
+        return false;
     }
 
     @Override
-    public void update(Category category) {
+    public boolean update(Category category) {
         String query = "UPDATE Category SET FullName = ?, Description = ? WHERE CategoryID = ?";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, category.getFullName());
             stmt.setString(2, category.getDescript());
@@ -92,26 +88,27 @@ public class CategoryDao extends Connector implements GenericDao<Category> {
             stmt.executeUpdate();
 
             System.out.println("Category updated successfully.");
-
+            return true;
         } catch (SQLException e) {
             System.out.println("Error updating category with ID " + category.getId() + ": " + e.getMessage());
         }
+        return false;
     }
 
     @Override
-    public void delete(int id) {
+    public boolean delete(int id) {
         String query = "DELETE FROM Category WHERE CategoryID = ?";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setInt(1, id);
             stmt.executeUpdate();
 
             System.out.println("Category deleted successfully.");
-
+            return true;
         } catch (SQLException e) {
             System.out.println("Error deleting category with ID " + id + ": " + e.getMessage());
         }
+        return false;
     }
 }

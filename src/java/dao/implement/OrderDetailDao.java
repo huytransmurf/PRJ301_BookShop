@@ -67,7 +67,7 @@ public class OrderDetailDao extends Connector implements GenericDao<OrderDetail>
     }
 
     @Override
-    public void insert(OrderDetail orderDetail) {
+    public boolean insert(OrderDetail orderDetail) {
         String query = "INSERT INTO OrderDetail (OrderID, ProductID, Quantity, Cost) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = getConnect();
@@ -80,14 +80,16 @@ public class OrderDetailDao extends Connector implements GenericDao<OrderDetail>
             stmt.executeUpdate();
 
             System.out.println("Order detail inserted successfully.");
+            return true;
 
         } catch (SQLException e) {
             System.out.println("Error inserting order detail: " + e.getMessage());
         }
+        return false;
     }
 
     @Override
-    public void update(OrderDetail orderDetail) {
+    public boolean update(OrderDetail orderDetail) {
         String query = "UPDATE OrderDetail SET OrderID = ?, ProductID = ?, Quantity = ?, Cost = ? WHERE OrderDetailID = ?";
 
         try (Connection conn = getConnect();
@@ -101,14 +103,16 @@ public class OrderDetailDao extends Connector implements GenericDao<OrderDetail>
             stmt.executeUpdate();
 
             System.out.println("Order detail updated successfully.");
+            return true;
 
         } catch (SQLException e) {
             System.out.println("Error updating order detail with ID " + orderDetail.getId() + ": " + e.getMessage());
         }
+        return false;
     }
 
     @Override
-    public void delete(int id) {
+    public boolean delete(int id) {
         String query = "DELETE FROM OrderDetail WHERE OrderDetailID = ?";
 
         try (Connection conn = getConnect();
@@ -118,9 +122,11 @@ public class OrderDetailDao extends Connector implements GenericDao<OrderDetail>
             stmt.executeUpdate();
 
             System.out.println("Order detail deleted successfully.");
+            return true;
 
         } catch (SQLException e) {
             System.out.println("Error deleting order detail with ID " + id + ": " + e.getMessage());
         }
+        return false;
     }
 }
