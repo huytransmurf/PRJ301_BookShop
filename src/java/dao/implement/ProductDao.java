@@ -150,13 +150,12 @@ public class ProductDao extends Connector implements IProductDao {
     }
 
     @Override
-    public List<Product> getOrganicProducts(int category) {
+    public List<Product> getOrganicFruits() {
         List<Product> result = new ArrayList<>();
         try {
             String query = "select  top 8 * from Product"
-                    + "	where CategoryID = ?";
+                    + "	where CategoryID = 1";
             PreparedStatement ps = getConnect().prepareStatement(query);
-            ps.setInt(1, category);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Product product = new Product();

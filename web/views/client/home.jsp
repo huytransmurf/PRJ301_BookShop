@@ -139,7 +139,7 @@
                 <div class="col-lg-8 text-end">
                     <ul class="nav nav-pills d-inline-flex text-center mb-5">
                         <li class="nav-item">
-                            <a class="d-flex m-2 py-2 bg-light rounded-pill active" href="/PRJ301_BookShop/ProductServlet">
+                            <a class="d-flex m-2 py-2 bg-light rounded-pill active" href="#tab-1">
                                 <span class="text-dark" style="width: 130px;">Fruit</span>
                             </a>
                         </li>
@@ -161,7 +161,7 @@
                     <div class="row g-4">
                         <div class="col-lg-12">
                             <div class="row g-4">    
-                                <c:forEach var="p" items="${organicProducts}">
+                                <c:forEach var="p" items="${organicFruits}">
                                     <div class="col-md-6 col-lg-4 col-xl-3">
                                         <a href="/PRJ301_BookShop/">
                                             <div class="rounded position-relative fruite-item">
