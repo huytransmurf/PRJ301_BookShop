@@ -12,7 +12,7 @@ import model.Product;
  * @author admin
  */
 public interface IProductDao extends GenericDao<Product> {
-    List<Product> getOrganicProducts(int category);
+    List<Product> getOrganicFruits();
     List<Product> getFreshVegetables();
     List<Product> getBestSeller();
 }

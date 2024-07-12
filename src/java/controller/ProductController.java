@@ -11,8 +11,8 @@ import java.io.IOException;
 import java.util.List;
 import model.Product;
 
-@WebServlet(name = "ProductServlet", urlPatterns = {"/ProductServlet"})
-public class ProductServlet extends HttpServlet {
+@WebServlet(name = "ProductController", urlPatterns = {"/ProductController"})
+public class ProductController extends HttpServlet {
 
     private static final int PAGE_SIZE_ADMIN = 10;
 
@@ -103,19 +103,7 @@ public class ProductServlet extends HttpServlet {
 
     private void loadHome(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int category;
-        try {
-            category = Integer.parseInt(request.getParameter("category"));
-        } catch (Exception e) {
-            category = 1;
-        }
-        List<Product> organicProducts = new ProductDao().getOrganicProducts(category);
-        List<Product> freshVegetables = new ProductDao().getFreshVegetables();
-        List<Product> bestSellers = new ProductDao().getBestSeller();
-        request.setAttribute("organicProducts", organicProducts);
-        request.setAttribute("freshVegetables", freshVegetables);
-        request.setAttribute("bestSellers", bestSellers);
-        request.getRequestDispatcher("views/client/index.jsp").include(request, response);
+    
     }
 
     private void getProductById(HttpServletRequest request, HttpServletResponse response) {
