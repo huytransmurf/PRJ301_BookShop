@@ -70,7 +70,7 @@ public class UserDao extends Connector implements GenericDao<User> {
     }
 
     @Override
-    public void insert(User user) {
+    public boolean insert(User user) {
         String query = "INSERT INTO [User] (FirstName, LastName, Address, Role, AvatarURL) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = getConnect();
@@ -84,14 +84,16 @@ public class UserDao extends Connector implements GenericDao<User> {
             stmt.executeUpdate();
 
             System.out.println("User inserted successfully.");
+            return true;
 
         } catch (SQLException e) {
             System.out.println("Error inserting user: " + e.getMessage());
         }
+        return false;
     }
 
     @Override
-    public void update(User user) {
+    public boolean update(User user) {
         String query = "UPDATE [User] SET FirstName = ?, LastName = ?, Address = ?, Role = ?, AvatarURL = ? WHERE UserID = ?";
 
         try (Connection conn = getConnect();
@@ -106,14 +108,16 @@ public class UserDao extends Connector implements GenericDao<User> {
             stmt.executeUpdate();
 
             System.out.println("User updated successfully.");
+            return true;
 
         } catch (SQLException e) {
             System.out.println("Error updating user with ID " + user.getId() + ": " + e.getMessage());
         }
+        return false;
     }
 
     @Override
-    public void delete(int id) {
+    public boolean delete(int id) {
         String query = "DELETE FROM [User] WHERE UserID = ?";
 
         try (Connection conn = getConnect();
@@ -123,9 +127,11 @@ public class UserDao extends Connector implements GenericDao<User> {
             stmt.executeUpdate();
 
             System.out.println("User deleted successfully.");
+            return true;
 
         } catch (SQLException e) {
             System.out.println("Error deleting user with ID " + id + ": " + e.getMessage());
         }
+        return false;
     }
 }
