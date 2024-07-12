@@ -139,7 +139,7 @@
                 <div class="col-lg-8 text-end">
                     <ul class="nav nav-pills d-inline-flex text-center mb-5">
                         <li class="nav-item">
-                            <a class="d-flex m-2 py-2 bg-light rounded-pill active" href="#tab-1">
+                            <a class="d-flex m-2 py-2 bg-light rounded-pill active" data-bs-toggle="pill" href="#tab-1">
                                 <span class="text-dark" style="width: 130px;">Fruit</span>
                             </a>
                         </li>
@@ -160,26 +160,24 @@
                 <div id="tab-1" class="tab-pane fade show p-0 active">
                     <div class="row g-4">
                         <div class="col-lg-12">
-                            <div class="row g-4">    
+                            <div class="row g-4">
                                 <c:forEach var="p" items="${organicFruits}">
                                     <div class="col-md-6 col-lg-4 col-xl-3">
-                                        <a href="/PRJ301_BookShop/">
-                                            <div class="rounded position-relative fruite-item">
-                                                <div class="fruite-img">
-                                                    <img src="${pageContext.request.contextPath}/views/client/asset/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                        <div class="rounded position-relative fruite-item">
+                                            <div class="fruite-img">
+                                                <img src="${pageContext.request.contextPath}${p.imageURL}" class="img-fluid w-100 rounded-top" alt="">
+                                            </div>
+                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Vegetable</div>
+                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                <h4>${p.fullName}</h4>
+                                                <p>${p.description}</p>
+                                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <p class="text-dark fs-5 fw-bold mb-0">$${p.price} / kg</p>
+                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
                                                 </div>
-                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruit</div>
-                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                    <h4>${p.fullName}</h4>
-                                                    <p>${p.description}</p>
-                                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                                        <p class="text-dark fs-5 fw-bold mb-0">$${p.price} / kg</p>
-                                                        <a href="/PRJ301_BookShop/NewServlet" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                                    </div>
-                                                </div>
-                                            </div
-                                        </a>
-                                    </div> 
+                                            </div>
+                                        </div>
+                                    </div>
                                 </c:forEach>
                             </div>
                         </div>
@@ -193,7 +191,7 @@
                                     <div class="col-md-6 col-lg-4 col-xl-3">
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
-                                                <img src="${pageContext.request.contextPath}/views/client/asset/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                                <img src="${pageContext.request.contextPath}${p.imageURL}" class="img-fluid w-100 rounded-top" alt="">
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Vegetable</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
@@ -219,9 +217,9 @@
                                     <div class="col-md-6 col-lg-4 col-xl-3">
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
-                                                <img src="${pageContext.request.contextPath}/views/asset/client/asset/img/fruite-item-1.jpg" class="img-fluid w-100 rounded-top" alt="">
+                                                <img src="${pageContext.request.contextPath}${p.imageURL}" class="img-fluid w-100 rounded-top" alt="">
                                             </div>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
+                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Nut</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                                 <h4>${p.fullName}</h4>
                                                 <p>${p.description}</p>
@@ -302,7 +300,7 @@
                 <div class="border border-primary rounded position-relative vesitable-item">
                     <a href="/PRJ301_BookShop/NewServlet">
                         <div class="vesitable-img">
-                            <img src="${pageContext.request.contextPath}/views/asset/client/img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
+                            <img src="${pageContext.request.contextPath}${p.imageURL}" class="img-fluid w-100 rounded-top" alt="">
                         </div>
                         <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
                         <div class="p-4 rounded-bottom">
@@ -336,7 +334,7 @@
             </div>
             <div class="col-lg-6">
                 <div class="position-relative">
-                    <img src="img/baner-1.png" class="img-fluid w-100 rounded" alt="">
+                    <img src="${pageContext.request.contextPath}/views/client/asset/img/baner-1.png" class="img-fluid w-100 rounded" alt="">
                     <div class="d-flex align-items-center justify-content-center bg-white rounded-circle position-absolute" style="width: 140px; height: 140px; top: 0; left: 0;">
                         <h1 style="font-size: 100px;">1</h1>
                         <div class="d-flex flex-column">
@@ -365,7 +363,7 @@
                     <div class="p-4 rounded bg-light">
                         <div class="row align-items-center">
                             <div class="col-6">
-                                <img src="${pageContext.request.contextPath}/views/client/asset/img/best-product-1.jpg" class="img-fluid rounded-circle w-100" alt="">
+                                <img src="${pageContext.request.contextPath}${p.imageURL}" class="img-fluid rounded-circle w-100" alt="">
                             </div>
                             <div class="col-6">
                                 <a href="/PRJ301_BookShop/NewServlet" class="h5">${p.fullName}</a>

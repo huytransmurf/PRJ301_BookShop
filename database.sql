@@ -1,6 +1,6 @@
 CREATE DATABASE FruitStore;
 GO
-
+DROP DATABASE FruitStore
 USE FruitStore;
 GO
 
@@ -93,25 +93,6 @@ VALUES ('Fruits', 'Fresh fruits and dried fruits'),
        ('Vegetables', 'Various types of vegetables'),
        ('Nuts', 'Healthy nuts and treats');
 GO
-INSERT INTO Product (isBestSeller, FullName, Description, Quantity, QuantitySold, ImageURL, CategoryID, Price, discount)
-VALUES (1, 'Apple', 'Fresh and crispy apples', 100, 50, '/images/apple.jpg', 1, 1.99, 0),
-       (0, 'Banana', 'Ripe and yellow bananas', 80, 30, '/images/banana.jpg', 1, 0.99, 0),
-       (1, 'Carrot', 'Organic carrots', 120, 70, '/images/carrot.jpg', 2, 0.79, 0);
-GO
-INSERT INTO Product (isBestSeller, FullName, Description, Quantity, QuantitySold, ImageURL, CategoryID, Price, discount)
-VALUES 
-    (0, 'Orange', 'Fresh and juicy oranges', 80, 40, '/assets/images/orange.jpg', 1, 1.49, 0),
-    (0, 'Grape', 'Sweet and seedless grapes', 100, 60, '/assets/images/grape.jpg', 1, 2.99, 0),
-    (0, 'Apricot', 'Ripe and nutritious apricots', 60, 30, '/assets/images/papaya.jpg', 1, 3.49, 0),
-    (0, 'Peach', 'Delicious and fuzzy peaches', 70, 35, '/assets/images/peach.jpg', 1, 1.99, 0),
-    (1, 'Banana', 'Ripe and yellow bananas', 80, 50, '/assets/images/banana.jpg', 1, 0.99, 0),
-    (1, 'Apple', 'Fresh and crispy apples', 100, 70, '/assets/images/apple.jpg', 1, 1.99, 0),
-    (0, 'Tomato', 'Fresh tomatoes', 90, 60, '/assets/images/tomato.jpg', 2, 1.29, 0),
-    (0, 'Broccoli', 'Nutritious broccoli', 50, 25, '/assets/images/broccoli.jpg', 2, 1.79, 0),
-    (0, 'Bell Pepper', 'Colorful bell peppers', 40, 20, '/assets/images/bell_pepper.jpg', 2, 0.99, 0),
-    (0, 'Potato', 'Versatile potatoes', 120, 80, '/assets/images/potato.jpg', 3, 0.89, 0),
-    (0, 'Coriander', 'Fresh coriander leaves', 30, 15, '/assets/images/coriander.jpg', 3, 0.49, 0);
-GO
 INSERT INTO [User] (FirstName, LastName, Address, Role, AvatarURL)
 VALUES ('Emily', 'Johnson', '789 Oak Ave', 'Customer', '/assets/images/emilyjohnson.jpg'),
        ('Michael', 'Brown', '101 Pine Rd', 'Admin', 'storage/images/taoanhdep_thay_tu_50818.png');
@@ -148,4 +129,46 @@ select * from Category
 select  top 8 * from Product
 	where isBestSeller = 1
 
+--fruit
+INSERT INTO Product (isBestSeller, FullName, Description, Quantity, QuantitySold, ImageURL, CategoryID, Price, discount)
+VALUES 
+    (0, 'Mango', 'Sweet and juicy mangoes', 70, 50, '/views/client/asset/img/mango.jpg', 1, 1.99, 0),
+    (1, 'Pineapple', 'Fresh and tangy pineapples', 60, 30, '/views/client/asset/img/pineapple.jpg', 1, 2.49, 0),
+    (0, 'Strawberry', 'Fresh and sweet strawberries', 80, 40, '/views/client/asset/img/strawberry.jpg', 1, 3.99, 0),
+    (1, 'Blueberry', 'Plump and juicy blueberries', 100, 60, '/views/client/asset/img/blueberry.jpg', 1, 4.99, 0),
+    (0, 'Raspberry', 'Tangy and sweet raspberries', 90, 45, '/views/client/asset/img/raspberry.jpg', 1, 5.49, 0),
+    (1, 'Watermelon', 'Refreshing and juicy watermelon', 50, 25, '/views/client/asset/img/watermelon.jpg', 1, 3.49, 0),
+    (0, 'Kiwi', 'Tart and sweet kiwi fruit', 60, 30, '/views/client/asset/img/kiwi.jpg', 1, 2.99, 0),
+    (1, 'Cherry', 'Sweet and succulent cherries', 70, 35, '/views/client/asset/img/cherry.jpg', 1, 4.99, 0),
+    (0, 'Pomegranate', 'Rich and juicy pomegranate', 40, 20, '/views/client/asset/img/pomegranate.jpg', 1, 3.99, 0),
+    (0, 'Papaya', 'Delicious and tropical papaya', 50, 25, '/views/client/asset/img/papaya.jpg', 1, 2.79, 0);
+GO
+--vegetable
+INSERT INTO Product (isBestSeller, FullName, Description, Quantity, QuantitySold, ImageURL, CategoryID, Price, discount)
+VALUES 
+    (0, 'Spinach', 'Fresh and nutritious spinach', 60, 30, '/views/client/asset/img/spinach.jpg', 2, 1.49, 0),
+    (0, 'Lettuce', 'Crispy and fresh lettuce', 80, 40, '/views/client/asset/img/lettuce.jpg', 2, 1.29, 0),
+    (0, 'Kale', 'Healthy and green kale', 50, 25, '/views/client/asset/img/kale.jpg', 2, 2.49, 0),
+    (1, 'Carrot', 'Crunchy and sweet carrots', 90, 45, '/views/client/asset/img/carrot.jpg', 2, 0.99, 0),
+    (0, 'Cauliflower', 'Fresh cauliflower', 70, 35, '/views/client/asset/img/cauliflower.jpg', 2, 1.79, 0),
+    (1, 'Cucumber', 'Cool and refreshing cucumber', 100, 50, '/views/client/asset/img/cucumber.jpg', 2, 0.89, 0),
+    (0, 'Cabbage', 'Healthy green cabbage', 60, 30, '/views/client/asset/img/cabbage.jpg', 2, 1.19, 0),
+    (1, 'Zucchini', 'Fresh and versatile zucchini', 80, 40, '/views/client/asset/img/zucchini.jpg', 2, 1.59, 0),
+    (0, 'Eggplant', 'Nutritious and tasty eggplant', 50, 25, '/views/client/asset/img/eggplant.jpg', 2, 1.99, 0),
+    (1, 'Radish', 'Crisp and peppery radishes', 40, 20, '/views/client/asset/img/radish.jpg', 2, 1.09, 0);
+GO
+--nut
+INSERT INTO Product (isBestSeller, FullName, Description, Quantity, QuantitySold, ImageURL, CategoryID, Price, discount)
+VALUES 
+    (0, 'Almond', 'Crunchy and nutritious almonds', 50, 25, '/views/client/asset/img/almond.jpg', 3, 5.99, 0),
+    (1, 'Walnut', 'Rich and healthy walnuts', 60, 30, '/views/client/asset/img/walnut.jpg', 3, 6.99, 0),
+    (0, 'Cashew', 'Creamy and delicious cashews', 40, 20, '/views/client/asset/img/cashew.jpg', 3, 7.49, 0),
+    (1, 'Pistachio', 'Crunchy and tasty pistachios', 70, 35, '/views/client/asset/img/pistachio.jpg', 3, 8.99, 0),
+    (0, 'Hazelnut', 'Nutty and rich hazelnuts', 50, 25, '/views/client/asset/img/hazelnut.jpg', 3, 6.49, 0),
+    (1, 'Peanut', 'Crunchy and tasty peanuts', 90, 45, '/views/client/asset/img/peanut.jpg', 3, 3.99, 0),
+    (0, 'Pine Nut', 'Rich and buttery pine nuts', 30, 15, '/views/client/asset/img/pine_nut.jpg', 3, 9.99, 0),
+    (1, 'Macadamia', 'Buttery and rich macadamias', 20, 10, '/views/client/asset/img/macadamia.jpg', 3, 11.99, 0),
+    (0, 'Brazil Nut', 'Rich and creamy Brazil nuts', 40, 20, '/views/client/asset/img/brazil_nut.jpg', 3, 7.99, 0),
+    (0, 'Sunflower Seed', 'Crunchy and nutritious sunflower seeds', 80, 40, '/views/client/asset/img/sunflower_seed.jpg', 3, 2.99, 0);
+GO
 
