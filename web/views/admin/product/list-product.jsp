@@ -1,9 +1,9 @@
-
-
-<jsp:include page="./includes/navbar.jsp" />
+<%@ page import="java.util.List" %>
+<%@ page import="model.Product" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
+<jsp:include page="../includes/navbar.jsp" />
 
 <main id="content" role="main" class="main">
     <!-- Content -->
@@ -12,14 +12,26 @@
         <div class="page-header">
             <div class="row align-items-center mb-3">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title">Products <span class="badge badge-soft-dark ml-2">72,031</span></h1>
+                    <h1 class="page-header-title">Products <span class="badge badge-soft-dark ml-2">${totalProducts}</span></h1>
                 </div>
-
                 <div class="col-sm-auto">
-                    <a class="btn btn-primary" href="ecommerce-add-product.html">Add product</a>
+                    <a class="btn btn-primary" href="ecommerce-add-product.jsp">Add Product</a>
                 </div>
             </div>
             <!-- End Row -->
+
+            <!-- Column Control -->
+            <div class="mb-3">
+                <label><input type="checkbox" class="column-control" data-column="2" checked> Product Name</label>
+                <label><input type="checkbox" class="column-control" data-column="3" checked> Description</label>
+                <label><input type="checkbox" class="column-control" data-column="4" checked> Quantity</label>
+                <label><input type="checkbox" class="column-control" data-column="5" checked> Quantity Sold</label>
+                <label><input type="checkbox" class="column-control" data-column="6" checked> Image</label>
+                <label><input type="checkbox" class="column-control" data-column="7" checked> Category</label>
+                <label><input type="checkbox" class="column-control" data-column="8" checked> Price</label>
+                <label><input type="checkbox" class="column-control" data-column="9" checked> Discount</label>
+            </div>
+            <!-- End Column Control -->
 
             <!-- Nav Scroller -->
             <div class="js-nav-scroller hs-nav-scroller-horizontal">
@@ -38,7 +50,7 @@
                 <!-- Nav -->
                 <ul class="nav nav-tabs page-header-tabs" id="pageHeaderTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">All productas</a>
+                        <a class="nav-link active" href="#">All Products</a>
                     </li>
                 </ul>
                 <!-- End Nav -->
@@ -47,14 +59,8 @@
         </div>
         <!-- End Page Header -->
 
-
-        <!-- End Row -->
-
         <!-- Card -->
         <div class="card">
-            <!-- Header -->
-            <!-- End Header -->
-
             <!-- Table -->
             <div class="table-responsive datatable-custom">
                 <table id="datatable" class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
@@ -62,32 +68,38 @@
                         <tr>
                             <th scope="col" class="table-column-pr-0"></th>
                             <th>ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Address</th>
-                            <th>Role</th>
-                            <th>Avatar</th>
+                            <th>Product Name</th>
+                            <th>Description</th>
+                            <th>Quantity</th>
+                            <th>Quantity Sold</th>
+                            <th>Image</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Discount</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="user" items="${users}">
+                        <c:forEach var="product" items="${products}">
                             <tr>
                                 <td class="table-column-pr-0"></td>
-                                <td>${user.id}</td>
-                                <td>${user.firstName}</td>
-                                <td>${user.lastName}</td>
-                                <td>${user.address}</td>
-                                <td>${user.role}</td>
+                                <td>${product.productID}</td>
+                                <td>${product.fullName}</td>
+                                <td>${product.description}</td>
+                                <td>${product.quantity}</td>
+                                <td>${product.quantitySold}</td>
                                 <td>
-                                    <img class="avatar avatar-lg" src="https://cdn.tuoitre.vn/zoom/700_700/471584752817336320/2024/6/3/doraemon-3-17173722166781704981911-30-9-657-1207-crop-1717372336444425413969.jpeg" alt="Avatar">
+                                    <img class="avatar avatar-lg" src="${product.imageURL}" alt="${product.fullName}">
                                 </td>
+                                <td>${product.categoryID}</td> <!-- Có th? c?n l?y tên danh m?c t? c? s? d? li?u -->
+                                <td>$${product.price}</td>
+                                <td>${product.discount}%</td>
                                 <td>
                                     <div class="btn-group" role="group">
-                                        <a class="btn btn-sm btn-warning" href="user-details.jsp?id=${user.id}" style="margin-right: 5px;">
+                                        <a class="btn btn-sm btn-warning" href="product-edit.jsp?id=${product.productID}" style="margin-right: 5px;">
                                             <i class="tio-edit"></i> Edit
                                         </a>
-                                        <a class="btn btn-sm btn-danger" href="user-delete.jsp?id=${user.id}">
+                                        <a class="btn btn-sm btn-danger" href="product-delete.jsp?id=${product.productID}">
                                             <i class="tio-delete"></i> Delete
                                         </a>
                                     </div>
@@ -109,7 +121,7 @@
                                     <!-- Previous Page -->
                                     <c:if test="${currentPage > 1}">
                                         <li class="page-item">
-                                            <a class="page-link" href="UserServlet?action=list-users-admin&page=${currentPage - 1}" aria-label="Previous">
+                                            <a class="page-link" href="ProductServlet?action=loadListProductAdmin&page=${currentPage - 1}" aria-label="Previous">
                                                 <span aria-hidden="true">&laquo;</span>
                                             </a>
                                         </li>
@@ -118,14 +130,14 @@
                                     <!-- Page Numbers -->
                                     <c:forEach var="page" begin="1" end="${totalPages}">
                                         <li class="page-item <c:if test="${page == currentPage}">active</c:if>">
-                                            <a class="page-link" href="UserServlet?action=list-users-admin&page=${page}">${page}</a>
+                                            <a class="page-link" href="ProductServlet?action=loadListProductAdmin&page=${page}">${page}</a>
                                         </li>
                                     </c:forEach>
 
                                     <!-- Next Page -->
                                     <c:if test="${currentPage < totalPages}">
                                         <li class="page-item">
-                                            <a class="page-link" href="UserServlet?action=list-users-admin&page=${currentPage - 1}" aria-label="Next">
+                                            <a class="page-link" href="ProductServlet?action=loadListProductAdmin&page=${currentPage + 1}" aria-label="Next">
                                                 <span aria-hidden="true">&raquo;</span>
                                             </a>
                                         </li>
@@ -143,14 +155,18 @@
     </div>
     <!-- End Content -->
 
-    <!-- Footer -->
-
-
-
-
-    <!-- End Footer -->
-
-    <jsp:include page="./includes/footer.jsp" />
-
+    <jsp:include page="../includes/footer.jsp" />
 </main>
 
+<script>
+    document.querySelectorAll('.column-control').forEach(checkbox => {
+        checkbox.addEventListener('change', function () {
+            const column = this.getAttribute('data-column');
+            const isChecked = this.checked;
+            document.querySelectorAll('#datatable th:nth-child(' + column + '), #datatable td:nth-child(' + column + ')')
+                .forEach(cell => {
+                    cell.style.display = isChecked ? '' : 'none';
+                });
+        });
+    });
+</script>

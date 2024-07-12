@@ -5,6 +5,9 @@ public class Review {
     private String description;
     private int userID;
     private int productID;
+    
+    public Review() {
+    }
 
     public Review(int id, String description, int userID, int productID) {
         this.id = id;

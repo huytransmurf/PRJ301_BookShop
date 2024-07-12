@@ -18,9 +18,7 @@ public class ReviewDao extends Connector implements GenericDao<Review> {
         List<Review> reviews = new ArrayList<>();
         String query = "SELECT * FROM Review";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
                 Review review = new Review(
@@ -43,8 +41,7 @@ public class ReviewDao extends Connector implements GenericDao<Review> {
         Review review = null;
         String query = "SELECT * FROM Review WHERE ReviewID = ?";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -69,8 +66,7 @@ public class ReviewDao extends Connector implements GenericDao<Review> {
     public boolean insert(Review review) {
         String query = "INSERT INTO Review (Description, UserID, ProductID) VALUES (?, ?, ?)";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, review.getDescription());
             stmt.setInt(2, review.getUserID());
@@ -90,8 +86,7 @@ public class ReviewDao extends Connector implements GenericDao<Review> {
     public boolean update(Review review) {
         String query = "UPDATE Review SET Description = ?, UserID = ?, ProductID = ? WHERE ReviewID = ?";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, review.getDescription());
             stmt.setInt(2, review.getUserID());
@@ -112,8 +107,7 @@ public class ReviewDao extends Connector implements GenericDao<Review> {
     public boolean delete(int id) {
         String query = "DELETE FROM Review WHERE ReviewID = ?";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setInt(1, id);
             stmt.executeUpdate();
@@ -125,5 +119,32 @@ public class ReviewDao extends Connector implements GenericDao<Review> {
             System.out.println("Error deleting review with ID " + id + ": " + e.getMessage());
         }
         return false;
+    }
+
+    public List<Review> getReviewsByProductId(int productId) {
+        List<Review> reviews = new ArrayList<>();
+        String query = "SELECT r.ReviewID, r.ProductID, r.UserID, r.Description, u.FirstName, u.LastName "
+                + "FROM Review r "
+                + "JOIN [User] u ON r.UserID = u.UserID "
+                + "WHERE r.ProductID = ?";
+
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, productId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Review review = new Review();
+                review.setId(rs.getInt("ReviewID"));
+                review.setProductID(rs.getInt("ProductID"));
+                review.setUserID(rs.getInt("UserID"));
+                review.setDescription(rs.getString("Description"));
+
+                reviews.add(review);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching reviews for product with ID " + productId + ": " + e.getMessage());
+        }
+
+        return reviews;
     }
 }

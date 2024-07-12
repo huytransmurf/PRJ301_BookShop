@@ -1,9 +1,7 @@
 <%@ page import="java.util.List" %>
-<%@ page import="model.Product" %>
+<%@ page import="model.Order" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-
-<jsp:include page="./includes/navbar.jsp" />
+<jsp:include page="../includes/navbar.jsp" />
 
 <main id="content" role="main" class="main">
     <!-- Content -->
@@ -12,26 +10,13 @@
         <div class="page-header">
             <div class="row align-items-center mb-3">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title">Products <span class="badge badge-soft-dark ml-2">${totalProducts}</span></h1>
+                    <h1 class="page-header-title">Orders <span class="badge badge-soft-dark ml-2">${totalOrders}</span></h1>
                 </div>
                 <div class="col-sm-auto">
-                    <a class="btn btn-primary" href="ecommerce-add-product.jsp">Add Product</a>
+                    <a class="btn btn-primary" href="order-add.jsp">Add Order</a>
                 </div>
             </div>
             <!-- End Row -->
-
-            <!-- Column Control -->
-            <div class="mb-3">
-                <label><input type="checkbox" class="column-control" data-column="2" checked> Product Name</label>
-                <label><input type="checkbox" class="column-control" data-column="3" checked> Description</label>
-                <label><input type="checkbox" class="column-control" data-column="4" checked> Quantity</label>
-                <label><input type="checkbox" class="column-control" data-column="5" checked> Quantity Sold</label>
-                <label><input type="checkbox" class="column-control" data-column="6" checked> Image</label>
-                <label><input type="checkbox" class="column-control" data-column="7" checked> Category</label>
-                <label><input type="checkbox" class="column-control" data-column="8" checked> Price</label>
-                <label><input type="checkbox" class="column-control" data-column="9" checked> Discount</label>
-            </div>
-            <!-- End Column Control -->
 
             <!-- Nav Scroller -->
             <div class="js-nav-scroller hs-nav-scroller-horizontal">
@@ -50,7 +35,7 @@
                 <!-- Nav -->
                 <ul class="nav nav-tabs page-header-tabs" id="pageHeaderTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">All Products</a>
+                        <a class="nav-link active" href="#">All Orders</a>
                     </li>
                 </ul>
                 <!-- End Nav -->
@@ -68,38 +53,48 @@
                         <tr>
                             <th scope="col" class="table-column-pr-0"></th>
                             <th>ID</th>
-                            <th>Product Name</th>
-                            <th>Description</th>
-                            <th>Quantity</th>
-                            <th>Quantity Sold</th>
-                            <th>Image</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th>Discount</th>
+                            <th>User ID</th>
+                            <th>Order Date</th>
+                            <th>Expected Date</th>
+                            <th>Order Status</th>
+                            <th>Total Cost</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="product" items="${products}">
+                        <c:forEach var="order" items="${orders}">
                             <tr>
                                 <td class="table-column-pr-0"></td>
-                                <td>${product.productID}</td>
-                                <td>${product.fullName}</td>
-                                <td>${product.description}</td>
-                                <td>${product.quantity}</td>
-                                <td>${product.quantitySold}</td>
-                                <td>
-                                    <img class="avatar avatar-lg" src="${product.imageURL}" alt="${product.fullName}">
+                                <td>${order.id}</td>
+                                <td>${order.userID}</td>
+                                <td>${order.orderDate}</td>
+                                <td>${order.expectedDate}</td>
+                                <td><c:choose>
+                                        <c:when test="${order.orderStatusID == 1}">
+                                            <span class="badge badge-soft-warning">
+                                                <span class="legend-indicator bg-warning"></span>Pending
+                                            </span>
+                                        </c:when>
+                                        <c:when test="${order.orderStatusID == 2}">
+                                            <span class="badge badge-soft-success">
+                                                <span class="legend-indicator bg-success"></span>Paid
+                                            </span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <span class="badge badge-soft-secondary">
+                                                <span class="legend-indicator bg-secondary"></span>Unknown Status
+                                            </span>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </td>
-                                <td>${product.categoryID}</td> <!-- Có th? c?n l?y tên danh m?c t? c? s? d? li?u -->
-                                <td>$${product.price}</td>
-                                <td>${product.discount}%</td>
+
+                                <td>${order.totalCost}</td>
                                 <td>
                                     <div class="btn-group" role="group">
-                                        <a class="btn btn-sm btn-warning" href="product-edit.jsp?id=${product.productID}" style="margin-right: 5px;">
+                                        <a class="btn btn-sm btn-warning" href="order-edit.jsp?id=${order.id}" style="margin-right: 5px;">
                                             <i class="tio-edit"></i> Edit
                                         </a>
-                                        <a class="btn btn-sm btn-danger" href="product-delete.jsp?id=${product.productID}">
+                                        <a class="btn btn-sm btn-danger" href="OrderServlet?action=delete&id=${order.id}">
                                             <i class="tio-delete"></i> Delete
                                         </a>
                                     </div>
@@ -121,52 +116,38 @@
                                     <!-- Previous Page -->
                                     <c:if test="${currentPage > 1}">
                                         <li class="page-item">
-                                            <a class="page-link" href="ProductServlet?action=loadListProductAdmin&page=${currentPage - 1}" aria-label="Previous">
+                                            <a class="page-link" href="?action=listOrderAdmin&page=${currentPage - 1}" aria-label="Previous">
                                                 <span aria-hidden="true">&laquo;</span>
                                             </a>
                                         </li>
                                     </c:if>
 
                                     <!-- Page Numbers -->
-                                    <c:forEach var="page" begin="1" end="${totalPages}">
-                                        <li class="page-item <c:if test="${page == currentPage}">active</c:if>">
-                                            <a class="page-link" href="ProductServlet?action=loadListProductAdmin&page=${page}">${page}</a>
+                                    <c:forEach var="i" begin="1" end="${totalPages}">
+                                        <li class="page-item ${i == currentPage ? 'active' : ''}">
+                                            <a class="page-link" href="?action=listOrderAdmin&page=${i}">${i}</a>
                                         </li>
                                     </c:forEach>
 
                                     <!-- Next Page -->
                                     <c:if test="${currentPage < totalPages}">
                                         <li class="page-item">
-                                            <a class="page-link" href="ProductServlet?action=loadListProductAdmin&page=${currentPage + 1}" aria-label="Next">
+                                            <a class="page-link" href="?action=listOrderAdmin&page=${currentPage + 1}" aria-label="Next">
                                                 <span aria-hidden="true">&raquo;</span>
                                             </a>
                                         </li>
                                     </c:if>
                                 </ul>
                             </nav>
-                            <!-- End Pagination Controls -->
                         </div>
                     </div>
                 </div>
+                <!-- End Pagination -->
             </div>
-            <!-- End Footer -->
         </div>
         <!-- End Card -->
     </div>
     <!-- End Content -->
+    <jsp:include page="../includes/footer.jsp" />
 
-    <jsp:include page="./includes/footer.jsp" />
 </main>
-
-<script>
-    document.querySelectorAll('.column-control').forEach(checkbox => {
-        checkbox.addEventListener('change', function () {
-            const column = this.getAttribute('data-column');
-            const isChecked = this.checked;
-            document.querySelectorAll('#datatable th:nth-child(' + column + '), #datatable td:nth-child(' + column + ')')
-                .forEach(cell => {
-                    cell.style.display = isChecked ? '' : 'none';
-                });
-        });
-    });
-</script>
