@@ -114,7 +114,7 @@ VALUES
 GO
 INSERT INTO [User] (FirstName, LastName, Address, Role, AvatarURL)
 VALUES ('Emily', 'Johnson', '789 Oak Ave', 'Customer', '/assets/images/emilyjohnson.jpg'),
-       ('Michael', 'Brown', '101 Pine Rd', 'Admin', '/assets/images/michaelbrown.jpg');
+       ('Michael', 'Brown', '101 Pine Rd', 'Admin', 'storage/images/taoanhdep_thay_tu_50818.png');
 GO
 INSERT INTO Review (Description, UserID, ProductID)
 VALUES ('Delicious!', 1, 4),
@@ -137,6 +137,9 @@ VALUES (1, 1, 3, 7.47),
        (2, 2, 2, 2.58);
 
 select * from OrderDetail
+
+
+SELECT COUNT(*) AS total FROM [User]
 select * from Cart
 select * from [Order]
 select * from Category

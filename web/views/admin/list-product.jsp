@@ -89,7 +89,6 @@
                                 <a class="btn btn-sm btn-outline-danger mb-2 mb-sm-0 mr-2" href="java1script:;">
                                     <i class="tio-delete-outlined"></i> Delete
                                 </a>
-
                             </div>
                         </div>
                         <!-- End Datatable Info -->
@@ -141,7 +140,7 @@
                             <tbody>
                                 <tr>
                                     <td class="table-column-pr-0">
-                                        
+
                                     </td>
                                     <td class="table-column-pl-0">
                                         <a class="media align-items-center" href="ecommerce-product-details.html">
@@ -170,239 +169,14 @@
                                             <a class="btn btn-sm btn-warning " href="ecommerce-product-details.html" style="margin-right: 5px;">
                                                 <i class="tio-edit"></i> Edit
                                             </a>
-                                               
-                                             <a class="btn btn-sm btn-danger me-2" href="ecommerce-product-details.html">
+
+                                            <a class="btn btn-sm btn-danger me-2" href="ecommerce-product-details.html">
                                                 <i class="tio-edit"></i> Delete
                                             </a>
                                             <!-- End Unfold -->
                                         </div>
                                     </td>
                                 </tr>
-
-                                <tr>
-                                    <td class="table-column-pr-0">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="productsCheck2">
-                                            <label class="custom-control-label" for="productsCheck2"></label>
-                                        </div>
-                                    </td>
-                                    <td class="table-column-pl-0">
-                                        <a class="media align-items-center" href="ecommerce-product-details.html">
-                                            <img class="avatar avatar-lg mr-3" src="assets\img\400x400\img26.jpg" alt="Image Description">
-                                            <div class="media-body">
-                                                <h5 class="text-hover-primary mb-0">Topman shoe</h5>
-                                            </div>
-                                        </a>
-                                    </td>
-                                    <td>Shoes</td>
-                                    <td>Topman</td>
-                                    <td>
-                                        <label class="toggle-switch toggle-switch-sm" for="stocksCheckbox2">
-                                            <input type="checkbox" class="toggle-switch-input" id="stocksCheckbox2" checked="">
-                                            <span class="toggle-switch-label">
-                                                <span class="toggle-switch-indicator"></span>
-                                            </span>
-                                        </label>
-                                    </td>
-                                    <td>4124123847</td>
-                                    <td>$21</td>
-                                    <td>125</td>
-                                    <td>4</td>
-                                    <td>
-                                        <div class="btn-group" role="group">
-                                            <a class="btn btn-sm btn-white" href="ecommerce-product-details.html">
-                                                <i class="tio-edit"></i> Edit
-                                            </a>
-
-                                            <!-- Unfold -->
-                                            <div class="hs-unfold btn-group">
-                                                <a class="js-hs-unfold-invoker btn btn-icon btn-sm btn-white dropdown-toggle dropdown-toggle-empty" href="javascript:;" data-hs-unfold-options='{
-                                                   "target": "#productsEditDropdown2",
-                                                   "type": "css-animation",
-                                                   "smartPositionOffEl": "#datatable"
-                                                   }'></a>
-
-                                                <div id="productsEditDropdown2" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right mt-1">
-                                                    <a class="dropdown-item" href="#">
-                                                        <i class="tio-delete-outlined dropdown-item-icon"></i> Delete
-                                                    </a>
-
-                                                </div>
-                                            </div>
-                                            <!-- End Unfold -->
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="table-column-pr-0">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="productsCheck3">
-                                            <label class="custom-control-label" for="productsCheck3"></label>
-                                        </div>
-                                    </td>
-                                    <td class="table-column-pl-0">
-                                        <a class="media align-items-center" href="ecommerce-product-details.html">
-                                            <img class="avatar avatar-lg mr-3" src="assets\img\400x400\img25.jpg" alt="Image Description">
-                                            <div class="media-body">
-                                                <h5 class="text-hover-primary mb-0">RayBan black sunglasses</h5>
-                                            </div>
-                                        </a>
-                                    </td>
-                                    <td>Accessories</td>
-                                    <td>RayBan</td>
-                                    <td>
-                                        <label class="toggle-switch toggle-switch-sm" for="stocksCheckbox3">
-                                            <input type="checkbox" class="toggle-switch-input" id="stocksCheckbox3" checked="">
-                                            <span class="toggle-switch-label">
-                                                <span class="toggle-switch-indicator"></span>
-                                            </span>
-                                        </label>
-                                    </td>
-                                    <td>8472341241</td>
-                                    <td>$37</td>
-                                    <td>42</td>
-                                    <td>1</td>
-                                    <td>
-                                        <div class="btn-group" role="group">
-                                            <a class="btn btn-sm btn-white" href="ecommerce-product-details.html">
-                                                <i class="tio-edit"></i> Edit
-                                            </a>
-
-                                            <!-- Unfold -->
-                                            <div class="hs-unfold btn-group">
-                                                <a class="js-hs-unfold-invoker btn btn-icon btn-sm btn-white dropdown-toggle dropdown-toggle-empty" href="javascript:;" data-hs-unfold-options='{
-                                                   "target": "#productsEditDropdown3",
-                                                   "type": "css-animation",
-                                                   "smartPositionOffEl": "#datatable"
-                                                   }'></a>
-
-                                                <div id="productsEditDropdown3" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right mt-1">
-                                                    <a class="dropdown-item" href="#">
-                                                        <i class="tio-delete-outlined dropdown-item-icon"></i> Delete
-                                                    </a>
-
-                                                </div>
-                                            </div>
-                                            <!-- End Unfold -->
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="table-column-pr-0">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="productsCheck4">
-                                            <label class="custom-control-label" for="productsCheck4"></label>
-                                        </div>
-                                    </td>
-                                    <td class="table-column-pl-0">
-                                        <a class="media align-items-center" href="ecommerce-product-details.html">
-                                            <img class="avatar avatar-lg mr-3" src="assets\img\400x400\img6.jpg" alt="Image Description">
-                                            <div class="media-body">
-                                                <h5 class="text-hover-primary mb-0">Mango Women's shoe</h5>
-                                            </div>
-                                        </a>
-                                    </td>
-                                    <td>Shoes</td>
-                                    <td>Mango</td>
-                                    <td>
-                                        <label class="toggle-switch toggle-switch-sm" for="stocksCheckbox4">
-                                            <input type="checkbox" class="toggle-switch-input" id="stocksCheckbox4">
-                                            <span class="toggle-switch-label">
-                                                <span class="toggle-switch-indicator"></span>
-                                            </span>
-                                        </label>
-                                    </td>
-                                    <td>2412384741</td>
-                                    <td>$65</td>
-                                    <td>76</td>
-                                    <td>3</td>
-                                    <td>
-                                        <div class="btn-group" role="group">
-                                            <a class="btn btn-sm btn-white" href="ecommerce-product-details.html">
-                                                <i class="tio-edit"></i> Edit
-                                            </a>
-
-                                            <!-- Unfold -->
-                                            <div class="hs-unfold btn-group">
-                                                <a class="js-hs-unfold-invoker btn btn-icon btn-sm btn-white dropdown-toggle dropdown-toggle-empty" href="javascript:;" data-hs-unfold-options='{
-                                                   "target": "#productsEditDropdown4",
-                                                   "type": "css-animation",
-                                                   "smartPositionOffEl": "#datatable"
-                                                   }'></a>
-
-                                                <div id="productsEditDropdown4" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right mt-1">
-                                                    <a class="dropdown-item" href="#">
-                                                        <i class="tio-delete-outlined dropdown-item-icon"></i> Delete
-                                                    </a>
-
-                                                </div>
-                                            </div>
-                                            <!-- End Unfold -->
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="table-column-pr-0">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="productsCheck5">
-                                            <label class="custom-control-label" for="productsCheck5"></label>
-                                        </div>
-                                    </td>
-                                    <td class="table-column-pl-0">
-                                        <a class="media align-items-center" href="ecommerce-product-details.html">
-                                            <img class="avatar avatar-lg mr-3" src="assets\img\400x400\img3.jpg" alt="Image Description">
-                                            <div class="media-body">
-                                                <h5 class="text-hover-primary mb-0">Calvin Klein t-shirts</h5>
-                                            </div>
-                                        </a>
-                                    </td>
-                                    <td>Clothing</td>
-                                    <td>Calvin Klein</td>
-                                    <td>
-                                        <label class="toggle-switch toggle-switch-sm" for="stocksCheckbox5">
-                                            <input type="checkbox" class="toggle-switch-input" id="stocksCheckbox5">
-                                            <span class="toggle-switch-label">
-                                                <span class="toggle-switch-indicator"></span>
-                                            </span>
-                                        </label>
-                                    </td>
-                                    <td>8234741241</td>
-                                    <td>$89</td>
-                                    <td>99</td>
-                                    <td>7</td>
-                                    <td>
-                                        <div class="btn-group" role="group">
-                                            <a class="btn btn-sm btn-white" href="ecommerce-product-details.html">
-                                                <i class="tio-edit"></i> Edit
-                                            </a>
-
-                                            <!-- Unfold -->
-                                            <div class="hs-unfold btn-group">
-                                                <a class="js-hs-unfold-invoker btn btn-icon btn-sm btn-white dropdown-toggle dropdown-toggle-empty" href="javascript:;" data-hs-unfold-options='{
-                                                   "target": "#productsEditDropdown5",
-                                                   "type": "css-animation",
-                                                   "smartPositionOffEl": "#datatable"
-                                                   }'></a>
-
-                                                <div id="productsEditDropdown5" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right mt-1">
-                                                    <a class="dropdown-item" href="#">
-                                                        <i class="tio-delete-outlined dropdown-item-icon"></i> Delete
-                                                    </a>
-
-                                                </div>
-                                            </div>
-                                            <!-- End Unfold -->
-                                        </div>
-                                    </td>
-                                </tr>
-
-
-
-
-
                             </tbody>
                         </table>
                     </div>
@@ -454,45 +228,6 @@
 
             <!-- Footer -->
 
-            <div class="footer">
-                <div class="row justify-content-between align-items-center">
-                    <div class="col">
-                        <p class="font-size-sm mb-0">&copy; Front. <span class="d-none d-sm-inline-block">2020 Htmlstream.</span></p>
-                    </div>
-                    <div class="col-auto">
-                        <div class="d-flex justify-content-end">
-                            <!-- List Dot -->
-                            <ul class="list-inline list-separator">
-                                <li class="list-inline-item">
-                                    <a class="list-separator-link" href="#">FAQ</a>
-                                </li>
-
-                                <li class="list-inline-item">
-                                    <a class="list-separator-link" href="#">License</a>
-                                </li>
-
-                                <li class="list-inline-item">
-                                    <!-- Keyboard Shortcuts Toggle -->
-                                    <div class="hs-unfold">
-                                        <a class="js-hs-unfold-invoker btn btn-icon btn-ghost-secondary rounded-circle" href="javascript:;" data-hs-unfold-options='{
-                                           "target": "#keyboardShortcutsSidebar",
-                                           "type": "css-animation",
-                                           "animationIn": "fadeInRight",
-                                           "animationOut": "fadeOutRight",
-                                           "hasOverlay": true,
-                                           "smartPositionOff": true
-                                           }'>
-                                            <i class="tio-command-key"></i>
-                                        </a>
-                                    </div>
-                                    <!-- End Keyboard Shortcuts Toggle -->
-                                </li>
-                            </ul>
-                            <!-- End List Dot -->
-                        </div>
-                    </div>
-                </div>
-            </div>
 
 
 
@@ -512,7 +247,7 @@
         <!-- JS Front -->
         <script src="assets\js\theme.min.js"></script>
 
-     <script>
+        <script>
             $(document).on("ready", function () {
                 // ONLY DEV
                 // =======================================================
