@@ -32,7 +32,7 @@
     <body class="footer-offset">
         <script src="assets\vendor\hs-navbar-vertical-aside\hs-navbar-vertical-aside-mini-cache.js"></script>
 
-        <jsp:include page="./includes/navbar.jsp" />
+        <jsp:include page="../includes/navbar.jsp" />
 
         <main id="content" role="main" class="main">
 
@@ -103,7 +103,7 @@
                 </form>
         </main>
 
-        <jsp:include page="./includes/footer.jsp" />
+        <jsp:include page="../includes/footer.jsp" />
 
 
         <script src="assets\js\demo.js"></script>
