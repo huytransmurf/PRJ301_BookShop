@@ -281,4 +281,62 @@ public class ProductDao extends Connector implements IProductDao {
 
         return products;
     }
+
+    @Override
+    public List<Product> getOrganicVegetables() {
+        List<Product> result = new ArrayList<>();
+        try {
+            String query = "select  top 8 * from Product"
+                    + "	where CategoryID = 2";
+            PreparedStatement ps = getConnect().prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product product = new Product();
+                product.setProductID(rs.getInt("ProductID"));
+                product.setBestSeller(rs.getBoolean("isBestSeller"));
+                product.setFullName(rs.getString("FullName"));
+                product.setDescription(rs.getString("Description"));
+                product.setQuantity(rs.getInt("Quantity"));
+                product.setQuantitySold(rs.getInt("QuantitySold"));
+                product.setImageURL(rs.getString("ImageURL"));
+                product.setCategoryID(rs.getInt("CategoryID"));
+                product.setPrice(rs.getDouble("Price"));
+                product.setDiscount(rs.getInt("discount"));
+
+                result.add(product);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error get organic vegetable!!");
+        }
+        return result;
+    }
+
+    @Override
+    public List<Product> getOrganicNuts() {
+        List<Product> result = new ArrayList<>();
+        try {
+            String query = "select  top 8 * from Product"
+                    + "	where CategoryID = 3";
+            PreparedStatement ps = getConnect().prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product product = new Product();
+                product.setProductID(rs.getInt("ProductID"));
+                product.setBestSeller(rs.getBoolean("isBestSeller"));
+                product.setFullName(rs.getString("FullName"));
+                product.setDescription(rs.getString("Description"));
+                product.setQuantity(rs.getInt("Quantity"));
+                product.setQuantitySold(rs.getInt("QuantitySold"));
+                product.setImageURL(rs.getString("ImageURL"));
+                product.setCategoryID(rs.getInt("CategoryID"));
+                product.setPrice(rs.getDouble("Price"));
+                product.setDiscount(rs.getInt("discount"));
+
+                result.add(product);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error get organic Nuts!!");
+        }
+        return result;
+    }
 }

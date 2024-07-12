@@ -15,4 +15,7 @@ public interface IProductDao extends GenericDao<Product> {
     List<Product> getOrganicFruits();
     List<Product> getFreshVegetables();
     List<Product> getBestSeller();
+    List<Product> getOrganicVegetables();
+    List<Product> getOrganicNuts();
+    
 }
