@@ -91,7 +91,7 @@ GO
 INSERT INTO Category (FullName, Description)
 VALUES ('Fruits', 'Fresh fruits and dried fruits'),
        ('Vegetables', 'Various types of vegetables'),
-       ('Snacks', 'Healthy snacks and treats');
+       ('Nuts', 'Healthy nuts and treats');
 GO
 INSERT INTO Product (isBestSeller, FullName, Description, Quantity, QuantitySold, ImageURL, CategoryID, Price, discount)
 VALUES (1, 'Apple', 'Fresh and crispy apples', 100, 50, '/images/apple.jpg', 1, 1.99, 0),
@@ -129,13 +129,23 @@ VALUES (1),
        (2);
 GO
 INSERT INTO CartItem (Quantity, TotalCost, CartID, ProductID)
-VALUES (3, 7.47, 3, 1),
-       (2, 2.58, 4, 2);
+VALUES (3, 7.47, 1, 1),
+       (2, 2.58, 2, 2);
 GO
 INSERT INTO OrderDetail (OrderID, ProductID, Quantity, Cost)
-VALUES (3, 1, 3, 7.47),
-       (4, 2, 2, 2.58);
+VALUES (1, 1, 3, 7.47),
+       (2, 2, 2, 2.58);
 
 select * from OrderDetail
 
+
 SELECT COUNT(*) AS total FROM [User]
+select * from Cart
+select * from [Order]
+select * from Category
+
+
+select  top 8 * from Product
+	where isBestSeller = 1
+
+
