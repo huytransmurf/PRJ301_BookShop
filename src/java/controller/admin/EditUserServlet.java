@@ -34,8 +34,12 @@ public class EditUserServlet extends HttpServlet {
         User user = new User(id, firstName, lastName, address, role, avatarURL);
         UserDao userDao = new UserDao();
 
-        userDao.update(user);
+        if (userDao.update(user)) {
 
-        response.sendRedirect("UserServlet?action=list-users-admin");
+            response.sendRedirect("GetUserByIdServlet?id=" + id);
+        } else {
+            response.sendRedirect(request.getContextPath() + "/${pageContext.request.contextPath}/views/admin/others/error-500.jsp");
+
+        }
     }
 }
