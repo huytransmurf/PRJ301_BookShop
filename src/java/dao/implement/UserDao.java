@@ -113,15 +113,53 @@ public class UserDao extends Connector implements GenericDao<User> {
 
     @Override
     public boolean delete(int id) {
-        String query = "DELETE FROM [User] WHERE UserID = ?";
+        String deleteCartItemsQuery = "DELETE FROM CartItem WHERE CartID IN (SELECT CartID FROM Cart WHERE UserID = ?)";
+        String deleteCartQuery = "DELETE FROM Cart WHERE UserID = ?";
+        String deleteOrderDetailsQuery = "DELETE FROM OrderDetail WHERE OrderID IN (SELECT OrderID FROM [Order] WHERE UserID = ?)";
+        String deleteOrdersQuery = "DELETE FROM [Order] WHERE UserID = ?";
+        String deleteReviewsQuery = "DELETE FROM Review WHERE UserID = ?";
+        String deleteUserQuery = "DELETE FROM [User] WHERE UserID = ?";
 
-        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnect()) {
+            // Xóa các bản ghi liên quan trong bảng CartItem trước
+            try (PreparedStatement stmt = conn.prepareStatement(deleteCartItemsQuery)) {
+                stmt.setInt(1, id);
+                stmt.executeUpdate();
+            }
 
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
+            // Xóa các bản ghi liên quan trong bảng Cart
+            try (PreparedStatement stmt = conn.prepareStatement(deleteCartQuery)) {
+                stmt.setInt(1, id);
+                stmt.executeUpdate();
+            }
 
-            System.out.println("User deleted successfully.");
-            return true;
+            // Xóa các bản ghi liên quan trong bảng OrderDetail
+            try (PreparedStatement stmt = conn.prepareStatement(deleteOrderDetailsQuery)) {
+                stmt.setInt(1, id);
+                stmt.executeUpdate();
+            }
+
+            // Xóa các bản ghi liên quan trong bảng Order
+            try (PreparedStatement stmt = conn.prepareStatement(deleteOrdersQuery)) {
+                stmt.setInt(1, id);
+                stmt.executeUpdate();
+            }
+
+            // Xóa các bản ghi liên quan trong bảng Review
+            try (PreparedStatement stmt = conn.prepareStatement(deleteReviewsQuery)) {
+                stmt.setInt(1, id);
+                stmt.executeUpdate();
+            }
+
+            // Xóa người dùng
+            try (PreparedStatement stmt = conn.prepareStatement(deleteUserQuery)) {
+                stmt.setInt(1, id);
+                int rowsAffected = stmt.executeUpdate();
+                if (rowsAffected > 0) {
+                    System.out.println("User deleted successfully.");
+                    return true;
+                }
+            }
 
         } catch (SQLException e) {
             System.out.println("Error deleting user with ID " + id + ": " + e.getMessage());

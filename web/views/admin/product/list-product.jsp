@@ -96,12 +96,19 @@
                                 <td>${product.discount}%</td>
                                 <td>
                                     <div class="btn-group" role="group">
-                                        <a class="btn btn-sm btn-warning" href="product-edit.jsp?id=${product.productID}" style="margin-right: 5px;">
-                                            <i class="tio-edit"></i> Edit
-                                        </a>
-                                        <a class="btn btn-sm btn-danger" href="product-delete.jsp?id=${product.productID}">
-                                            <i class="tio-delete"></i> Delete
-                                        </a>
+                                        <form action="${pageContext.request.contextPath}/GetProductByIdServlet" method="GET" style="display: inline;">
+                                            <input type="hidden" name="id" value="${product.productID}">
+                                            <button type="submit" class="btn btn-sm btn-warning" style="margin-right: 5px;">
+                                                <i class="tio-edit"></i> Edit
+                                            </button>
+                                        </form>
+
+                                        <form action="${pageContext.request.contextPath}/DeleteProductServlet" method="POST" style="display: inline;">
+                                            <input type="hidden" name="id" value="${product.productID}">
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="tio-delete"></i> Delete
+                                            </button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>
