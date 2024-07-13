@@ -210,4 +210,33 @@ public class UserDao extends Connector implements GenericDao<User> {
 
         return total;
     }
+
+    public User getUserByUsername(String username) {
+        User user = null;
+        String query = "SELECT * FROM [User] WHERE userName = ?";
+
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                user = new User(
+                        rs.getInt("UserID"),
+                        rs.getString("FirstName"),
+                        rs.getString("LastName"),
+                        rs.getString("Address"),
+                        rs.getString("Role"),
+                        rs.getString("AvatarURL"),
+                        rs.getString("userName"),
+                        rs.getString("password")
+                );
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error fetching user with username " + username + ": " + e.getMessage());
+        }
+
+        return user;
+    }
 }

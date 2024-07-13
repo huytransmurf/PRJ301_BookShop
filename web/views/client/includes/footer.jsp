@@ -106,7 +106,7 @@
 <script src="${pageContext.request.contextPath}/views/client/asset/lib/lightbox/js/lightbox.min.js"></script>
 <script src="${pageContext.request.contextPath}/views/client/asset/lib/owlcarousel/owl.carousel.min.js"></script>
 
-<!-- Template Javascript -->
+<!-- Template Javascript -->    
 <script src="${pageContext.request.contextPath}/views/client/asset/js/main.js"></script>
 </body>
 
