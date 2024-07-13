@@ -35,11 +35,10 @@ public class GetUserByIdServlet extends HttpServlet {
                 request.setAttribute("user", user);
                 request.getRequestDispatcher("views/admin/user/detail-user.jsp").forward(request, response);
             } else {
-                response.sendRedirect("errorPage.jsp");
+                response.sendRedirect(request.getContextPath() + "/${pageContext.request.contextPath}/views/admin/others/error-500.jsp");
             }
         } else {
-            // Handle the case where the ID is not valid
-            response.sendRedirect("errorPage.jsp");
+            response.sendRedirect(request.getContextPath() + "/${pageContext.request.contextPath}/views/admin/others/error-404.jsp");
         }
     }
 

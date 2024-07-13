@@ -1,39 +1,5 @@
 
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <!-- Required Meta Tags Always Come First -->
-        <meta charset="utf-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-            />
-
-        <!-- Title -->
-        <title>E-commerce | Front - Admin &amp; Dashboard Template</title>
-
-        <!-- Favicon -->
-        <link rel="shortcut icon" href="favicon.ico" />
-
-        <!-- Font -->
-        <link
-            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap"
-            rel="stylesheet"
-            />
-
-        <!-- CSS Implementing Plugins -->
-        <link rel="stylesheet" href="assets\css\vendor.min.css" />
-        <link rel="stylesheet" href="assets\vendor\icon-set\style.css" />
-
-        <!-- CSS Front Template -->
-        <link rel="stylesheet" href="assets\css\theme.min.css?v=1.0" />
-    </head>
-
-    <body class="footer-offset">
-        <script src="assets\vendor\hs-navbar-vertical-aside\hs-navbar-vertical-aside-mini-cache.js"></script>
-
         <%@ include file="../admin/includes/navbar.jsp" %>
 
         <script src="assets\js\demo.js"></script>

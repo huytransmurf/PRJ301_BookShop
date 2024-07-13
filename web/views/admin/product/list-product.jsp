@@ -15,21 +15,21 @@
                     <h1 class="page-header-title">Products <span class="badge badge-soft-dark ml-2">${totalProducts}</span></h1>
                 </div>
                 <div class="col-sm-auto">
-                    <a class="btn btn-primary" href="ecommerce-add-product.jsp">Add Product</a>
+                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/views/admin/product/add-product.jsp">Add Product</a>
                 </div>
             </div>
             <!-- End Row -->
 
             <!-- Column Control -->
             <div class="mb-3">
-                <label><input type="checkbox" class="column-control" data-column="2" checked> Product Name</label>
-                <label><input type="checkbox" class="column-control" data-column="3" checked> Description</label>
-                <label><input type="checkbox" class="column-control" data-column="4" checked> Quantity</label>
-                <label><input type="checkbox" class="column-control" data-column="5" checked> Quantity Sold</label>
-                <label><input type="checkbox" class="column-control" data-column="6" checked> Image</label>
-                <label><input type="checkbox" class="column-control" data-column="7" checked> Category</label>
-                <label><input type="checkbox" class="column-control" data-column="8" checked> Price</label>
-                <label><input type="checkbox" class="column-control" data-column="9" checked> Discount</label>
+                <label style="margin-right: 30px;"><input type="checkbox" class="column-control" data-column="2" checked> Product Name</label>
+                <label style="margin-right: 30px;"><input type="checkbox" class="column-control" data-column="3" checked> Description</label>
+                <label style="margin-right: 30px;"><input type="checkbox" class="column-control" data-column="4" checked> Quantity</label>
+                <label style="margin-right: 30px;"><input type="checkbox" class="column-control" data-column="5" checked> Quantity Sold</label>
+                <label style="margin-right: 30px;"><input type="checkbox" class="column-control" data-column="6" checked> Image</label>
+                <label style="margin-right: 30px;"><input type="checkbox" class="column-control" data-column="7" checked> Category</label>
+                <label style="margin-right: 30px;"><input type="checkbox" class="column-control" data-column="8" checked> Price</label>
+                <label style="margin-right: 30px;"><input type="checkbox" class="column-control" data-column="9" checked> Discount</label>
             </div>
             <!-- End Column Control -->
 
@@ -96,6 +96,13 @@
                                 <td>${product.discount}%</td>
                                 <td>
                                     <div class="btn-group" role="group">
+
+                                        <form action="${pageContext.request.contextPath}/GetProductByIdServlet" method="GET" style="display: inline;">
+                                            <input type="hidden" name="id" value="${product.productID}">
+                                            <button type="submit" class="btn btn-sm btn-dark" style="margin-right: 5px;">
+                                                <i class="tio-edit"></i> View
+                                            </button>
+                                        </form>
                                         <form action="${pageContext.request.contextPath}/GetProductByIdServlet" method="GET" style="display: inline;">
                                             <input type="hidden" name="id" value="${product.productID}">
                                             <button type="submit" class="btn btn-sm btn-warning" style="margin-right: 5px;">
@@ -128,7 +135,7 @@
                                     <!-- Previous Page -->
                                     <c:if test="${currentPage > 1}">
                                         <li class="page-item">
-                                            <a class="page-link" href="ProductServlet?action=loadListProductAdmin&page=${currentPage - 1}" aria-label="Previous">
+                                            <a class="page-link" href="products?page=${currentPage - 1}" aria-label="Previous">
                                                 <span aria-hidden="true">&laquo;</span>
                                             </a>
                                         </li>
@@ -137,14 +144,14 @@
                                     <!-- Page Numbers -->
                                     <c:forEach var="page" begin="1" end="${totalPages}">
                                         <li class="page-item <c:if test="${page == currentPage}">active</c:if>">
-                                            <a class="page-link" href="ProductServlet?action=loadListProductAdmin&page=${page}">${page}</a>
+                                            <a class="page-link" href="products?page=${page}">${page}</a>
                                         </li>
                                     </c:forEach>
 
                                     <!-- Next Page -->
                                     <c:if test="${currentPage < totalPages}">
                                         <li class="page-item">
-                                            <a class="page-link" href="ProductServlet?action=loadListProductAdmin&page=${currentPage + 1}" aria-label="Next">
+                                            <a class="page-link" href="products?page=${currentPage + 1}" aria-label="Next">
                                                 <span aria-hidden="true">&raquo;</span>
                                             </a>
                                         </li>
@@ -171,9 +178,9 @@
             const column = this.getAttribute('data-column');
             const isChecked = this.checked;
             document.querySelectorAll('#datatable th:nth-child(' + column + '), #datatable td:nth-child(' + column + ')')
-                .forEach(cell => {
-                    cell.style.display = isChecked ? '' : 'none';
-                });
+                    .forEach(cell => {
+                        cell.style.display = isChecked ? '' : 'none';
+                    });
         });
     });
 </script>
