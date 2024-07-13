@@ -4,6 +4,8 @@
  */
 package dao.intefaces;
 
+import java.util.List;
+import java.util.Map;
 import model.Category;
 
 /**
@@ -11,5 +13,5 @@ import model.Category;
  * @author admin
  */
 public interface ICategoryDao extends GenericDao<Category> {
-
+    Map<Integer, Integer> getQuantityOfCategory(List<Category> cList);
 }

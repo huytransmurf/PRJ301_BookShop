@@ -120,15 +120,18 @@
                         <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body d-flex align-items-center">
-                        <div class="input-group w-75 mx-auto d-flex">
-                            <form action="/PRJ301_BookShop/NewServlet">
-                                <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
-                                <a href="shop.jsp" id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></a>
-                            </form>
 
+
+                    <form action="Shop" class="modal-body d-flex align-items-center">
+                        <div class="input-group w-75 mx-auto d-flex">
+                            
+                            <input type="search" class="form-control p-3" placeholder="Keywords" aria-describedby="search-icon-1" name="keyword">
+                            <input type="hidden" name="action" value="searchName">
+                            <button type="submit" href="shop.jsp" id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></button>
                         </div>
-                    </div>
+                    </form>
+
+
                 </div>
             </div>
         </div>

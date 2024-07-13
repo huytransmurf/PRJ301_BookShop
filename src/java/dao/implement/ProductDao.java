@@ -251,6 +251,7 @@ public class ProductDao extends Connector implements IProductDao {
         return totalCount;
     }
 
+    @Override
     public List<Product> getPaginatedProducts(int offset, int limit) {
         List<Product> products = new ArrayList<>();
         String query = "SELECT * FROM [Product] ORDER BY ProductID OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
@@ -339,11 +340,83 @@ public class ProductDao extends Connector implements IProductDao {
         }
         return result;
     }
-    
-    public static void main(String[] args) {
-        List<Product> list = new ProductDao().getAll();
-        for (Product product : list) {
-            System.out.println(product);
+
+    @Override
+    public List<Product> searchByName(String keyword) {
+        List<Product> result = new ArrayList<>();
+        try {
+            String query = "select * from Product\n"
+                    + "	where CHARINDEX(?, FullName) > 0";
+            PreparedStatement ps = getConnect().prepareStatement(query);
+            ps.setString(1, keyword);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product product = new Product();
+                product.setProductID(rs.getInt("ProductID"));
+                product.setBestSeller(rs.getBoolean("isBestSeller"));
+                product.setFullName(rs.getString("FullName"));
+                product.setDescription(rs.getString("Description"));
+                product.setQuantity(rs.getInt("Quantity"));
+                product.setQuantitySold(rs.getInt("QuantitySold"));
+                product.setImageURL(rs.getString("ImageURL"));
+                product.setCategoryID(rs.getInt("CategoryID"));
+                product.setPrice(rs.getDouble("Price"));
+                product.setDiscount(rs.getInt("discount"));
+
+                result.add(product);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error Search!!");
         }
+        return result;
+    }
+
+    @Override
+    public List<Product> searchByCategory(int categoryID) {
+        List<Product> result = new ArrayList<>();
+        try {
+            String query = "select * from Product\n"
+                    + "where CategoryID = ?";
+            PreparedStatement ps = getConnect().prepareStatement(query);
+            ps.setInt(1, categoryID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product product = new Product();
+                product.setProductID(rs.getInt("ProductID"));
+                product.setBestSeller(rs.getBoolean("isBestSeller"));
+                product.setFullName(rs.getString("FullName"));
+                product.setDescription(rs.getString("Description"));
+                product.setQuantity(rs.getInt("Quantity"));
+                product.setQuantitySold(rs.getInt("QuantitySold"));
+                product.setImageURL(rs.getString("ImageURL"));
+                product.setCategoryID(rs.getInt("CategoryID"));
+                product.setPrice(rs.getDouble("Price"));
+                product.setDiscount(rs.getInt("discount"));
+
+                result.add(product);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error search by category!!");
+        }
+        return result;
+    }
+
+    @Override
+    public int getQuantityByCateID(int categoryID) {
+        int n = 0;
+        try {
+            String query = "SELECT COUNT(*) AS number\n"
+                    + "FROM Product\n"
+                    + "WHERE CategoryID = ?;";
+            PreparedStatement ps = getConnect().prepareStatement(query);
+            ps.setInt(1, categoryID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {                
+                n = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error get quantity by category!!");
+        }
+        return n;
     }
 }

@@ -1,16 +1,18 @@
 package dao.implement;
 
 import dao.connection.Connector;
-import dao.intefaces.GenericDao;
+import dao.intefaces.ICategoryDao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import model.Category;
 
-public class CategoryDao extends Connector implements GenericDao<Category> {
+public class CategoryDao extends Connector implements ICategoryDao {
 
     @Override
     public List<Category> getAll() {
@@ -110,5 +112,14 @@ public class CategoryDao extends Connector implements GenericDao<Category> {
             System.out.println("Error deleting category with ID " + id + ": " + e.getMessage());
         }
         return false;
+    }
+
+    @Override
+    public Map<Integer, Integer> getQuantityOfCategory(List<Category> cList) {
+        Map<Integer, Integer> cateMap = new HashMap<>();
+        for (Category category : cList) {
+            cateMap.put(category.getId(), new ProductDao().getQuantityByCateID(category.getId()));
+        }
+        return cateMap;
     }
 }
