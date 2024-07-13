@@ -1,12 +1,15 @@
 package model;
 
 public class User {
+
     private int id;
     private String firstName;
     private String lastName;
     private String address;
     private String role;
     private String avatarURL;
+    private String userName;
+    private String password;
 
     public User(int id, String firstName, String lastName, String address, String role, String avatarURL) {
         this.id = id;
@@ -15,6 +18,17 @@ public class User {
         this.address = address;
         this.role = role;
         this.avatarURL = avatarURL;
+    }
+
+    public User(int id, String firstName, String lastName, String address, String role, String avatarURL, String userName, String password) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.role = role;
+        this.avatarURL = avatarURL;
+        this.userName = userName;
+        this.password = password;
     }
 
     public int getId() {
@@ -65,15 +79,31 @@ public class User {
         this.avatarURL = avatarURL;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", address='" + address + '\'' +
-                ", role='" + role + '\'' +
-                ", avatarURL='" + avatarURL + '\'' +
-                '}';
+        return "User{"
+                + "id=" + id
+                + ", firstName='" + firstName + '\''
+                + ", lastName='" + lastName + '\''
+                + ", address='" + address + '\''
+                + ", role='" + role + '\''
+                + ", avatarURL='" + avatarURL + '\''
+                + '}';
     }
 }
