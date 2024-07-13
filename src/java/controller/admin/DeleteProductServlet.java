@@ -12,16 +12,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
 /**
  *
  * @author admin
  */
 @WebServlet(name = "DeleteProductServlet", urlPatterns = {"/DeleteProductServlet"})
 public class DeleteProductServlet extends HttpServlet {
-
-   
-    
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -38,18 +34,17 @@ public class DeleteProductServlet extends HttpServlet {
                 boolean success = productDao.delete(productId);
 
                 if (success) {
-                    response.sendRedirect("GetAllProductServlet");
-                    
+                    response.sendRedirect("products");
+
                 } else {
                     response.sendRedirect("GetAllProductServlet");
                 }
             } catch (NumberFormatException e) {
-                response.sendRedirect("views/admin/product/list-product.jsp?message=Invalid product ID");
+                response.sendRedirect(request.getContextPath() + "/${pageContext.request.contextPath}/views/admin/others/error-500.jsp");
             }
         } else {
-            response.sendRedirect("views/admin/product/list-product.jsp?message=product ID is required");
+            response.sendRedirect(request.getContextPath() + "/${pageContext.request.contextPath}/views/admin/others/error-404.jsp");
         }
     }
 
-  
 }

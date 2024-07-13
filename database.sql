@@ -172,6 +172,16 @@ VALUES
     (0, 'Sunflower Seed', 'Crunchy and nutritious sunflower seeds', 80, 40, '/views/client/asset/img/sunflower_seed.jpg', 3, 2.99, 0);
 GO
 
+DECLARE @RandomProducts TABLE (
+    ProductID INT
+)
+select * from Product
+UPDATE Product
+SET discount = 0;
+UPDATE Product
+SET discount = 30
+WHERE ProductID IN (1, 4, 7, 12, 15, 18, 22, 25, 28, 30);
+
 SELECT COUNT(*) AS number
 FROM Product
 WHERE CategoryID = 1;

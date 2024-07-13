@@ -724,3 +724,15 @@
 }
 /*** Footer End ***/
 
+.limited-text {
+    line-height: 1.5em; /* Chiều cao của một dòng */
+    height: 3.0em; /* Chiều cao cho 3 dòng (1.5em * 3) */
+    overflow: hidden; /* Ẩn phần văn bản vượt quá */
+    text-overflow: ellipsis; /* Thêm dấu ba chấm nếu văn bản bị cắt ngắn */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    max-height: 4.5em;
+    white-space: normal;
+    word-break: break-word; /* Đảm bảo văn bản bị ngắt đúng chỗ */
+}

@@ -35,11 +35,10 @@ public class GetProductByIdServlet extends HttpServlet {
                 request.setAttribute("product", product);
                 request.getRequestDispatcher("views/admin/product/detail-product.jsp").forward(request, response);
             } else {
-                response.sendRedirect("errorPage.jsp");
+            response.sendRedirect(request.getContextPath() + "/${pageContext.request.contextPath}/views/admin/others/error-500.jsp");
             }
         } else {
-            // Handle the case where the ID is not valid
-            response.sendRedirect("errorPage.jsp");
+            response.sendRedirect(request.getContextPath() + "/${pageContext.request.contextPath}/views/admin/others/error-404.jsp");
         }
     }
 

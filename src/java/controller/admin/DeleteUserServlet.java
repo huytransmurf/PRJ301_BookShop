@@ -34,10 +34,10 @@ public class DeleteUserServlet extends HttpServlet {
                     response.sendRedirect("UserServlet?action=list-users-admin");
                 }
             } catch (NumberFormatException e) {
-                response.sendRedirect("views/admin/user/list-user.jsp?message=Invalid user ID");
+            response.sendRedirect(request.getContextPath() + "/${pageContext.request.contextPath}/views/admin/others/error-500.jsp");
             }
         } else {
-            response.sendRedirect("views/admin/user/list-user.jsp?message=User ID is required");
+            response.sendRedirect(request.getContextPath() + "/${pageContext.request.contextPath}/views/admin/others/error-404.jsp");
         }
     }
 }
