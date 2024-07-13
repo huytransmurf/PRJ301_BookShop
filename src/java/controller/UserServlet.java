@@ -66,7 +66,7 @@ public class UserServlet extends HttpServlet {
         UserDao userDao = new UserDao();
         userDao.insert(newUser);
 
-        response.sendRedirect("UserServlet?action=list");
+        response.sendRedirect("UserServlet?action=list-users-admin");
     }
 
     private void deleteUserById(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -117,7 +117,7 @@ public class UserServlet extends HttpServlet {
             request.setAttribute("users", users);
         request.setAttribute("currentPage", currentPage);
         request.setAttribute("totalPages", totalPages);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/user/list-customer.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/user/list-user.jsp");
         dispatcher.forward(request, response);
     }
 

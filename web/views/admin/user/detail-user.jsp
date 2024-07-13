@@ -102,34 +102,38 @@
 
         <jsp:include page="../includes/navbar.jsp" />
 
-        // Body here
         <main id="content" role="main" class="main">
             <div class="content container-fluid">
 
                 <div class="profile-card">
                     <div class="text-center">
-                        <img src="https://cdn.tuoitre.vn/zoom/700_700/471584752817336320/2024/6/3/doraemon-3-17173722166781704981911-30-9-657-1207-crop-1717372336444425413969.jpeg" alt="Profile Picture" class="profile-img">
-                        <div class="profile-name">User Name</div>
-                        <div class="profile-email">Email: user@example.com</div>
+                        <img src="${user.avatarURL}" alt="Profile Picture" class="profile-img">
+                        <div class="profile-name">${user.firstName} ${user.lastName}</div>
                         <button class="btn btn-edit-profile" id="btnEditProfile">Edit Profile</button>
                     </div>
                     <div class="edit-profile-form" id="editProfileForm">
-                        <form>
+                        <form method="post" action="EditUserServlet">
+                            <input hidden="true" id="userId" name="id" value="${user.id}" />
+
                             <div class="form-group">
-                                <label for="fullName">Full Name:</label>
-                                <input type="text" class="form-control" id="fullName" value="User Full Name">
+                                <label for="firstName">First Name:</label>
+                                <input type="text" class="form-control" id="firstName" name="firstName" value="${user.firstName}">
                             </div>
                             <div class="form-group">
-                                <label for="age">Age:</label>
-                                <input type="number" class="form-control" id="age" value="30">
+                                <label for="lastName">Last Name:</label>
+                                <input type="text" class="form-control" id="lastName" name="lastName" value="${user.lastName}">
                             </div>
                             <div class="form-group">
-                                <label for="location">Location:</label>
-                                <input type="text" class="form-control" id="location" value="City, Country">
+                                <label for="address">Address:</label>
+                                <input type="text" class="form-control" id="address" name="address" value="${user.address}">
                             </div>
                             <div class="form-group">
-                                <label for="interests">Interests:</label>
-                                <textarea class="form-control" id="interests" rows="3">Reading, Traveling</textarea>
+                                <label for="role">Role:</label>
+                                <input type="text" class="form-control" id="role" name="role" value="${user.role}">
+                            </div>
+                            <div class="form-group">
+                                <label for="avatarURL">Avatar URL:</label>
+                                <input type="text" class="form-control" id="avatarURL" name="avatarURL" value="${user.avatarURL}">
                             </div>
                             <button type="submit" class="btn btn-primary">Save Changes</button>
                         </form>
@@ -137,10 +141,10 @@
                     <div class="profile-details">
                         <h4>Profile Details</h4>
                         <ul>
-                            <li><strong>Full Name:</strong> Nguyen Van Dat</li>
-                            <li><strong>Age:</strong> 20 years</li>
-                            <li><strong>Location:</strong> City, Country</li>
-                            <li><strong>Interests:</strong> Reading, Traveling</li>
+                            <li><strong>First Name:</strong> ${user.firstName}</li>
+                            <li><strong>Last Name:</strong> ${user.lastName}</li>
+                            <li><strong>Address:</strong> ${user.address}</li>
+                            <li><strong>Role:</strong> ${user.role}</li>
                         </ul>
                     </div>
                 </div>
