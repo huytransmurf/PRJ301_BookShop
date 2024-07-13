@@ -172,3 +172,6 @@ VALUES
     (0, 'Sunflower Seed', 'Crunchy and nutritious sunflower seeds', 80, 40, '/views/client/asset/img/sunflower_seed.jpg', 3, 2.99, 0);
 GO
 
+SELECT COUNT(*) AS number
+FROM Product
+WHERE CategoryID = 1;
