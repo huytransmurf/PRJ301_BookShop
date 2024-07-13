@@ -341,6 +341,14 @@ public class ProductDao extends Connector implements IProductDao {
         return result;
     }
 
+
+    public List<Product> getFeatureProduct() {
+        List<Product> result = new ArrayList<>();
+        String query = "SELECT * FROM Product WHERE discount != 0";
+
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
+
+
     @Override
     public List<Product> searchByName(String keyword) {
         List<Product> result = new ArrayList<>();
@@ -350,6 +358,7 @@ public class ProductDao extends Connector implements IProductDao {
             PreparedStatement ps = getConnect().prepareStatement(query);
             ps.setString(1, keyword);
             ResultSet rs = ps.executeQuery();
+
             while (rs.next()) {
                 Product product = new Product();
                 product.setProductID(rs.getInt("ProductID"));
@@ -366,6 +375,25 @@ public class ProductDao extends Connector implements IProductDao {
                 result.add(product);
             }
         } catch (SQLException e) {
+
+            System.out.println("Error fetching featured products: " + e.getMessage());
+        }
+
+        return result;
+    }
+
+    public List<Product> getPaginatedProductsOrderByPrice(String order, int offset, int limit) {
+        List<Product> products = new ArrayList<>();
+        String query = "SELECT * FROM [Product] ORDER BY Price " + order +" OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, order);
+            stmt.setInt(2, offset);
+            stmt.setInt(3, limit);
+            
+            ResultSet rs = stmt.executeQuery();
+
+
             System.out.println("Error Search!!");
         }
         return result;
@@ -380,6 +408,7 @@ public class ProductDao extends Connector implements IProductDao {
             PreparedStatement ps = getConnect().prepareStatement(query);
             ps.setInt(1, categoryID);
             ResultSet rs = ps.executeQuery();
+
             while (rs.next()) {
                 Product product = new Product();
                 product.setProductID(rs.getInt("ProductID"));
@@ -393,6 +422,19 @@ public class ProductDao extends Connector implements IProductDao {
                 product.setPrice(rs.getDouble("Price"));
                 product.setDiscount(rs.getInt("discount"));
 
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching paginated products: " + e.getMessage());
+        }
+
+        return products;
+    }
+
+    public static void main(String[] args) {
+        List<Product> list = new ProductDao().getAll();
+        for (Product product : list) {
+            System.out.println(product);
                 result.add(product);
             }
         } catch (SQLException e) {

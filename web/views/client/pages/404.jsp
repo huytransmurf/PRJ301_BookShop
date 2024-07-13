@@ -1,4 +1,17 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<jsp:include page="includes/header.jsp" />
+ <!-- Single Page Header start -->
+        <div class="container-fluid page-header py-5">
+            <h1 class="text-center text-white display-6">404 Error</h1>
+            <ol class="breadcrumb justify-content-center mb-0">
+                <li class="breadcrumb-item"><a href="Home">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                <li class="breadcrumb-item active text-white">404</li>
+            </ol>
+        </div>
+        <!-- Single Page Header End -->
+
 <jsp:include page="../includes/header.jsp" />
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">

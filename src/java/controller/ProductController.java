@@ -28,7 +28,7 @@ public class ProductController extends HttpServlet {
             case "loadHome":
                 loadHome(request, response);
                 break;
-            case "loadShop":
+            case "loadProduct":
                 getProductById(request, response);
                 break;
             case "loadListProductAdmin":
@@ -103,12 +103,19 @@ public class ProductController extends HttpServlet {
 
     private void loadHome(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    
+
     }
 
-    private void getProductById(HttpServletRequest request, HttpServletResponse response) {
-
-        // Continue ...
+    private void getProductById(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Product> products = new ProductDao().getAll();
+        List<Product> features = new ProductDao().getFeatureProduct();
+        String id = request.getParameter("id");
+        Product product = new ProductDao().getById(Integer.parseInt(id));
+        request.setAttribute("product", product);
+        request.setAttribute("products", products);
+        request.setAttribute("features", features);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("views/client/pages/product/product-detail.jsp");
+        dispatcher.forward(request, response);
     }
 
 }
