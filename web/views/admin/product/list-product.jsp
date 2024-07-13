@@ -147,7 +147,6 @@
                                             <a class="page-link" href="products?page=${page}">${page}</a>
                                         </li>
                                     </c:forEach>
-
                                     <!-- Next Page -->
                                     <c:if test="${currentPage < totalPages}">
                                         <li class="page-item">

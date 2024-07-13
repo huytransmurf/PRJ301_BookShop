@@ -1,12 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controller;
 
 import dao.implement.CategoryDao;
 import dao.implement.ProductDao;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -20,18 +15,32 @@ import java.util.Map;
 import model.Category;
 import model.Product;
 
-/**
- *
- * @author LAPTOP
- */
 @WebServlet(name = "ShopController", urlPatterns = {"/Shop"})
 public class ShopController extends HttpServlet {
 
     private static List<Product> pList = new ArrayList<>();
-    private static final int PAGE_SIZE_ADMIN = 10;
+    private static final int PAGE_SIZE_ADMIN = 9;
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String action;
+        action = request.getParameter("action");
+        if (action == null) {
+            action = "loadHome";
+        }
+        switch (action) {
+            case "loadHome":
+                loadPaginatedProducts(request, response);
+
+                break;
+            default:
+                loadToPage(request, response);
+                break;
+        }
+    }
+
+    protected void doGet1(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
         if (action == null) {
@@ -44,10 +53,10 @@ public class ShopController extends HttpServlet {
                 break;
             case "searchName":
                 String keyword = request.getParameter("keyword");
-                if (keyword == "") {
+                if (keyword == null || keyword.isEmpty()) {
                     pList = new ProductDao().getAll();
                 } else {
-                    pList = new ProductDao().searchByName(request.getParameter("keyword"));
+                    pList = new ProductDao().searchByName(keyword);
                 }
                 loadToPage(request, response);
                 break;
@@ -59,41 +68,20 @@ public class ShopController extends HttpServlet {
                 loadToPage(request, response);
                 break;
 
-            case "sorting":
-                String orderBy = request.getParameter("param");
-                switch (orderBy) {
-                    case "nameUp":
-                        pList = new ProductDao().getAll();
-                        break;
-                    case "nameDown":
-                        pList = new ProductDao().getAll();
-                        break;
-                    case "priceUp":
-                        pList = new ProductDao().getOrganicFruits();
-                        break;
-                    case "priceDowm":
-                        pList = new ProductDao().getOrganicFruits();
-                        break;
-                    default:
-                        pList = new ProductDao().getAll();
-                        break;
-                }
-                break;
         }
         loadPaginatedProducts(request, response);
-
-        }
-
     }
 
-    private void loadToPage(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    private void loadHome(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        request.getRequestDispatcher("/views/client/pages/product/list.jsp").forward(request, response);
+    }
+
+    private void loadToPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product> features = new ProductDao().getFeatureProduct();
-
-
         List<Category> cList = new CategoryDao().getAll();
         Map<Integer, Integer> cMap = new CategoryDao().getQuantityOfCategory(cList);
+
         List<Product> result = new ArrayList<>();
         int page;
         try {
@@ -112,10 +100,9 @@ public class ShopController extends HttpServlet {
         }
 
         request.setAttribute("features", features);
-
-        request.setAttribute("pages", pages);
+        request.setAttribute("totalPages", pages);
         request.setAttribute("result", result);
-        request.setAttribute("page", page);
+        request.setAttribute("currentPage", page);
         request.setAttribute("cMap", cMap);
         request.setAttribute("cList", cList);
         request.getRequestDispatcher("/views/client/pages/product/list.jsp").forward(request, response);
@@ -123,30 +110,34 @@ public class ShopController extends HttpServlet {
 
     private void loadPaginatedProducts(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ProductDao productDao = new ProductDao();
-        List<Product> features = new ProductDao().getFeatureProduct();
-
         String order = "ASC";
-
+        
         int currentPage = 1;
         try {
-            order = (request.getParameter("order"));
+            String sortOrder = request.getParameter("order");
+            if (sortOrder != null && !sortOrder.isEmpty()) {
+                order = sortOrder.toUpperCase();
+            }
             currentPage = Integer.parseInt(request.getParameter("page"));
         } catch (NumberFormatException e) {
             currentPage = 1;
-            order = "ASC";
         }
 
+        ProductDao productDao = new ProductDao();
         int offset = (currentPage - 1) * PAGE_SIZE_ADMIN;
-        List<Product> products = productDao.getPaginatedProductsOrderByPrice(order, offset, PAGE_SIZE_ADMIN);
+        List<Product> products = productDao.getPaginatedProductsDynamic(order, "Price", offset, PAGE_SIZE_ADMIN);
+
         int totalProducts = productDao.getTotalProductCount();
         int totalPages = (int) Math.ceil((double) totalProducts / PAGE_SIZE_ADMIN);
+        List<Category> cList = new CategoryDao().getAll();
+        Map<Integer, Integer> cMap = new CategoryDao().getQuantityOfCategory(cList);
 
-        request.setAttribute("features", features);
+        request.setAttribute("features", productDao.getFeatureProduct());
         request.setAttribute("result", products);
-        request.setAttribute("page", currentPage);
-        request.setAttribute("pages", totalPages);
-
+        request.setAttribute("currentPage", currentPage);
+        request.setAttribute("numberOfPages", totalPages);
+        request.setAttribute("cMap", cMap);
+        request.setAttribute("cList", cList);
         request.getRequestDispatcher("/views/client/pages/product/list.jsp").forward(request, response);
     }
 }
