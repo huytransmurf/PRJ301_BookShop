@@ -190,9 +190,24 @@
                                                     <p class="text-dark fs-5 fw-bold mb-0">$${p.price} / kg</p>
                                                     <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
                                                 </div>
+                                    <div class="rounded position-relative fruite-item">
+                                        <a href="${pageContext.request.contextPath}/ProductDetail?id=${p.productID}">
+                                            <img src="${pageContext.request.contextPath}${p.imageURL}" class="img-fluid w-100 rounded-top" alt="">
+                                        </a>
+                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">
+                                            <c:if test="${p.categoryID == 1}">Fruit</c:if>
+                                            <c:if test="${p.categoryID == 2}">Vegetable</c:if>
+                                            <c:if test="${p.categoryID == 3}">Nuts</c:if>
+                                            </div>
+                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                <h4>Grapes</h4>
+                                                <p>${p.description}</p>
+                                            <div class="d-flex justify-content-between flex-lg-wrap">
+                                                <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
+                                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
                                             </div>
                                         </div>
-                                    </a>
+                                    </div>
                                 </div>
                             </c:forEach>
                         </div>

@@ -6,7 +6,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:include page="includes/header.jsp"/>
+<jsp:include page="./includes/header.jsp"/>
 
 <!--Modal Search Start--> 
 <!--<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -163,12 +163,14 @@
                         <div class="col-lg-12">
                             <div class="row g-4">
                                 <c:forEach var="p" items="${organicFruits}">
-                                    <div class="col-md-6 col-lg-4 col-xl-3">
-                                        <div class="rounded position-relative fruite-item">
+                                    <div class="col-md-6 col-lg-4 col-xl-3">          
+                                        <div class="rounded position-relative fruite-item">        
                                             <div class="fruite-img">
-                                                <img src="${pageContext.request.contextPath}${p.imageURL}" class="img-fluid w-100 rounded-top" alt="">
+                                                <a href="${pageContext.request.contextPath}/ProductDetail?id=${p.productID}">
+                                                    <img src="${pageContext.request.contextPath}${p.imageURL}" class="img-fluid w-100 rounded-top" alt="">
+                                                </a>
                                             </div>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Vegetable</div>
+                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruit</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                                 <h4>${p.fullName}</h4>
                                                 <p>${p.description}</p>
@@ -178,7 +180,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>                               
                                 </c:forEach>
                             </div>
                         </div>
@@ -192,7 +194,9 @@
                                     <div class="col-md-6 col-lg-4 col-xl-3">
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
-                                                <img src="${pageContext.request.contextPath}${p.imageURL}" class="img-fluid w-100 rounded-top" alt="">
+                                                <a href="${pageContext.request.contextPath}/ProductDetail?id=${p.productID}">
+                                                    <img src="${pageContext.request.contextPath}${p.imageURL}" class="img-fluid w-100 rounded-top" alt="">
+                                                </a>
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Vegetable</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
@@ -218,17 +222,19 @@
                                     <div class="col-md-6 col-lg-4 col-xl-3">
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
-                                                <img src="${pageContext.request.contextPath}${p.imageURL}" class="img-fluid w-100 rounded-top" alt="">
+                                                <a href="${pageContext.request.contextPath}/ProductDetail?id=${p.productID}">
+                                                    <img src="${pageContext.request.contextPath}${p.imageURL}" class="img-fluid w-100 rounded-top" alt="">
+                                                </a>
                                             </div>
-                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Nut</div>
+                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Nuts</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                                 <h4>${p.fullName}</h4>
                                                 <p>${p.description}</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
                                                     <p class="text-dark fs-5 fw-bold mb-0">$${p.price} / kg</p>
-                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <!--                                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>-->
                                                 </div>
-                                            </div>
+                                            </div>           
                                         </div>
                                     </div>
                                 </c:forEach>
@@ -299,20 +305,20 @@
         <div class="owl-carousel vegetable-carousel justify-content-center">
             <c:forEach var="p" items="${freshVegetables}">
                 <div class="border border-primary rounded position-relative vesitable-item">
-                    <a href="/PRJ301_BookShop/NewServlet">
-                        <div class="vesitable-img">
+                    <div class="fruite-img">
+                        <a href="${pageContext.request.contextPath}/ProductDetail?id=${p.productID}">
                             <img src="${pageContext.request.contextPath}${p.imageURL}" class="img-fluid w-100 rounded-top" alt="">
+                        </a>
+                    </div>
+                    <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
+                    <div class="p-4 rounded-bottom">
+                        <h4>${p.fullName}</h4>
+                        <p>${p.description}</p>
+                        <div class="d-flex justify-content-between flex-lg-wrap">
+                            <p class="text-dark fs-5 fw-bold mb-0">${p.price}$ / kg</p>
+                            <a href="/PRJ301_BookShop/NewServlet" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
                         </div>
-                        <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
-                        <div class="p-4 rounded-bottom">
-                            <h4>${p.fullName}</h4>
-                            <p>${p.description}</p>
-                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                <p class="text-dark fs-5 fw-bold mb-0">${p.price}$ / kg</p>
-                                <a href="/PRJ301_BookShop/NewServlet" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                            </div>
-                        </div>
-                    </a>
+                    </div>
                 </div> 
             </c:forEach>
         </div>
@@ -363,8 +369,10 @@
                 <div class="col-lg-6 col-xl-4">
                     <div class="p-4 rounded bg-light">
                         <div class="row align-items-center">
-                            <div class="col-6">
-                                <img src="${pageContext.request.contextPath}${p.imageURL}" class="img-fluid rounded-circle w-100" alt="">
+                            <div class="fruite-img">
+                                <a href="${pageContext.request.contextPath}/ProductDetail?id=${p.productID}">
+                                    <img src="${pageContext.request.contextPath}${p.imageURL}" class="img-fluid w-100 rounded-top" alt="">
+                                </a>
                             </div>
                             <div class="col-6">
                                 <a href="/PRJ301_BookShop/NewServlet" class="h5">${p.fullName}</a>

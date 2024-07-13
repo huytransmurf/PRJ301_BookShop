@@ -32,7 +32,7 @@
     <body class="footer-offset">
         <script src="assets\vendor\hs-navbar-vertical-aside\hs-navbar-vertical-aside-mini-cache.js"></script>
 
-        <jsp:include page="./includes/navbar.jsp" />
+        <jsp:include page="../includes/navbar.jsp" />
 
         <main id="content" role="main" class="main">
 
@@ -60,238 +60,119 @@
                 <div class="row">
                     <div class="col-md-8 offset-md-2">
                         <div class="product-details">
-                            <form action="UpdateProductServlet" method="post" enctype="multipart/form-data">
-                                <!-- Hidden input để lưu ID sản phẩm -->
-                                <input type="hidden" name="productId" value="${product.id}">
+                            <div class="container mt-4">
+                                <h1>Edit Product</h1>
+                                <form method="POST" action="${pageContext.request.contextPath}/EditProductServlet" class="needs-validation" novalidate>
+                                    <input type="hidden" name="productID" value="${product.productID}">
+                                    <div class="form-group">
+                                        <label>Best Seller:</label>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="bestSeller" name="bestSeller" ${product.bestSeller ? 'checked' : ''}>
+                                            <label class="custom-control-label" for="bestSeller">Is Best Seller</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Full Name:</label>
+                                        <input type="text" class="form-control" name="fullName" value="${product.fullName}" required>
+                                        <div class="invalid-feedback">
+                                            Please provide a valid full name.
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Description:</label>
+                                        <textarea class="form-control" name="description" rows="3">${product.description}</textarea>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Quantity:</label>
+                                            <input type="number" class="form-control" name="quantity" value="${product.quantity}" required>
+                                            <div class="invalid-feedback">
+                                                Please provide a valid quantity.
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Quantity Sold:</label>
+                                            <input type="number" class="form-control" name="quantitySold" value="${product.quantitySold}" required>
+                                            <div class="invalid-feedback">
+                                                Please provide a valid quantity sold.
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                <div class="form-group">
-                                    <label for="fullName">Full Name:</label>
-                                    <input type="text" class="form-control" id="fullName" name="fullName" value="${product.fullName}" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="descript">Description:</label>
-                                    <textarea class="form-control" id="descript" name="descript" rows="3" required>${product.descript}</textarea>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-6">
-                                        <label for="quantity">Quantity:</label>
-                                        <input type="number" class="form-control" id="quantity" name="quantity" value="${product.quantity}" required>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Category ID:</label>
+                                            <input type="number" class="form-control" name="categoryID" value="${product.categoryID}" required>
+                                            <div class="invalid-feedback">
+                                                Please provide a valid category ID.
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Price:</label>
+                                            <input type="number" step="0.01" class="form-control" name="price" value="${product.price}" required>
+                                            <div class="invalid-feedback">
+                                                Please provide a valid price.
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <label for="quantitySold">Quantity Sold:</label>
-                                        <input type="number" class="form-control" id="quantitySold" name="quantitySold" value="${product.quantitySold}" required>
+                                    <div class="form-group">
+                                        <label>Discount:</label>
+                                        <input type="number" class="form-control" name="discount" value="${product.discount}" required>
+                                        <div class="invalid-feedback">
+                                            Please provide a valid discount.
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-6">
-                                        <label for="price">Price:</label>
-                                        <input type="number" step="0.01" class="form-control" id="price" name="price" value="${product.price}" required>
+                                    <div class="form-group">
+                                        <label for="imgUrl">Current Image:</label><br>
+                                        <img src="${product.imageURL}" alt="Current Image" class="img-preview">
                                     </div>
-                                    <div class="col-md-6">
-                                        <label for="numberOfPage">Number of Pages:</label>
-                                        <input type="number" class="form-control" id="numberOfPage" name="numberOfPage" value="${product.numberOfPage}" required>
+                                   
+                                    <div class="form-group">
+                                        <label for="imgFile">Image File:</label>
+                                        <input type="file" class="form-control-file" id="imgFile" name="imgFile" accept="image/*" required onchange="previewImage(event)">
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="imgUrl">Current Image:</label><br>
-                                    <img src="${product.imgUrl}" alt="Current Image" class="img-preview">
-                                </div>
-                                <div class="form-group">
-                                    <label for="newImgFile">New Image File:</label>
-                                    <input type="file" class="form-control-file" id="newImgFile" name="newImgFile" accept="image/*">
-                                </div>
-                                <div class="form-group">
-                                    <label for="categoryID">Category ID:</label>
-                                    <input type="number" class="form-control" id="categoryID" name="categoryID" value="${product.categoryID}" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="author">Author:</label>
-                                    <input type="text" class="form-control" id="author" name="author" value="${product.author}" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="publisher">Publisher:</label>
-                                    <input type="text" class="form-control" id="publisher" name="publisher" value="${product.publisher}" required>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Update Product</button>
-                            </form>
+                                    <div class="form-group text-center">
+                                        <img id="imgPreview" src="" alt="Image Preview" class=" mx-auto" style="max-width: 50%; height: auto; display: none" >
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-        </main>
-
-        <jsp:include page="./includes/footer.jsp" />
+                    </main>
 
 
-        <script src="assets\js\demo.js"></script>
+                    <jsp:include page="../includes/footer.jsp" />
 
-        <!-- JS Implementing Plugins -->
-        <script src="assets\js\vendor.min.js"></script>
-        <script src="assets\vendor\chart.js\dist\Chart.min.js"></script>
-        <script src="assets\vendor\chartjs-chart-matrix\dist\chartjs-chart-matrix.min.js"></script>
-
-        <!-- JS Front -->
-        <script src="assets\js\theme.min.js"></script>
-
-        <!-- JS Plugins Init. -->
-        <script>
-            $(document).on("ready", function () {
-                // ONLY DEV
-                // =======================================================
-
-                if (window.localStorage.getItem("hs-builder-popover") === null) {
-                    $("#builderPopover")
-                            .popover("show")
-                            .on("shown.bs.popover", function () {
-                                $(".popover").last().addClass("popover-dark");
-                            });
-
-                    $(document).on("click", "#closeBuilderPopover", function () {
-                        window.localStorage.setItem("hs-builder-popover", true);
-                        $("#builderPopover").popover("dispose");
-                    });
-                } else {
-                    $("#builderPopover").on("show.bs.popover", function () {
-                        return false;
-                    });
-                }
-
-                // END ONLY DEV
-                // =======================================================
-
-                // BUILDER TOGGLE INVOKER
-                // =======================================================
-                $(".js-navbar-vertical-aside-toggle-invoker").click(function () {
-                    $(".js-navbar-vertical-aside-toggle-invoker i").tooltip("hide");
-                });
-
-                // INITIALIZATION OF MEGA MENU
-                // =======================================================
-                var megaMenu = new HSMegaMenu($(".js-mega-menu"), {
-                    desktop: {
-                        position: "left",
-                    },
-                }).init();
-
-                // INITIALIZATION OF NAVBAR VERTICAL NAVIGATION
-                // =======================================================
-                var sidebar = $(".js-navbar-vertical-aside").hsSideNav();
-
-                // INITIALIZATION OF TOOLTIP IN NAVBAR VERTICAL MENU
-                // =======================================================
-                $(".js-nav-tooltip-link").tooltip({boundary: "window"});
-
-                $(".js-nav-tooltip-link").on("show.bs.tooltip", function (e) {
-                    if (!$("body").hasClass("navbar-vertical-aside-mini-mode")) {
-                        return false;
-                    }
-                });
-
-                // INITIALIZATION OF UNFOLD
-                // =======================================================
-                $(".js-hs-unfold-invoker").each(function () {
-                    var unfold = new HSUnfold($(this)).init();
-                });
-
-                // INITIALIZATION OF FORM SEARCH
-                // =======================================================
-                $(".js-form-search").each(function () {
-                    new HSFormSearch($(this)).init();
-                });
-
-                // INITIALIZATION OF SELECT2
-                // =======================================================
-                $(".js-select2-custom").each(function () {
-                    var select2 = $.HSCore.components.HSSelect2.init($(this));
-                });
-
-                // INITIALIZATION OF DATERANGEPICKER
-                // =======================================================
-                $(".js-daterangepicker").daterangepicker();
-
-                $(".js-daterangepicker-times").daterangepicker({
-                    timePicker: true,
-                    startDate: moment().startOf("hour"),
-                    endDate: moment().startOf("hour").add(32, "hour"),
-                    locale: {
-                        format: "M/DD hh:mm A",
-                    },
-                });
-
-                var start = moment();
-                var end = moment();
-
-                function cb(start, end) {
-                    $(
-                            "#js-daterangepicker-predefined .js-daterangepicker-predefined-preview"
-                            ).html(start.format("MMM D") + " - " + end.format("MMM D, YYYY"));
-                }
-
-                $("#js-daterangepicker-predefined").daterangepicker(
-                        {
-                            startDate: start,
-                            endDate: end,
-                            ranges: {
-                                Today: [moment(), moment()],
-                                Yesterday: [
-                                    moment().subtract(1, "days"),
-                                    moment().subtract(1, "days"),
-                                ],
-                                "Last 7 Days": [moment().subtract(6, "days"), moment()],
-                                "Last 30 Days": [moment().subtract(29, "days"), moment()],
-                                "This Month": [
-                                    moment().startOf("month"),
-                                    moment().endOf("month"),
-                                ],
-                                "Last Month": [
-                                    moment().subtract(1, "month").startOf("month"),
-                                    moment().subtract(1, "month").endOf("month"),
-                                ],
-                            },
-                        },
-                        cb
-                        );
-
-                cb(start, end);
-
-                // INITIALIZATION OF CHARTJS
-                // =======================================================
-                $(".js-chart").each(function () {
-                    $.HSCore.components.HSChartJS.init($(this));
-                });
-
-                // INITIALIZATION OF JVECTORMAP
-                // =======================================================
-                $(".js-jvectormap").each(function () {
-                    var jVectorMap = $.HSCore.components.HSJVectorMap.init($(this));
-                });
-            });
-        </script>
-
-        <!-- IE Support -->
-        <script>
-            if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent))
-                document.write(
-                        '<script src="./assets/vendor/babel-polyfill/polyfill.min.js"><\/script>'
-                        );
-        </script>
-
-        <style>
-            @keyframes blink {
-                0% {
-                    opacity: 1;
-                }
-                50% {
-                    opacity: 0.8;
-                }
-                100% {
-                    opacity: 1;
-                }
-            }
-            .blinking {
-                animation: blink 1s infinite;
-                color: #009aa8; /* Màu nổi bật */
-            }
-        </style>
-    </body>
-</html>
+                    <script>
+                        function previewImage(event) {
+                            var reader = new FileReader();
+                            reader.onload = function () {
+                                var imgPreview = document.getElementById('imgPreview');
+                                imgPreview.src = reader.result;
+                                imgPreview.style.display = 'block';
+                            };
+                            var fileInput = event.target;
+                            if (fileInput.files && fileInput.files[0]) {
+                                reader.readAsDataURL(fileInput.files[0]);
+                            }
+                        }
+                    </script>
+                    <style>
+                        @keyframes blink {
+                            0% {
+                                opacity: 1;
+                            }
+                            50% {
+                                opacity: 0.8;
+                            }
+                            100% {
+                                opacity: 1;
+                            }
+                        }
+                        .blinking {
+                            animation: blink 1s infinite;
+                            color: #009aa8; /* Màu nổi bật */
+                        }
+                    </style>
