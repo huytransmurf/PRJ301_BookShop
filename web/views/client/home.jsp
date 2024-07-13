@@ -253,7 +253,7 @@
     <div class="container py-5">
         <div class="row g-4 justify-content-center">
             <div class="col-md-6 col-lg-4">
-                <a href="#">
+                <a href="Shop">
                     <div class="service-item bg-secondary rounded border border-secondary">
                         <img src="${pageContext.request.contextPath}/views/client/asset/img/featur-1.jpg" class="img-fluid rounded-top w-100" alt="">
                         <div class="px-4 rounded-bottom">
@@ -266,7 +266,7 @@
                 </a>
             </div>
             <div class="col-md-6 col-lg-4">
-                <a href="#">
+                <a href="Shop">
                     <div class="service-item bg-dark rounded border border-dark">
                         <img src="${pageContext.request.contextPath}/views/client/asset/img/featur-2.jpg" class="img-fluid rounded-top w-100" alt="">
                         <div class="px-4 rounded-bottom">
@@ -279,7 +279,7 @@
                 </a>
             </div>
             <div class="col-md-6 col-lg-4">
-                <a href="#">
+                <a href="Shop">
                     <div class="service-item bg-primary rounded border border-primary">
                         <img src="${pageContext.request.contextPath}/views/client/asset/img/featur-3.jpg" class="img-fluid rounded-top w-100" alt="">
                         <div class="px-4 rounded-bottom">
@@ -343,10 +343,6 @@
                     <img src="${pageContext.request.contextPath}/views/client/asset/img/baner-1.png" class="img-fluid w-100 rounded" alt="">
                     <div class="d-flex align-items-center justify-content-center bg-white rounded-circle position-absolute" style="width: 140px; height: 140px; top: 0; left: 0;">
                         <h1 style="font-size: 100px;">1</h1>
-                        <div class="d-flex flex-column">
-                            <span class="h2 mb-0">50$</span>
-                            <span class="h4 text-muted mb-0">kg</span>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -426,7 +422,7 @@
                     <div class="counter bg-white rounded p-5">
                         <i class="fa fa-users text-secondary"></i>
                         <h4>Available Products</h4>
-                        <h1>789</h1>
+                        <h1>30</h1>
                     </div>
                 </div>
             </div>

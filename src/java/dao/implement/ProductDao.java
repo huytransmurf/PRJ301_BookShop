@@ -339,35 +339,68 @@ public class ProductDao extends Connector implements IProductDao {
         }
         return result;
     }
-    
+
     public List<Product> getFeatureProduct() {
-    List<Product> result = new ArrayList<>();
-    String query = "SELECT * FROM Product WHERE discount != 0";
+        List<Product> result = new ArrayList<>();
+        String query = "SELECT * FROM Product WHERE discount != 0";
 
-    try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
 
-        while (rs.next()) {
-            Product product = new Product();
-            product.setProductID(rs.getInt("ProductID"));
-            product.setBestSeller(rs.getBoolean("isBestSeller"));
-            product.setFullName(rs.getString("FullName"));
-            product.setDescription(rs.getString("Description"));
-            product.setQuantity(rs.getInt("Quantity"));
-            product.setQuantitySold(rs.getInt("QuantitySold"));
-            product.setImageURL(rs.getString("ImageURL"));
-            product.setCategoryID(rs.getInt("CategoryID"));
-            product.setPrice(rs.getDouble("Price"));
-            product.setDiscount(rs.getInt("discount"));
+            while (rs.next()) {
+                Product product = new Product();
+                product.setProductID(rs.getInt("ProductID"));
+                product.setBestSeller(rs.getBoolean("isBestSeller"));
+                product.setFullName(rs.getString("FullName"));
+                product.setDescription(rs.getString("Description"));
+                product.setQuantity(rs.getInt("Quantity"));
+                product.setQuantitySold(rs.getInt("QuantitySold"));
+                product.setImageURL(rs.getString("ImageURL"));
+                product.setCategoryID(rs.getInt("CategoryID"));
+                product.setPrice(rs.getDouble("Price"));
+                product.setDiscount(rs.getInt("discount"));
 
-            result.add(product);
+                result.add(product);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching featured products: " + e.getMessage());
         }
-    } catch (SQLException e) {
-        System.out.println("Error fetching featured products: " + e.getMessage());
+
+        return result;
     }
 
-    return result;
-}
-    
+    public List<Product> getPaginatedProductsOrderByPrice(String order, int offset, int limit) {
+        List<Product> products = new ArrayList<>();
+        String query = "SELECT * FROM [Product] ORDER BY Price " + order +" OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, order);
+            stmt.setInt(2, offset);
+            stmt.setInt(3, limit);
+            
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Product product = new Product();
+                product.setProductID(rs.getInt("ProductID"));
+                product.setBestSeller(rs.getBoolean("isBestSeller"));
+                product.setFullName(rs.getString("FullName"));
+                product.setDescription(rs.getString("Description"));
+                product.setQuantity(rs.getInt("Quantity"));
+                product.setQuantitySold(rs.getInt("QuantitySold"));
+                product.setImageURL(rs.getString("ImageURL"));
+                product.setCategoryID(rs.getInt("CategoryID"));
+                product.setPrice(rs.getDouble("Price"));
+                product.setDiscount(rs.getInt("discount"));
+
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching paginated products: " + e.getMessage());
+        }
+
+        return products;
+    }
+
     public static void main(String[] args) {
         List<Product> list = new ProductDao().getAll();
         for (Product product : list) {
