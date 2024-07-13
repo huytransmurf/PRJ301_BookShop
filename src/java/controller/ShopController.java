@@ -42,6 +42,8 @@ public class ShopController extends HttpServlet {
 
     private void loadToPage(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        List<Product> features = new ProductDao().getFeatureProduct();
+        
         List<Product> result = new ArrayList<>();
         int page;
         try {
@@ -58,6 +60,9 @@ public class ShopController extends HttpServlet {
         for (int i = (page*9-9); i <= length; i++) {
             result.add(pList.get(i));
         }
+        
+        request.setAttribute("features", features);
+        
         request.setAttribute("pages", pages);
         request.setAttribute("result", result);
         request.setAttribute("page", page);

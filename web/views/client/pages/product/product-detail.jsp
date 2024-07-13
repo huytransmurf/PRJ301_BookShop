@@ -4,11 +4,11 @@
 
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
-    <h1 class="text-center text-white display-6">Shop Detail</h1>
+    <h1 class="text-center text-white display-6">Product Detail</h1>
     <ol class="breadcrumb justify-content-center mb-0">
-        <li class="breadcrumb-item"><a href="index.jsp">Home</a></li>
+        <li class="breadcrumb-item"><a href="Home">Home</a></li>
         <li class="breadcrumb-item"><a href="#">Pages</a></li>
-        <li class="breadcrumb-item active text-white">Shop Detail</li>
+        <li class="breadcrumb-item active text-white">Product Detail</li>
     </ol>
 </div>
 <!-- Single Page Header End -->
@@ -46,13 +46,15 @@
                                     <i class="fa fa-minus"></i>
                                 </button>
                             </div>
-                            <input type="text" class="form-control form-control-sm text-center border-0" value="1">
+                            <c:set var="maxQuantity" value="${product.quantity}" />
+                            <input type="text" class="form-control form-control-sm text-center border-0" value="1"/> 
                             <div class="input-group-btn">
                                 <button class="btn btn-sm btn-plus rounded-circle bg-light border">
                                     <i class="fa fa-plus"></i>
                                 </button>
-                            </div>
+                            </div>  
                         </div>
+                        <p>${product.quantity} (s) remaining</p>
                         <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
                     </div>
                     <div class="col-lg-12">
@@ -209,60 +211,53 @@
                         <div class="mb-4">
                             <h4>Categories</h4>
                             <ul class="list-unstyled fruite-categorie">
-                                <li>
-                                    <div class="d-flex justify-content-between fruite-name">
-                                        <a href="#"><i class="fas fa-apple-alt me-2"></i>Apples</a>
-                                        <span>(3)</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="d-flex justify-content-between fruite-name">
-                                        <a href="#"><i class="fas fa-apple-alt me-2"></i>Oranges</a>
-                                        <span>(5)</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="d-flex justify-content-between fruite-name">
-                                        <a href="#"><i class="fas fa-apple-alt me-2"></i>Strawbery</a>
-                                        <span>(2)</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="d-flex justify-content-between fruite-name">
-                                        <a href="#"><i class="fas fa-apple-alt me-2"></i>Banana</a>
-                                        <span>(8)</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="d-flex justify-content-between fruite-name">
-                                        <a href="#"><i class="fas fa-apple-alt me-2"></i>Pumpkin</a>
-                                        <span>(5)</span>
-                                    </div>
-                                </li>
+                                <c:forEach var="p" items="${products}" varStatus="loop">
+                                    <c:if test="${loop.index < 5}">
+                                        <li>
+                                            <div class="d-flex justify-content-between fruite-name">
+                                                <a href="${pageContext.request.contextPath}/ProductController?id=${p.productID}&action=loadProduct">
+                                                    <i class="fas fa-apple-alt me-2"></i>
+                                                    ${p.fullName}
+                                                </a>
+                                                <span>${p.quantity}</span>
+                                            </div>
+                                        </li>
+                                    </c:if>
+                                </c:forEach>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <h4 class="mb-4">Featured products</h4>
-                        <div class="d-flex align-items-center justify-content-start">
-                            <div class="rounded" style="width: 100px; height: 100px;">
-                                <img src="img/featur-1.jpg" class="img-fluid rounded" alt="Image">
-                            </div>
-                            <div>
-                                <h6 class="mb-2">Big Banana</h6>
-                                <div class="d-flex mb-2">
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                                <div class="d-flex mb-2">
-                                    <h5 class="fw-bold me-2">2.99 $</h5>
-                                    <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                </div>
-                            </div>
-                        </div>
+                        <ul class="list-unstyled fruite-categorie">
+                            <c:forEach var="p" items="${features}" varStatus="loop">
+                                <c:if test="${loop.index < 3}">
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/ProductController?id=${p.productID}&action=loadProduct">
+                                            <div class="d-flex align-items-center justify-content-start">
+                                                <div class="rounded me-4" style="width: 100px; height: 100px;">                                                 
+                                                    <img src="${pageContext.request.contextPath}${p.imageURL}" class="img-fluid rounded" alt="">
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-2">${p.fullName}</h6>
+                                                    <div class="d-flex mb-2">
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                        <i class="fa fa-star text-secondary"></i>
+                                                        <i class="fa fa-star"></i>
+                                                    </div>
+                                                    <div class="d-flex mb-2">
+                                                        <h5 class="fw-bold me-2">${p.price}</h5>
+                                                        <h5 class="text-danger text-decoration-line-through">${Math.round(p.price / (100 - p.discount) * 100 * 100) / 100} $</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </c:if>
+                            </c:forEach>
+                        </ul>
                     </div>
                     <div class="d-flex justify-content-center my-4">
                         <a href="#" class="btn border border-secondary px-4 py-3 rounded-pill text-primary w-100">Vew More</a>
@@ -270,7 +265,7 @@
                 </div>
                 <div class="col-lg-12">
                     <div class="position-relative">
-                        <img src="img/banner-fruits.jpg" class="img-fluid w-100 rounded" alt="">
+                        <img src="${pageContext.request.contextPath}/views/client/asset/img/banner-fruits.jpg" class="img-fluid w-100 rounded" alt="">
                         <div class="position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%);">
                             <h3 class="text-secondary fw-bold">Fresh <br> Fruits <br> Banner</h3>
                         </div>
@@ -278,35 +273,35 @@
                 </div>
             </div>
         </div>
-    </div>
-    <h1 class="fw-bold mb-0">Related products</h1>
-    <div class="vesitable">
-        <div class="owl-carousel vegetable-carousel justify-content-center">
-            <c:forEach var="p" items="${products}">
-                <div class="border border-primary rounded position-relative vesitable-item">
-                    <div class="fruite-img">
-                        <a href="${pageContext.request.contextPath}/ProductDetail?id=${p.productID}">
-                            <img src="${pageContext.request.contextPath}${p.imageURL}" class="img-fluid w-100 rounded-top" alt="">
-                        </a>
-                    </div>
-                    <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">
-                        <c:if test="${p.categoryID == 1}">Fruit</c:if>
-                        <c:if test="${p.categoryID == 2}">Vegetable</c:if>
-                        <c:if test="${p.categoryID == 3}">Nuts</c:if>
+        <h1 class="fw-bold mb-0">Related products</h1>
+        <div class="vesitable">
+
+            <div class="owl-carousel vegetable-carousel justify-content-center">
+                <c:forEach var="p" items="${products}">
+                    <div class="border border-primary rounded position-relative vesitable-item">
+                        <div class="fruite-img">
+                            <a href="${pageContext.request.contextPath}/ProductController?id=${p.productID}&action=loadProduct">
+                                <img src="${pageContext.request.contextPath}${p.imageURL}" class="img-fluid w-100 rounded-top" alt="">
+                            </a>
                         </div>
-                        <div class="p-4 rounded-bottom">
-                            <h4>${p.fullName}</h4>
-                        <p>${p.description}</p>
-                        <div class="d-flex justify-content-between flex-lg-wrap">
-                            <p class="text-dark fs-5 fw-bold mb-0">${p.price}$ / kg</p>
-                            <a href="/PRJ301_BookShop/NewServlet" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                        <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">
+                            <c:if test="${p.categoryID == 1}">Fruit</c:if>
+                            <c:if test="${p.categoryID == 2}">Vegetable</c:if>
+                            <c:if test="${p.categoryID == 3}">Nuts</c:if>
+                            </div>
+                            <div class="p-4 rounded-bottom">
+                                <h4>${p.fullName}</h4>
+                            <p>${p.description}</p>
+                            <div class="d-flex justify-content-between flex-lg-wrap">
+                                <p class="text-dark fs-5 fw-bold mb-0">${p.price}$ / kg</p>
+                                <a href="/PRJ301_BookShop/NewServlet" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                            </div>
                         </div>
-                    </div>
-                </div> 
-            </c:forEach>
+                    </div> 
+                </c:forEach>
+            </div>
         </div>
-    </div>
-</div>
+    </div> 
 </div>
 <!-- Single Product End -->
 <jsp:include page="/views/client/includes/footer.jsp" />
