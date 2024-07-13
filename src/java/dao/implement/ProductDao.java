@@ -251,6 +251,7 @@ public class ProductDao extends Connector implements IProductDao {
         return totalCount;
     }
 
+    @Override
     public List<Product> getPaginatedProducts(int offset, int limit) {
         List<Product> products = new ArrayList<>();
         String query = "SELECT * FROM [Product] ORDER BY ProductID OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
@@ -340,11 +341,23 @@ public class ProductDao extends Connector implements IProductDao {
         return result;
     }
 
+
     public List<Product> getFeatureProduct() {
         List<Product> result = new ArrayList<>();
         String query = "SELECT * FROM Product WHERE discount != 0";
 
         try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
+
+
+    @Override
+    public List<Product> searchByName(String keyword) {
+        List<Product> result = new ArrayList<>();
+        try {
+            String query = "select * from Product\n"
+                    + "	where CHARINDEX(?, FullName) > 0";
+            PreparedStatement ps = getConnect().prepareStatement(query);
+            ps.setString(1, keyword);
+            ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 Product product = new Product();
@@ -362,6 +375,7 @@ public class ProductDao extends Connector implements IProductDao {
                 result.add(product);
             }
         } catch (SQLException e) {
+
             System.out.println("Error fetching featured products: " + e.getMessage());
         }
 
@@ -378,6 +392,22 @@ public class ProductDao extends Connector implements IProductDao {
             stmt.setInt(3, limit);
             
             ResultSet rs = stmt.executeQuery();
+
+
+            System.out.println("Error Search!!");
+        }
+        return result;
+    }
+
+    @Override
+    public List<Product> searchByCategory(int categoryID) {
+        List<Product> result = new ArrayList<>();
+        try {
+            String query = "select * from Product\n"
+                    + "where CategoryID = ?";
+            PreparedStatement ps = getConnect().prepareStatement(query);
+            ps.setInt(1, categoryID);
+            ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 Product product = new Product();
@@ -405,6 +435,30 @@ public class ProductDao extends Connector implements IProductDao {
         List<Product> list = new ProductDao().getAll();
         for (Product product : list) {
             System.out.println(product);
+                result.add(product);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error search by category!!");
         }
+        return result;
+    }
+
+    @Override
+    public int getQuantityByCateID(int categoryID) {
+        int n = 0;
+        try {
+            String query = "SELECT COUNT(*) AS number\n"
+                    + "FROM Product\n"
+                    + "WHERE CategoryID = ?;";
+            PreparedStatement ps = getConnect().prepareStatement(query);
+            ps.setInt(1, categoryID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {                
+                n = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error get quantity by category!!");
+        }
+        return n;
     }
 }

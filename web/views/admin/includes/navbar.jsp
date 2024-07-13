@@ -37,6 +37,8 @@
 
         <!-- CSS Front Template -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/views/admin/assets/css/theme.min.css?v=1.0" />
+
+
     </head>
 
     <body class="footer-offset">
@@ -349,19 +351,19 @@
 
                                     <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="index.html" title="Default">
+                                            <a class="nav-link" href="${pageContext.request.contextPath}/views/client/home.jsp" title="Default">
                                                 <span class="tio-circle nav-indicator-icon"></span>
-                                                <span class="text-truncate">Default</span>
+                                                <span class="text-truncate">Client</span>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a
                                                 class="nav-link"
-                                                href="dashboard-alternative.html"
+                                                href="${pageContext.request.contextPath}/views/admin/index.jsp"
                                                 title="Alternative"
                                                 >
                                                 <span class="tio-circle nav-indicator-icon"></span>
-                                                <span class="text-truncate">Alternative</span>
+                                                <span class="text-truncate">Admin</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -397,14 +399,14 @@
                                                 title="E-commerce"
                                                 >
                                                 <span class="tio-circle nav-indicator-icon"></span>
-                                                <span class="text-truncate">E-commerce</span>
+                                                <span class="text-truncate">Fruit Shop</span>
                                             </a>
 
                                             <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
                                                 <li class="nav-item">
                                                     <a
                                                         class="nav-link active"
-                                                        href="admin.jsp"
+                                                        href="${pageContext.request.contextPath}/views/admin/index.jsp"
                                                         title="Overview"
                                                         >
                                                         <span
@@ -432,7 +434,7 @@
                                                         <li class="nav-item">
                                                             <a
                                                                 class="nav-link"
-                                                                href="list-product.jsp"
+                                                                href="${pageContext.request.contextPath}/products"
                                                                 title="Products"
                                                                 >
                                                                 <span
@@ -441,32 +443,8 @@
                                                                 <span class="text-truncate">Products</span>
                                                             </a>
                                                         </li>
-                                                        <li class="nav-item">
-                                                            <a
-                                                                class="nav-link"
-                                                                href="detail-product.jsp"
-                                                                title="Product Details"
-                                                                >
-                                                                <span
-                                                                    class="tio-circle nav-indicator-icon"
-                                                                    ></span>
-                                                                <span class="text-truncate"
-                                                                      >Product Details</span
-                                                                >
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a
-                                                                class="nav-link"
-                                                                href="add-product.jsp"
-                                                                title="Add Product"
-                                                                >
-                                                                <span
-                                                                    class="tio-circle nav-indicator-icon"
-                                                                    ></span>
-                                                                <span class="text-truncate">Add Product</span>
-                                                            </a>
-                                                        </li>
+
+
                                                     </ul>
                                                 </li>
 
@@ -488,7 +466,7 @@
                                                         <li class="nav-item">
                                                             <a
                                                                 class="nav-link"
-                                                                href="list-order.jsp"
+                                                                href="${pageContext.request.contextPath}/views/admin/order/list-order.jsp"
                                                                 title="Orders"
                                                                 >
                                                                 <span
@@ -497,18 +475,7 @@
                                                                 <span class="text-truncate">Orders</span>
                                                             </a>
                                                         </li>
-                                                        <li class="nav-item">
-                                                            <a
-                                                                class="nav-link"
-                                                                href="detail-order.jsp"
-                                                                title="Order Details"
-                                                                >
-                                                                <span
-                                                                    class="tio-circle nav-indicator-icon"
-                                                                    ></span>
-                                                                <span class="text-truncate">Order Details</span>
-                                                            </a>
-                                                        </li>
+
                                                     </ul>
                                                 </li>
 
@@ -530,7 +497,7 @@
                                                         <li class="nav-item">
                                                             <a
                                                                 class="nav-link"
-                                                                href="list-customer.jsp"
+                                                                href="${pageContext.request.contextPath}/users"
                                                                 title="Customers"
                                                                 >
                                                                 <span
@@ -539,39 +506,15 @@
                                                                 <span class="text-truncate">Customers</span>
                                                             </a>
                                                         </li>
-                                                        <li class="nav-item">
-                                                            <a
-                                                                class="nav-link"
-                                                                href="detail-customer.jsp"
-                                                                title="Customer Details"
-                                                                >
-                                                                <span
-                                                                    class="tio-circle nav-indicator-icon"
-                                                                    ></span>
-                                                                <span class="text-truncate"
-                                                                      >Customer Details</span
-                                                                >
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a
-                                                                class="nav-link"
-                                                                href="add-customer.jsp"
-                                                                title="Add Customers"
-                                                                >
-                                                                <span
-                                                                    class="tio-circle nav-indicator-icon"
-                                                                    ></span>
-                                                                <span class="text-truncate">Add Customers</span>
-                                                            </a>
-                                                        </li>
+
+
                                                     </ul>
                                                 </li>
 
                                                 <li class="nav-item">
                                                     <a
                                                         class="nav-link"
-                                                        href="manage-review.jsp"
+                                                        href="${pageContext.request.contextPath}/views/admin/review/manage-review.jsp"
                                                         title="Manage Reviews"
                                                         >
                                                         <span
@@ -583,7 +526,7 @@
                                                 <li class="nav-item">
                                                     <a
                                                         class="nav-link"
-                                                        href="ecommerce-checkout.html"
+                                                        href="${pageContext.request.contextPath}/views/admin/review/manage-review.jsp"
                                                         title="Checkout"
                                                         >
                                                         <span
@@ -608,7 +551,7 @@
                                         <li class="nav-item">
                                             <a
                                                 class="js-nav-tooltip-link nav-link"
-                                                href="welcome-page.html"
+                                                href="${pageContext.request.contextPath}/views/client/home.jsp"
                                                 title="Welcome page"
                                                 data-placement="left"
                                                 >
@@ -629,86 +572,7 @@
                                         <!-- End Help -->
 
                                         <!-- Language -->
-                                        <li class="navbar-vertical-aside-has-menu nav-footer-item">
-                                            <a
-                                                class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle"
-                                                href="javascript:;"
-                                                title="Language"
-                                                >
-                                                <img
-                                                    class="avatar avatar-xss avatar-circle"
-                                                    src="assets\vendor\flag-icon-css\flags\1x1\us.svg"
-                                                    alt="United States Flag"
-                                                    />
-                                                <span
-                                                    class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate"
-                                                    >Language</span
-                                                >
-                                            </a>
 
-                                            <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="#" title="English (US)">
-                                                        <img
-                                                            class="avatar avatar-xss avatar-circle mr-2"
-                                                            src="assets\vendor\flag-icon-css\flags\1x1\us.svg"
-                                                            alt="Flag"
-                                                            />
-                                                        English (US)
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="#" title="English (UK)">
-                                                        <img
-                                                            class="avatar avatar-xss avatar-circle mr-2"
-                                                            src="assets\vendor\flag-icon-css\flags\1x1\gb.svg"
-                                                            alt="Flag"
-                                                            />
-                                                        English (UK)
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="#" title="Deutsch">
-                                                        <img
-                                                            class="avatar avatar-xss avatar-circle mr-2"
-                                                            src="assets\vendor\flag-icon-css\flags\1x1\de.svg"
-                                                            alt="Flag"
-                                                            />
-                                                        Deutsch
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="#" title="Dansk">
-                                                        <img
-                                                            class="avatar avatar-xss avatar-circle mr-2"
-                                                            src="assets\vendor\flag-icon-css\flags\1x1\dk.svg"
-                                                            alt="Flag"
-                                                            />
-                                                        Dansk
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="#" title="Italiano">
-                                                        <img
-                                                            class="avatar avatar-xss avatar-circle mr-2"
-                                                            src="assets\vendor\flag-icon-css\flags\1x1\it.svg"
-                                                            alt="Flag"
-                                                            />
-                                                        Italiano
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="#" title="?? (??)">
-                                                        <img
-                                                            class="avatar avatar-xss avatar-circle mr-2"
-                                                            src="assets\vendor\flag-icon-css\flags\1x1\cn.svg"
-                                                            alt="Flag"
-                                                            />
-                                                        ?? (??)
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
                                         <!-- End Language -->
                                     </ul>
                                 </li>
@@ -793,7 +657,7 @@
                                             </a>
                                             <div class="dropdown-divider"></div>
                                             <span class="dropdown-header">Contacts</span>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="https://www.facebook.com/nvdat.6789">
                                                 <i class="tio-chat-outlined dropdown-item-icon"></i>
                                                 <span class="text-truncate pr-2" title="Contact support"
                                                       >Contact support</span
@@ -804,95 +668,7 @@
                                     <!-- End Other Links -->
                                 </li>
 
-                                <li class="navbar-vertical-footer-list-item">
-                                    <!-- Language -->
-                                    <div class="hs-unfold">
-                                        <a
-                                            class="js-hs-unfold-invoker btn btn-icon btn-ghost-secondary rounded-circle"
-                                            href="javascript:;"
-                                            data-hs-unfold-options='{
-                                            "target": "#languageDropdown",
-                                            "type": "css-animation",
-                                            "animationIn": "slideInDown",
-                                            "hideOnScroll": true
-                                            }'
-                                            >
-                                            <img
-                                                class="avatar avatar-xss avatar-circle"
-                                                src="assets\vendor\flag-icon-css\flags\1x1\us.svg"
-                                                alt="United States Flag"
-                                                />
-                                        </a>
 
-                                        <div
-                                            id="languageDropdown"
-                                            class="hs-unfold-content dropdown-unfold dropdown-menu navbar-vertical-footer-dropdown"
-                                            >
-                                            <span class="dropdown-header">Select language</span>
-                                            <a class="dropdown-item" href="#">
-                                                <img
-                                                    class="avatar avatar-xss avatar-circle mr-2"
-                                                    src="assets\vendor\flag-icon-css\flags\1x1\us.svg"
-                                                    alt="Flag"
-                                                    />
-                                                <span class="text-truncate pr-2" title="English"
-                                                      >English (US)</span
-                                                >
-                                            </a>
-                                            <a class="dropdown-item" href="#">
-                                                <img
-                                                    class="avatar avatar-xss avatar-circle mr-2"
-                                                    src="assets\vendor\flag-icon-css\flags\1x1\gb.svg"
-                                                    alt="Flag"
-                                                    />
-                                                <span class="text-truncate pr-2" title="English"
-                                                      >English (UK)</span
-                                                >
-                                            </a>
-                                            <a class="dropdown-item" href="#">
-                                                <img
-                                                    class="avatar avatar-xss avatar-circle mr-2"
-                                                    src="assets\vendor\flag-icon-css\flags\1x1\de.svg"
-                                                    alt="Flag"
-                                                    />
-                                                <span class="text-truncate pr-2" title="Deutsch"
-                                                      >Deutsch</span
-                                                >
-                                            </a>
-                                            <a class="dropdown-item" href="#">
-                                                <img
-                                                    class="avatar avatar-xss avatar-circle mr-2"
-                                                    src="assets\vendor\flag-icon-css\flags\1x1\dk.svg"
-                                                    alt="Flag"
-                                                    />
-                                                <span class="text-truncate pr-2" title="Dansk"
-                                                      >Dansk</span
-                                                >
-                                            </a>
-                                            <a class="dropdown-item" href="#">
-                                                <img
-                                                    class="avatar avatar-xss avatar-circle mr-2"
-                                                    src="assets\vendor\flag-icon-css\flags\1x1\it.svg"
-                                                    alt="Flag"
-                                                    />
-                                                <span class="text-truncate pr-2" title="Italiano"
-                                                      >Italiano</span
-                                                >
-                                            </a>
-                                            <a class="dropdown-item" href="#">
-                                                <img
-                                                    class="avatar avatar-xss avatar-circle mr-2"
-                                                    src="assets\vendor\flag-icon-css\flags\1x1\cn.svg"
-                                                    alt="Flag"
-                                                    />
-                                                <span class="text-truncate pr-2" title="?? (??)"
-                                                      >?? (??)</span
-                                                >
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <!-- End Language -->
-                                </li>
                             </ul>
                         </div>
                         <!-- End Footer -->

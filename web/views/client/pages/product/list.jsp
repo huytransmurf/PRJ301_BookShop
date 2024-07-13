@@ -27,8 +27,11 @@
                 <div class="row g-4">
                     <div class="col-xl-3">
                         <div class="input-group w-100 mx-auto d-flex">
-                            <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
-                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+                            <form class="input-group w-100 mx-auto d-flex">      
+                                <input type="search" class="form-control p-3" placeholder="Keywords" aria-describedby="search-icon-1" name="keyword">
+                                <input type="hidden" name="action" value="searchName">
+                                <button id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></button>    
+                            </form>
                         </div>
                     </div>
                     <div class="col-6"></div>
@@ -80,6 +83,7 @@
                                 <div class="mb-3">
                                     <h4>Categories</h4>
                                     <ul class="list-unstyled fruite-categorie">
+
                                         <c:forEach var="p" items="${result}" varStatus="loop">
                                             <c:if test="${loop.index < 5}">
                                                 <li>
@@ -92,6 +96,15 @@
                                                     </div>
                                                 </li>
                                             </c:if>
+
+                                        <c:forEach var="c" items="${cList}">
+                                            <li>
+                                                <div class="d-flex justify-content-between fruite-name">
+                                                    <a href="Shop?action=searchCategory&cateID=${c.id}"><i class="fas fa-apple-alt me-2"></i>${c.fullName}</a>
+                                                    <span>${cMap[c.id]}</span>
+                                                </div>
+                                            </li>
+
                                         </c:forEach>
                                     </ul>
                                 </div>
@@ -153,7 +166,7 @@
                                     </c:forEach>
                                 </ul>
                                 <div class="d-flex justify-content-center my-4">
-                                    <a href="#" class="btn border border-secondary px-4 py-3 rounded-pill text-primary w-100">Vew More</a>
+                                    <a href="#" class="btn border border-secondary px-4 py-3 rounded-pill text-primary w-100">View More</a>
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -170,22 +183,32 @@
                         <div class="row g-4 justify-content-center">
                             <c:forEach var="p" items="${result}">
                                 <div class="col-md-6 col-lg-6 col-xl-4">
+
                                     <div class="rounded position-relative fruite-item">
+
                                         <a href="${pageContext.request.contextPath}/ProductController?id=${p.productID}&action=loadProduct">
+
+                                        <div class="fruite-img">
+
                                             <img src="${pageContext.request.contextPath}${p.imageURL}" class="img-fluid w-100 rounded-top" alt="">
-                                        </a>
+                                        </div>
                                         <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">
                                             <c:if test="${p.categoryID == 1}">Fruit</c:if>
                                             <c:if test="${p.categoryID == 2}">Vegetable</c:if>
-                                            <c:if test="${p.categoryID == 3}">Nuts</c:if>
+                                            <c:if test="${p.categoryID == 3}">Nut</c:if>
                                             </div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                                 <h4>${p.fullName}</h4>
                                             <p>${p.description}</p>
                                             <div class="d-flex justify-content-between flex-lg-wrap">
+
                                                 <p class="text-dark fs-5 fw-bold mb-0">${p.price} / kg</p>
+
+                                                <p class="text-dark fs-5 fw-bold mb-0">$${p.price} / kg</p>
+
                                                 <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -196,7 +219,7 @@
                                 <c:if test="${page > 1}"><a href="Shop?page=${page - 1}" class="rounded">&laquo;</a></c:if>
 
                                 <c:forEach var="p" items="${pages}">
-                                    <a href="Shop?page=${p}" class="<c:if test="${page == p}">active</c:if> rounded">${p}</a>
+                                    <a href="Shop?page=${p}&action=loadPage" class="<c:if test="${page == p}">active</c:if> rounded">${p}</a>
                                 </c:forEach>
                                 <c:if test="${page < pages.size()}"><a href="Shop?page=${page + 1}" class="rounded">&raquo;</a></c:if>
                                 </div>

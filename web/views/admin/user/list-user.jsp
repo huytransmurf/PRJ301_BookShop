@@ -10,15 +10,7 @@
     <div class="content container-fluid">
         <!-- Page Header -->
         <div class="page-header">
-            <div class="row align-items-center mb-3">
-                <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title">Products <span class="badge badge-soft-dark ml-2">72,031</span></h1>
-                </div>
-
-                <div class="col-sm-auto">
-                    <a class="btn btn-primary" href="ecommerce-add-product.html">Add product</a>
-                </div>
-            </div>
+            
             <!-- End Row -->
 
             <!-- Nav Scroller -->
@@ -38,7 +30,7 @@
                 <!-- Nav -->
                 <ul class="nav nav-tabs page-header-tabs" id="pageHeaderTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">All productas</a>
+                        <a class="nav-link active" href="#">All products</a>
                     </li>
                 </ul>
                 <!-- End Nav -->
@@ -80,10 +72,18 @@
                                 <td>${user.address}</td>
                                 <td>${user.role}</td>
                                 <td>
-                                    <img class="avatar avatar-lg" src="https://cdn.tuoitre.vn/zoom/700_700/471584752817336320/2024/6/3/doraemon-3-17173722166781704981911-30-9-657-1207-crop-1717372336444425413969.jpeg" alt="Avatar">
+                                    <img class="avatar avatar-lg" src="${user.avatarURL}" alt="Avatar">
                                 </td>
                                 <td>
                                     <div class="btn-group" role="group">
+                                        
+                                         <form action="${pageContext.request.contextPath}/GetUserByIdServlet" method="GET" style="display: inline;">
+                                            <input type="hidden" name="id" value="${user.id}">
+                                            <button type="submit" class="btn btn-sm btn-primary" style="margin-right: 5px;">
+                                                <i class="tio-edit"></i> View
+                                            </button>
+                                        </form>
+                                        
                                         <form action="${pageContext.request.contextPath}/GetUserByIdServlet" method="GET" style="display: inline;">
                                             <input type="hidden" name="id" value="${user.id}">
                                             <button type="submit" class="btn btn-sm btn-warning" style="margin-right: 5px;">
@@ -116,7 +116,7 @@
                                     <!-- Previous Page -->
                                     <c:if test="${currentPage > 1}">
                                         <li class="page-item">
-                                            <a class="page-link" href="UserServlet?action=list-users-admin&page=${currentPage - 1}" aria-label="Previous">
+                                            <a class="page-link" href="users?page=${currentPage - 1}" aria-label="Previous">
                                                 <span aria-hidden="true">&laquo;</span>
                                             </a>
                                         </li>
@@ -125,14 +125,14 @@
                                     <!-- Page Numbers -->
                                     <c:forEach var="page" begin="1" end="${totalPages}">
                                         <li class="page-item <c:if test="${page == currentPage}">active</c:if>">
-                                            <a class="page-link" href="UserServlet?action=list-users-admin&page=${page}">${page}</a>
+                                            <a class="page-link" href="users?page=${page}">${page}</a>
                                         </li>
                                     </c:forEach>
 
                                     <!-- Next Page -->
                                     <c:if test="${currentPage < totalPages}">
                                         <li class="page-item">
-                                            <a class="page-link" href="UserServlet?action=list-users-admin&page=${currentPage - 1}" aria-label="Next">
+                                            <a class="page-link" href="users?page=${currentPage - 1}" aria-label="Next">
                                                 <span aria-hidden="true">&raquo;</span>
                                             </a>
                                         </li>

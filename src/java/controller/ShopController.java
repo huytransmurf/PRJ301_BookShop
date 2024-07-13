@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dao.implement.CategoryDao;
 import dao.implement.ProductDao;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -15,6 +16,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import model.Category;
 import model.Product;
 
 /**
@@ -37,7 +40,25 @@ public class ShopController extends HttpServlet {
         switch (action) {
             case "getAll":
                 pList = new ProductDao().getAll();
+                loadToPage(request, response);
                 break;
+            case "searchName":
+                String keyword = request.getParameter("keyword");
+                if (keyword == "") {
+                    pList = new ProductDao().getAll();
+                } else {
+                    pList = new ProductDao().searchByName(request.getParameter("keyword"));
+                }
+                loadToPage(request, response);
+                break;
+            case "searchCategory":
+                pList = new ProductDao().searchByCategory(Integer.parseInt(request.getParameter("cateID")));
+                loadToPage(request, response);
+                break;
+            case "loadPage":
+                loadToPage(request, response);
+                break;
+
             case "sorting":
                 String orderBy = request.getParameter("param");
                 switch (orderBy) {
@@ -60,12 +81,19 @@ public class ShopController extends HttpServlet {
                 break;
         }
         loadPaginatedProducts(request, response);
+
+        }
+
     }
 
     private void loadToPage(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         List<Product> features = new ProductDao().getFeatureProduct();
 
+
+        List<Category> cList = new CategoryDao().getAll();
+        Map<Integer, Integer> cMap = new CategoryDao().getQuantityOfCategory(cList);
         List<Product> result = new ArrayList<>();
         int page;
         try {
@@ -88,6 +116,8 @@ public class ShopController extends HttpServlet {
         request.setAttribute("pages", pages);
         request.setAttribute("result", result);
         request.setAttribute("page", page);
+        request.setAttribute("cMap", cMap);
+        request.setAttribute("cList", cList);
         request.getRequestDispatcher("/views/client/pages/product/list.jsp").forward(request, response);
     }
 

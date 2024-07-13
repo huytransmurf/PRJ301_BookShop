@@ -5,20 +5,23 @@
 package controller.admin;
 
 import dao.implement.ProductDao;
+import dao.implement.ReviewDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import model.Product;
+import model.Review;
 
 /**
  *
  * @author admin
  */
-@WebServlet(name = "GetProductByIdServlet", urlPatterns = {"/GetProductByIdServlet"})
-public class GetProductByIdServlet extends HttpServlet {
+@WebServlet(name = "GetReviewByProductIdServlet", urlPatterns = {"/GetReviewByProductIdServlet"})
+public class GetReviewByProductIdServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
@@ -27,22 +30,22 @@ public class GetProductByIdServlet extends HttpServlet {
         String productId = request.getParameter("id");
 
         if (productId != null && !productId.isEmpty()) {
-            // Call your DAO or service method to get the Product details by ID
-            ProductDao ProductDao = new ProductDao();
-            Product product = ProductDao.getById(Integer.parseInt(productId));
+            // Call your DAO or service method to get the review details by ID
+            ReviewDao reviewDao = new ReviewDao();
+            List<Review> review = reviewDao.getReviewsByProductId(Integer.parseInt(productId));
+            Product product = new ProductDao().getById(Integer.parseInt(productId));
 
-            if (product != null) {
+            if (review != null) {
+                request.setAttribute("reviews", review);
                 request.setAttribute("product", product);
-                request.getRequestDispatcher("views/admin/product/detail-product.jsp").forward(request, response);
+                request.getRequestDispatcher("views/admin/review/manage-review.jsp").forward(request, response);
             } else {
             response.sendRedirect(request.getContextPath() + "/${pageContext.request.contextPath}/views/admin/others/error-500.jsp");
             }
         } else {
+            // Handle the case where the ID is not valid
             response.sendRedirect(request.getContextPath() + "/${pageContext.request.contextPath}/views/admin/others/error-404.jsp");
         }
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
-    }
 }

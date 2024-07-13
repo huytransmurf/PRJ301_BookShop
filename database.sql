@@ -182,3 +182,6 @@ UPDATE Product
 SET discount = 30
 WHERE ProductID IN (1, 4, 7, 12, 15, 18, 22, 25, 28, 30);
 
+SELECT COUNT(*) AS number
+FROM Product
+WHERE CategoryID = 1;
