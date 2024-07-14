@@ -29,7 +29,6 @@ public class GetReviewByProductIdServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String productId = request.getParameter("id");
 
-        if (productId != null && !productId.isEmpty()) {
             // Call your DAO or service method to get the review details by ID
             ReviewDao reviewDao = new ReviewDao();
             List<Review> review = reviewDao.getReviewsByProductId(Integer.parseInt(productId));
@@ -42,10 +41,7 @@ public class GetReviewByProductIdServlet extends HttpServlet {
             } else {
             response.sendRedirect(request.getContextPath() + "/${pageContext.request.contextPath}/views/admin/others/error-500.jsp");
             }
-        } else {
-            // Handle the case where the ID is not valid
-            response.sendRedirect(request.getContextPath() + "/${pageContext.request.contextPath}/views/admin/others/error-404.jsp");
-        }
+        
     }
 
 }

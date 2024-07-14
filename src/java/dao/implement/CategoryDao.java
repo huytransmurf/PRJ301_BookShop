@@ -118,7 +118,7 @@ public class CategoryDao extends Connector implements ICategoryDao {
     public Map<Integer, Integer> getQuantityOfCategory(List<Category> cList) {
         Map<Integer, Integer> cateMap = new HashMap<>();
         for (Category category : cList) {
-            cateMap.put(category.getId(), new ProductDao().getQuantityByCateID(category.getId()));
+            cateMap.put(category.getId(), new ProductDao().getQuantityByCateID(category.getId(), 0, Double.MAX_VALUE));
         }
         return cateMap;
     }
