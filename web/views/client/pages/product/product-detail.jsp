@@ -121,16 +121,16 @@
                             <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
 
 
-                                <c:forEach var="review" items="${reviews}">
+                                <c:forEach var="r" items="${reviews}">
 
                                     <div class="d-flex">
-                                        <img src="img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
+                                        <img src="${pageContext.request.contextPath}${r.user.avatarURL}" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
                                         <div class="">
                                             <div class="d-flex justify-content-between">
-                                                <h5>Sam Peters</h5>
+                                                <h5>${r.user.firstName} ${r.user.lastName}</h5>
 
                                             </div>
-                                            <p class="text-dark">review </p>
+                                            <p class="text-dark">${r.description}</p>
                                         </div>
                                     </div>
                                 </c:forEach>
