@@ -10,7 +10,7 @@
                 <div class="col-sm mb-2 mb-sm-0">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb breadcrumb-no-gutter">
-                            <li class="breadcrumb-item"><a class="breadcrumb-link" href="ecommerce-products.html">Products</a></li>
+                            <li class="breadcrumb-item"><a class="breadcrumb-link" href="${pageContext.request.contextPath}/products">Products</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Product Detail</li>
                         </ol>
                     </nav>
@@ -86,7 +86,7 @@
                             </div>
                             <div class="form-group text-center">
                                 <label for="imgUrl">Current Image:</label><br>
-                                <img src="${product.imageURL}" alt="Current Image" style="
+                                <img src="${pageContext.request.contextPath}/${product.imageURL}" alt="Current Image" style="
                                      width: 200px;
                                      height: 200px;
                                      object-fit: cover;

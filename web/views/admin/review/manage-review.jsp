@@ -43,7 +43,7 @@
                 <c:if test="${product != null}">
                     <div class="form-group text-center">
                         <label for="imgUrl">Image:</label><br>
-                        <img src="${product.imageURL}" alt="Current Image" style="
+                        <img src="${pageContext.request.contextPath}/${product.imageURL}" alt="Current Image" style="
                              width: 200px;
                              height: 200px;
                              object-fit: cover;

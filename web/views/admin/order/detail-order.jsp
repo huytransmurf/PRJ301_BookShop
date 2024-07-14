@@ -102,18 +102,29 @@
                                         <option value="3" ${order.orderStatusID == 3 ? 'selected' : ''}>Cancelled</option>
                                     </select>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Updatea Status</button>
+                                <button type="submit" class="btn btn-primary">Update Status</button>
                             </form>
                         </div>
                         <div class="order-details">
                             <h6>Order Details</h6>
-                            <ul>
-                                <c:forEach var="detail" items="${orderDetails}">
-                                    <li>Product ID: <c:out value="${detail.productID}"/></li>
-                                    <li>Quantity: <c:out value="${detail.quantity}"/></li>
-                                    <li>Cost: $<c:out value="${detail.cost}"/> USD</li>
-                                </c:forEach>
-                            </ul>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Product ID</th>
+                                        <th>Quantity</th>
+                                        <th>Cost</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach var="detail" items="${orderDetails}">
+                                        <tr>
+                                            <td><c:out value="${detail.id}"/></td>
+                                            <td><c:out value="${detail.quantity}"/></td>
+                                            <td>$<c:out value="${detail.cost}"/> USD</td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </c:if>
