@@ -18,8 +18,6 @@ import java.io.IOException;
 @WebServlet(name = "DeleteReviewServlet", urlPatterns = {"/DeleteReviewServlet"})
 public class DeleteReviewServlet extends HttpServlet {
 
-    
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -88,7 +88,7 @@ CREATE TABLE OrderDetail (
 );
 GO
 INSERT INTO OrderStatus (FullName)
-VALUES ('Pending'),  ('Delivered');
+VALUES ('Pending'),  ('Delivered'), ('Cancelled');
 GO
 INSERT INTO Category (FullName, Description)
 VALUES ('Fruits', 'Fresh fruits and dried fruits'),

@@ -136,14 +136,21 @@ public class ProductDao extends Connector implements IProductDao {
 
     @Override
     public boolean delete(int id) {
-        String query = "DELETE FROM Product WHERE ProductID = ?";
+            String deleteCartItemQuery = "DELETE FROM CartItem WHERE ProductID = ?";
+            String deleteProductQuery = "DELETE FROM Product WHERE ProductID = ?";
 
-        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnect()) {
+            // Xóa các bản ghi liên quan trong bảng CartItem trước
+            try (PreparedStatement stmt = conn.prepareStatement(deleteCartItemQuery)) {
+                stmt.setInt(1, id);
+                stmt.executeUpdate();
+            }
 
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
-            System.out.println("Product with ID " + id + " deleted successfully.");
-            return true;
+            // Xóa các bản ghi liên quan trong bảng Cart
+            try (PreparedStatement stmt = conn.prepareStatement(deleteProductQuery)) {
+                stmt.setInt(1, id);
+                stmt.executeUpdate();
+            }
 
         } catch (SQLException e) {
             System.out.println("Error deleting product with ID " + id + ": " + e.getMessage());

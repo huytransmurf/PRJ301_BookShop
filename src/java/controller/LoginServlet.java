@@ -78,7 +78,7 @@ public class LoginServlet extends HttpServlet {
 		
 	        if(user!=null && password.equals(user.getPassword())){
 	            HttpSession session = req.getSession(true);
-	            session.setAttribute("account", user);       
+	            session.setAttribute("user", user);       
 	            if(user.getRole().equals("Admin")) {
 				resp.sendRedirect("views/admin/index.jsp");
 			}else {
