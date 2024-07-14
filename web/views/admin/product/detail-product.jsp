@@ -14,16 +14,11 @@
                             <li class="breadcrumb-item active" aria-current="page">Product Detail</li>
                         </ol>
                     </nav>
-
                     <h1 class="page-header-title text-center blinking">Product Detail</h1>
                 </div>
             </div>
         </div>
 
-
-
-
-        <!-- Form ?? ch?nh s?a ho?c thêm m?i s?n ph?m -->
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <div class="product-details">

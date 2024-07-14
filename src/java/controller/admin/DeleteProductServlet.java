@@ -37,7 +37,7 @@ public class DeleteProductServlet extends HttpServlet {
                     response.sendRedirect("products");
 
                 } else {
-                    response.sendRedirect("GetAllProductServlet");
+                    response.sendRedirect("products");
                 }
             } catch (NumberFormatException e) {
                 response.sendRedirect(request.getContextPath() + "/${pageContext.request.contextPath}/views/admin/others/error-500.jsp");

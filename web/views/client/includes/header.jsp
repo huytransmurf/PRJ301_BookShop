@@ -152,7 +152,7 @@
                                         <div class="dropdown-content">
                                             <a href="${pageContext.request.contextPath}/views/client/pages/myProfile.jsp">My Profile</a>
                                             <a href="${pageContext.request.contextPath}/views/client/pages/orderHistory.jsp">Order History</a>
-                                            <a href="">Logout</a>
+                                            <a href="${pageContext.request.contextPath}/LogoutServlet">Logout</a>
                                         </div>
                                     </div>
                                 </c:otherwise>

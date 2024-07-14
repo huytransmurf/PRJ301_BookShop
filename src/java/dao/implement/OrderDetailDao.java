@@ -125,28 +125,27 @@ public class OrderDetailDao extends Connector implements GenericDao<OrderDetail>
     }
 
     public List<OrderDetail> getOrderDetailsByOrderID(int id) {
-        List<OrderDetail> orderDetails = new ArrayList<>();
-        String query = "SELECT * FROM OrderDetail WHERE OrderID = ?";
+       List<OrderDetail> orderDetails = new ArrayList<>();
+        try (Connection connection = getConnect();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM OrderDetail WHERE OrderID = ?")) {
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-        try {
-            PreparedStatement ps = getConnect().prepareStatement(query);
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                orderDetails.add(new OrderDetail(
-                        rs.getInt("OrderDetailID"),
-                        rs.getInt("OrderID"),
-                        rs.getInt("ProductID"),
-                        rs.getInt("Quantity"),
-                        rs.getDouble("Cost")
-                 )   
-                );
+            while (resultSet.next()) {
+                OrderDetail orderDetail = new OrderDetail();
+                orderDetail.setId(resultSet.getInt("OrderDetailID"));
+                orderDetail.setOrderID(resultSet.getInt("OrderID"));
+                orderDetail.setProductID(resultSet.getInt("ProductID"));
+                orderDetail.setQuantity(resultSet.getInt("Quantity"));
+//                orderDetail.setCost(resultSet.getDouble("Cost"));
+
+                orderDetails.add(orderDetail);
             }
         } catch (SQLException e) {
-            System.out.println("Error fetching orderDetail: " + e.getMessage());
+            e.printStackTrace();
         }
-
         return orderDetails;
     }
-
 }
+
+

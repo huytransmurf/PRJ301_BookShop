@@ -7,6 +7,9 @@ public class OrderDetail {
     private int quantity;
     private double cost;
 
+    public OrderDetail() {
+    }
+
     public OrderDetail(int id, int orderID, int productID, int quantity, double cost) {
         this.id = id;
         this.orderID = orderID;
