@@ -39,9 +39,9 @@ public class GetReviewByProductIdServlet extends HttpServlet {
                 request.setAttribute("product", product);
                 request.getRequestDispatcher("views/admin/review/manage-review.jsp").forward(request, response);
             } else {
-            response.sendRedirect(request.getContextPath() + "/${pageContext.request.contextPath}/views/admin/others/error-500.jsp");
+            response.sendRedirect(request.getContextPath() + "/views/admin/others/error-500.jsp");
+           
             }
-        
     }
 
 }

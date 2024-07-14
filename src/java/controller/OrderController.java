@@ -38,8 +38,14 @@ public class OrderController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         User u = (User) session.getAttribute("account");
+
+        if (u == null) {
+            request.getRequestDispatcher("views/client/pages/login.jsp").forward(request, response);
+        }
+
         List<Order> oList = new OrderDao().getOrderByUserID(u.getId());
         request.setAttribute("oList", oList);
+
         request.getRequestDispatcher("views/client/pages/order/order.jsp").forward(request, response);
     }
 
@@ -54,7 +60,7 @@ public class OrderController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
 
     /**

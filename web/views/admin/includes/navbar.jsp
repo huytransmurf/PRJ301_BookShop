@@ -523,7 +523,6 @@
                                                         <span class="text-truncate">Manage Reviews</span>
                                                     </a>
                                                 </li>
-                                                
                                             </ul>
                                         </li>
 

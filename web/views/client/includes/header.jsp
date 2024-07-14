@@ -150,7 +150,7 @@
                                                 <i class="fa fa-lock fa-1x"></i>Admin
                                             </a>
                                         </c:if>
-                                        <a href="Profile" class="dropdown-item">
+                                        <a href="UserServlet?action=detail" class="dropdown-item">
                                             <i class="fa fa-user-circle fa-1x"></i>Account
                                         </a> 
                                         <a href="LogoutServlet" class="dropdown-item">

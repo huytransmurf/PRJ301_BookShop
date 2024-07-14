@@ -57,7 +57,8 @@ public class UserDao extends Connector implements GenericDao<User> {
                         rs.getString("LastName"),
                         rs.getString("Address"),
                         rs.getString("Role"),
-                        rs.getString("AvatarURL")
+                        rs.getString("AvatarURL"), 
+                        rs.getString("Password")
                 );
             }
 
@@ -257,5 +258,22 @@ public class UserDao extends Connector implements GenericDao<User> {
             ps.execute();
         } catch (Exception e) {
         }
+    }
+    
+    public boolean updateImageUrl(User user) {
+        String query = "UPDATE [User] set AvatarURL = ? WHERE UserID = ?";
+
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, user.getAvatarURL());
+            stmt.setInt(2, user.getId());
+            stmt.executeUpdate();
+
+            System.out.println("User updated successfully.");
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println("Error updating user with ID " + user.getId() + ": " + e.getMessage());
+        }
+        return false;
     }
 }
