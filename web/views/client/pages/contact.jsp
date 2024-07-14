@@ -5,13 +5,13 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:include page="includes/header.jsp" />
+<jsp:include page="/views/client/includes/header.jsp"/>
 
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
     <h1 class="text-center text-white display-6">Contact</h1>
     <ol class="breadcrumb justify-content-center mb-0">
-        <li class="breadcrumb-item"><a href="Home">Home</a></li>
+        <li class="breadcrumb-item"><a href="Home">${pageContext.request.contextPath}/Home</a></li>
         <li class="breadcrumb-item"><a href="#">Pages</a></li>
         <li class="breadcrumb-item active text-white">Contact</li>
     </ol>
@@ -40,7 +40,7 @@
                 <div class="col-lg-7">
                     <form action="" class="">
                         <input type="text" class="w-100 form-control border-0 py-3 mb-4" placeholder="Your Name">
-                        <input type="email" class="w-100 form-control border-0 py-3 mb-4" placeholder="Enter Your Email">
+                        <input type="email" class="w-100 form-control border-0 py-3 mb-4" placeholder="Enter Your Email" value="${param.email}">
                         <textarea class="w-100 form-control border-0 mb-4" rows="5" cols="10" placeholder="Your Message"></textarea>
                         <button class="w-100 btn form-control border-secondary py-3 bg-white text-primary " type="submit">Submit</button>
                     </form>
@@ -50,21 +50,21 @@
                         <i class="fas fa-map-marker-alt fa-2x text-primary me-4"></i>
                         <div>
                             <h4>Address</h4>
-                            <p class="mb-2">123 Street New York.USA</p>
+                            <p class="mb-2">Hoa Hai, Ngu Hanh Son, Da Nang</p>
                         </div>
                     </div>
                     <div class="d-flex p-4 rounded mb-4 bg-white">
                         <i class="fas fa-envelope fa-2x text-primary me-4"></i>
                         <div>
                             <h4>Mail Us</h4>
-                            <p class="mb-2">info@example.com</p>
+                            <p class="mb-2">Example@fpt.edu.vn</p>
                         </div>
                     </div>
                     <div class="d-flex p-4 rounded bg-white">
                         <i class="fa fa-phone-alt fa-2x text-primary me-4"></i>
                         <div>
                             <h4>Telephone</h4>
-                            <p class="mb-2">(+012) 3456 7890</p>
+                            <p class="mb-2">(+084) xxx xxx 789</p>
                         </div>
                     </div>
                 </div>
@@ -74,4 +74,4 @@
 </div>
 <!-- Contact End -->
 
-<jsp:include page="includes/footer.jsp" />
+<jsp:include page="/views/client/includes/footer.jsp" />
