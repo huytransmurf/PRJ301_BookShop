@@ -36,7 +36,9 @@ CREATE TABLE [User] (
     LastName NVARCHAR(30),
     Address NVARCHAR(50),
 	Role VARCHAR(10),
-    AvatarURL VARCHAR(200)
+    AvatarURL VARCHAR(200),
+	Email VARCHAR(50),
+	Password VARCHAR(50)
 );
 GO
 CREATE TABLE Review (
@@ -93,41 +95,13 @@ VALUES ('Fruits', 'Fresh fruits and dried fruits'),
        ('Vegetables', 'Various types of vegetables'),
        ('Nuts', 'Healthy nuts and treats');
 GO
-INSERT INTO [User] (FirstName, LastName, Address, Role, AvatarURL)
-VALUES ('Emily', 'Johnson', '789 Oak Ave', 'Customer', '/assets/images/emilyjohnson.jpg'),
-       ('Michael', 'Brown', '101 Pine Rd', 'Admin', 'storage/images/taoanhdep_thay_tu_50818.png');
+INSERT INTO [User] (FirstName, LastName, Address, Role, AvatarURL, Email, Password)
+VALUES ('Quang', 'Hoang', 'Dannang', 'Customer', '/assets/images/emilyjohnson.jpg', 'quang@gmail', '123'),
+		('Huy', 'Tran', 'Dannang', 'Customer', '/assets/images/emilyjohnson.jpg', 'huy@gmail', '123'),
+		('Loi', 'Le', 'Dannang', 'Customer', '/assets/images/emilyjohnson.jpg', 'loi@gmail', '123'),
+		('Trong', 'Nguyen', 'Dannang', 'Customer', '/assets/images/emilyjohnson.jpg', 'trong@gmail', '123'),
+       ('Dat', 'Nguyen', 'Dannang', 'Admin', 'storage/images/taoanhdep_thay_tu_50818.png','dat@gmail', '123');
 GO
-INSERT INTO Review (Description, UserID, ProductID)
-VALUES ('Delicious!', 1, 4),
-       ('Highly recommended.', 2, 5);
-GO
-INSERT INTO [Order] (UserID, OrderDate, ExpectedDate, OrderStatusID, TotalCost)
-VALUES (1, '2024-07-12', '2024-07-17', 1, 18.97),
-       (2, '2024-07-13', '2024-07-18', 2, 27.48);
-GO
-INSERT INTO Cart (UserID)
-VALUES (1),
-       (2);
-GO
-INSERT INTO CartItem (Quantity, TotalCost, CartID, ProductID)
-VALUES (3, 7.47, 1, 1),
-       (2, 2.58, 2, 2);
-GO
-INSERT INTO OrderDetail (OrderID, ProductID, Quantity, Cost)
-VALUES (1, 1, 3, 7.47),
-       (2, 2, 2, 2.58);
-
-select * from OrderDetail
-
-
-SELECT COUNT(*) AS total FROM [User]
-select * from Cart
-select * from [Order]
-select * from Category
-
-
-select  top 8 * from Product
-	where isBestSeller = 1
 
 --fruit
 INSERT INTO Product (isBestSeller, FullName, Description, Quantity, QuantitySold, ImageURL, CategoryID, Price, discount)
@@ -171,6 +145,40 @@ VALUES
     (0, 'Brazil Nut', 'Rich and creamy Brazil nuts', 40, 20, '/views/client/asset/img/brazil_nut.jpg', 3, 7.99, 0),
     (0, 'Sunflower Seed', 'Crunchy and nutritious sunflower seeds', 80, 40, '/views/client/asset/img/sunflower_seed.jpg', 3, 2.99, 0);
 GO
+
+INSERT INTO Review (Description, UserID, ProductID)
+VALUES ('Delicious!', 1, 4),
+       ('Highly recommended.', 2, 5);
+GO
+INSERT INTO [Order] (UserID, OrderDate, ExpectedDate, OrderStatusID, TotalCost)
+VALUES (1, '2024-07-12', '2024-07-17', 1, 18.97),
+       (2, '2024-07-13', '2024-07-18', 2, 27.48);
+GO
+INSERT INTO Cart (UserID)
+VALUES (1),
+       (2);
+GO
+INSERT INTO CartItem (Quantity, TotalCost, CartID, ProductID)
+VALUES (3, 7.47, 1, 1),
+       (2, 2.58, 2, 2);
+GO
+INSERT INTO OrderDetail (OrderID, ProductID, Quantity, Cost)
+VALUES (1, 1, 3, 7.47),
+       (2, 2, 2, 2.58);
+
+select * from OrderDetail
+
+
+SELECT COUNT(*) AS total FROM [User]
+select * from Cart
+select * from [Order]
+select * from Category
+
+
+select  top 8 * from Product
+	where isBestSeller = 1
+
+
 
 DECLARE @RandomProducts TABLE (
     ProductID INT

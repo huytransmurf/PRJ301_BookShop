@@ -566,4 +566,30 @@ public class ProductDao extends Connector implements IProductDao {
         }
         return n;
     }
+
+    public Product getProductByID(int productID) {
+        Product product = new Product();
+        try {
+            String query = "SELECT * from Product \n"
+                    + "where ProductID = ?;";
+            PreparedStatement ps = getConnect().prepareStatement(query);
+            ps.setInt(1, productID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                product.setProductID(rs.getInt("ProductID"));
+                product.setBestSeller(rs.getBoolean("isBestSeller"));
+                product.setFullName(rs.getString("FullName"));
+                product.setDescription(rs.getString("Description"));
+                product.setQuantity(rs.getInt("Quantity"));
+                product.setQuantitySold(rs.getInt("QuantitySold"));
+                product.setImageURL(rs.getString("ImageURL"));
+                product.setCategoryID(rs.getInt("CategoryID"));
+                product.setPrice(rs.getDouble("Price"));
+                product.setDiscount(rs.getInt("discount"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error get Product by ProductID!!");
+        }
+        return product;
+    }
 }
