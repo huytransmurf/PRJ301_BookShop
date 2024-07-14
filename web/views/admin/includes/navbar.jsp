@@ -282,7 +282,7 @@
                         <a class="navbar-brand" href="index.html" aria-label="Front">
                             <img
                                 class="navbar-brand-logo"
-                                src="assets\svg\logos\logo.svg"
+                                src="${pageContext.request.contextPath}/views/admin/assets\svg\logos\logo.svg"
                                 alt="Logo"
                                 />
                         </a>
@@ -310,12 +310,12 @@
                             <a class="navbar-brand" href="index.html" aria-label="Front">
                                 <img
                                     class="navbar-brand-logo"
-                                    src="assets\svg\logos\logo.svg"
+                                    src="${pageContext.request.contextPath}/views/admin/assets\svg\logos\logo.svg"
                                     alt="Logo"
                                     />
                                 <img
                                     class="navbar-brand-logo-mini"
-                                    src="assets\svg\logos\logo-short.svg"
+                                    src="${pageContext.request.contextPath}/views/admin/assets\svg\logos\logo-short.svg"
                                     alt="Logo"
                                     />
                             </a>
@@ -466,7 +466,7 @@
                                                         <li class="nav-item">
                                                             <a
                                                                 class="nav-link"
-                                                                href="${pageContext.request.contextPath}/views/admin/order/list-order.jsp"
+                                                                href="${pageContext.request.contextPath}/GetAllOrder"
                                                                 title="Orders"
                                                                 >
                                                                 <span
@@ -523,18 +523,7 @@
                                                         <span class="text-truncate">Manage Reviews</span>
                                                     </a>
                                                 </li>
-                                                <li class="nav-item">
-                                                    <a
-                                                        class="nav-link"
-                                                        href="${pageContext.request.contextPath}/views/admin/review/manage-review.jsp"
-                                                        title="Checkout"
-                                                        >
-                                                        <span
-                                                            class="tio-circle-outlined nav-indicator-icon"
-                                                            ></span>
-                                                        <span class="text-truncate">Checkout</span>
-                                                    </a>
-                                                </li>
+                                                
                                             </ul>
                                         </li>
 

@@ -622,26 +622,4 @@
 
             <jsp:include page="./includes/footer.jsp" />
 
-            <!-- End Footer -->
-        </main>
-        <!-- ========== END MAIN CONTENT ========== -->
-
-        <!-- ========== SECONDARY CONTENTS ========== -->
-        <!-- Keyboard Shortcuts -->
-
-        <!-- End Keyboard Shortcuts -->
-
-        <!-- Activity -->
-
-        <!-- End Activity -->
-
-        <!-- Welcome Message Modal -->
-
-        <!-- End Welcome Message Modal -->
-        <!-- ========== END SECONDARY CONTENTS ========== -->
-
-       
-        <!-- IE Support -->
-       
-    </body>
-</html>
+  

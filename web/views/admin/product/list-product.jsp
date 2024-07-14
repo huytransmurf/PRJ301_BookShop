@@ -89,7 +89,7 @@
                                 <td>${product.quantity}</td>
                                 <td>${product.quantitySold}</td>
                                 <td>
-                                    <img class="avatar avatar-lg" src="${product.imageURL}" alt="${product.fullName}">
+                                    <img class="avatar avatar-lg" src="${pageContext.request.contextPath}/${product.imageURL}" alt="${product.fullName}">
                                 </td>
                                 <td>${product.categoryID}</td> <!-- Có th? c?n l?y tên danh m?c t? c? s? d? li?u -->
                                 <td>$${product.price}</td>

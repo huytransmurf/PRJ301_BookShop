@@ -212,7 +212,7 @@ public class OrderDao extends Connector implements GenericDao<Order> {
     }
 
     public boolean updateOrderStatus(int orderId, int orderStatus) {
-        String query = "UPDATE [Order] SET orderStatusID = ? WHERE id = ?";
+        String query = "UPDATE [Order] SET orderStatusID = ? WHERE OrderID = ?";
 
         try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, orderStatus);
