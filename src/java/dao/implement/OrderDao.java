@@ -132,4 +132,47 @@ public class OrderDao extends Connector implements GenericDao<Order> {
         }
         return false;
     }
+    
+    public List<Order> getOrderByUserID(int id) {
+        List<Order> orders = new ArrayList<>();
+        String query = "SELECT * FROM [Order] WHERE UserID = ?";
+
+        try {
+            PreparedStatement ps = getConnect().prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Order order = new Order();
+                order.setId(rs.getInt("OrderID"));
+                order.setUserID(rs.getInt("UserID"));
+                order.setOrderDate(rs.getDate("OrderDate"));
+                order.setExpectedDate(rs.getDate("ExpectedDate"));
+                order.setOrderStatusID(rs.getInt("OrderStatusID"));
+                order.setTotalCost(rs.getDouble("TotalCost"));
+
+                orders.add(order);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching orders: " + e.getMessage());
+        }
+
+        return orders;
+    }
+    
+    public double getTotalCostByID(int id) {
+        double cost= 0;
+        try {
+            String query = "Select TotalCost from [Order]"
+                    + "where OrderID = ?";
+            PreparedStatement ps = getConnect().prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                cost = rs.getDouble(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error get quantity by category!!");
+        }
+        return cost;
+    }
 }

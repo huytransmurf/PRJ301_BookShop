@@ -17,9 +17,7 @@ public class OrderDetailDao extends Connector implements GenericDao<OrderDetail>
         List<OrderDetail> orderDetails = new ArrayList<>();
         String query = "SELECT * FROM OrderDetail";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
                 OrderDetail orderDetail = new OrderDetail(
@@ -43,8 +41,7 @@ public class OrderDetailDao extends Connector implements GenericDao<OrderDetail>
         OrderDetail orderDetail = null;
         String query = "SELECT * FROM OrderDetail WHERE OrderDetailID = ?";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -70,8 +67,7 @@ public class OrderDetailDao extends Connector implements GenericDao<OrderDetail>
     public boolean insert(OrderDetail orderDetail) {
         String query = "INSERT INTO OrderDetail (OrderID, ProductID, Quantity, Cost) VALUES (?, ?, ?, ?)";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setInt(1, orderDetail.getOrderID());
             stmt.setInt(2, orderDetail.getProductID());
@@ -92,8 +88,7 @@ public class OrderDetailDao extends Connector implements GenericDao<OrderDetail>
     public boolean update(OrderDetail orderDetail) {
         String query = "UPDATE OrderDetail SET OrderID = ?, ProductID = ?, Quantity = ?, Cost = ? WHERE OrderDetailID = ?";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setInt(1, orderDetail.getOrderID());
             stmt.setInt(2, orderDetail.getProductID());
@@ -115,8 +110,7 @@ public class OrderDetailDao extends Connector implements GenericDao<OrderDetail>
     public boolean delete(int id) {
         String query = "DELETE FROM OrderDetail WHERE OrderDetailID = ?";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setInt(1, id);
             stmt.executeUpdate();
@@ -129,4 +123,30 @@ public class OrderDetailDao extends Connector implements GenericDao<OrderDetail>
         }
         return false;
     }
+
+    public List<OrderDetail> getOrderDetailsByOrderID(int id) {
+        List<OrderDetail> orderDetails = new ArrayList<>();
+        String query = "SELECT * FROM OrderDetail WHERE OrderID = ?";
+
+        try {
+            PreparedStatement ps = getConnect().prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                orderDetails.add(new OrderDetail(
+                        rs.getInt("OrderDetailID"),
+                        rs.getInt("OrderID"),
+                        rs.getInt("ProductID"),
+                        rs.getInt("Quantity"),
+                        rs.getDouble("Cost")
+                 )   
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching orderDetail: " + e.getMessage());
+        }
+
+        return orderDetails;
+    }
+
 }
