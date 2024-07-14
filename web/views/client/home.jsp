@@ -7,9 +7,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="./includes/header.jsp"/>
+<!--
 
-<!--Modal Search Start--> 
-<!--<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content rounded-0">
             <div class="modal-header">
@@ -25,7 +25,7 @@
         </div>
     </div>
 </div>-->
-<!--Modal Search End--> 
+
 
 
 <!-- Hero Start -->
@@ -38,7 +38,7 @@
                 <div class="position-relative mx-auto">
                     <form action="Shop">
                         <input type="hidden" name="action" value="searchName">
-                        <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill" type="search" placeholder="Search" name="keyword">
+                        <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill" type="search" placeholder="Search" name="keyword" required>
                         <button type="submit" class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100" style="top: 0; right: 25%;">Submit Now</button>
                     </form>
                 </div>
@@ -172,7 +172,7 @@
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruit</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>${p.fullName}</h4>
+                                                <h4 class="limited-text">${p.fullName}</h4>
                                                 <p class="limited-text">${p.description}</p>
                                                 <div class="d-flex justify-content-between align-items-center">                                              
                                                     <p class="text-dark fs-5 fw-bold mb-0">$ ${p.price} / kg</p>                            
@@ -200,7 +200,7 @@
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Vegetable</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>${p.fullName}</h4>
+                                                <h4 class="limited-text">${p.fullName}</h4>
                                                 <p>${p.description}</p>
                                                 <div class="d-flex justify-content-between  align-items-center">
                                                     <p class="text-dark fs-5 fw-bold mb-0">$ ${p.price} / kg</p>
@@ -228,7 +228,7 @@
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Nuts</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>${p.fullName}</h4>
+                                                <h4 class="limited-text">${p.fullName}</h4>
                                                 <p>${p.description}</p>
                                                 <div class="d-flex justify-content-between  align-items-center">
                                                     <p class="text-dark fs-5 fw-bold mb-0">$ ${p.price} / kg</p>

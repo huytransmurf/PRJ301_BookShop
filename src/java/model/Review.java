@@ -1,10 +1,14 @@
 package model;
 
+import java.util.List;
+
 public class Review {
     private int id;
     private String description;
     private int userID;
     private int productID;
+    private User user;
+    private Product product;
     
     public Review() {
     }
@@ -47,6 +51,23 @@ public class Review {
     public void setProductID(int productID) {
         this.productID = productID;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
 
     @Override
     public String toString() {

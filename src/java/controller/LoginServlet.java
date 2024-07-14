@@ -12,7 +12,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 import model.User;
 
 
@@ -74,7 +73,7 @@ public class LoginServlet extends HttpServlet {
 	      
 	        UserDao userDao = new UserDao();
 	        
-	        User user = userDao.getUserByUsername(username);
+	        User user = userDao.getUserByEmail(username);
 		
 	        if(user!=null && password.equals(user.getPassword())){
 	            HttpSession session = req.getSession(true);

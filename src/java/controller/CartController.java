@@ -28,6 +28,7 @@ public class CartController extends HttpServlet {
 
             request.getRequestDispatcher("/views/client/pages/cart.jsp").forward(request, response);
         }
+
     }
 
     @Override

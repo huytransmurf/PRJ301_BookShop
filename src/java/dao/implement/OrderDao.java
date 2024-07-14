@@ -17,9 +17,7 @@ public class OrderDao extends Connector implements GenericDao<Order> {
         List<Order> orders = new ArrayList<>();
         String query = "SELECT * FROM [Order]";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
                 Order order = new Order();
@@ -44,8 +42,7 @@ public class OrderDao extends Connector implements GenericDao<Order> {
         Order order = null;
         String query = "SELECT * FROM [Order] WHERE OrderID = ?";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -71,8 +68,7 @@ public class OrderDao extends Connector implements GenericDao<Order> {
     public boolean insert(Order order) {
         String query = "INSERT INTO [Order] (UserID, OrderDate, ExpectedDate, OrderStatusID, TotalCost) VALUES (?, ?, ?, ?, ?)";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setInt(1, order.getUserID());
             stmt.setDate(2, new java.sql.Date(order.getOrderDate().getTime()));
@@ -94,8 +90,7 @@ public class OrderDao extends Connector implements GenericDao<Order> {
     public boolean update(Order order) {
         String query = "UPDATE [Order] SET UserID = ?, OrderDate = ?, ExpectedDate = ?, OrderStatusID = ?, TotalCost = ? WHERE OrderID = ?";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setInt(1, order.getUserID());
             stmt.setDate(2, new java.sql.Date(order.getOrderDate().getTime()));
@@ -118,8 +113,7 @@ public class OrderDao extends Connector implements GenericDao<Order> {
     public boolean delete(int id) {
         String query = "DELETE FROM [Order] WHERE OrderID = ?";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setInt(1, id);
             stmt.executeUpdate();
@@ -130,6 +124,108 @@ public class OrderDao extends Connector implements GenericDao<Order> {
         } catch (SQLException e) {
             System.out.println("Error deleting order with ID " + id + ": " + e.getMessage());
         }
+        return false;
+    }
+
+    public List<Order> getOrderByUserID(int id) {
+        List<Order> orders = new ArrayList<>();
+        String query = "SELECT * FROM [Order] WHERE UserID = ?";
+
+        try {
+            PreparedStatement ps = getConnect().prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Order order = new Order();
+                order.setId(rs.getInt("OrderID"));
+                order.setUserID(rs.getInt("UserID"));
+                order.setOrderDate(rs.getDate("OrderDate"));
+                order.setExpectedDate(rs.getDate("ExpectedDate"));
+                order.setOrderStatusID(rs.getInt("OrderStatusID"));
+                order.setTotalCost(rs.getDouble("TotalCost"));
+
+                orders.add(order);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching orders: " + e.getMessage());
+        }
+
+        return orders;
+    }
+
+    public double getTotalCostByID(int id) {
+        double cost = 0;
+        try {
+            String query = "Select TotalCost from [Order]"
+                    + "where OrderID = ?";
+            PreparedStatement ps = getConnect().prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                cost = rs.getDouble(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error get quantity by category!!");
+        }
+        return cost;
+    }
+
+    public List<Order> getPaginatedorders(int offset, int limit) {
+        List<Order> orders = new ArrayList<>();
+        String query = "SELECT * FROM [Order] ORDER BY orderID OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, offset);
+            stmt.setInt(2, limit);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Order order = new Order();
+                order.setId(rs.getInt("OrderID"));
+                order.setUserID(rs.getInt("UserID"));
+                order.setOrderDate(rs.getTimestamp("OrderDate"));
+                order.setOrderStatusID(rs.getInt("OrderStatusID"));
+                order.setTotalCost(rs.getDouble("TotalCost"));
+
+                orders.add(order);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching paginated orders: " + e.getMessage());
+        }
+
+        return orders;
+    }
+
+    public int getTotalOrderCount() {
+        int totalCount = 0;
+        String query = "SELECT COUNT(*) FROM Order";
+
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                totalCount = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching total Order count: " + e.getMessage());
+        }
+
+        return totalCount;
+    }
+
+    public boolean updateOrderStatus(int orderId, int orderStatus) {
+        String query = "UPDATE [Order] SET orderStatusID = ? WHERE OrderID = ?";
+
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, orderStatus);
+            stmt.setInt(2, orderId);
+            stmt.executeUpdate();
+
+            System.out.println("Order updated successfully.");
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
         return false;
     }
 }

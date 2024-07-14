@@ -52,10 +52,9 @@
                     <thead>
                         <tr>
                             <th scope="col" class="table-column-pr-0"></th>
-                            <th>ID</th>
+                            <th>ORDER ID</th>
                             <th>User ID</th>
                             <th>Order Date</th>
-                            <th>Expected Date</th>
                             <th>Order Status</th>
                             <th>Total Cost</th>
                             <th>Actions</th>
@@ -68,7 +67,6 @@
                                 <td>${order.id}</td>
                                 <td>${order.userID}</td>
                                 <td>${order.orderDate}</td>
-                                <td>${order.expectedDate}</td>
                                 <td><c:choose>
                                         <c:when test="${order.orderStatusID == 1}">
                                             <span class="badge badge-soft-warning">
@@ -82,7 +80,7 @@
                                         </c:when>
                                         <c:otherwise>
                                             <span class="badge badge-soft-secondary">
-                                                <span class="legend-indicator bg-secondary"></span>Unknown Status
+                                                <span class="legend-indicator bg-secondary"></span>Cancel
                                             </span>
                                         </c:otherwise>
                                     </c:choose>
@@ -91,10 +89,10 @@
                                 <td>${order.totalCost}</td>
                                 <td>
                                     <div class="btn-group" role="group">
-                                        <a class="btn btn-sm btn-warning" href="order-edit.jsp?id=${order.id}" style="margin-right: 5px;">
-                                            <i class="tio-edit"></i> Edit
+                                        <a class="btn btn-sm btn-status-success" href="${pageContext.request.contextPath}/GetOrderById?id=${order.id}" style="margin-right: 5px;">
+                                            <i class="tio-edit"></i> Detail Order
                                         </a>
-                                        <a class="btn btn-sm btn-danger" href="OrderServlet?action=delete&id=${order.id}">
+                                        <a class="btn btn-sm btn-danger" href="${pageContext.request.contextPath}/DeleteOrderById?id=${order.id}">
                                             <i class="tio-delete"></i> Delete
                                         </a>
                                     </div>

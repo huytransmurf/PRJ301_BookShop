@@ -26,22 +26,33 @@
             <div class="col-lg-12">
                 <div class="row g-4">
                     <div class="col-xl-3">
-                        <div class="input-group w-100 mx-auto d-flex">
-                            <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
-                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
-                        </div>
+                        <form action="Shop?action=search" method="get" class="search-form">
+                            <div class="input-group w-100 mx-auto d-flex">
+                                <input type="search" name="keyword" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1" required 
+                                       value="<%= request.getAttribute("keyword") != null ? request.getAttribute("keyword") : "" %>">
+                                <input type="hidden" name="priceRange" value="${priceRange}">
+                                <button type="submit" id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></button>
+                            </div>
+                        </form>
                     </div>
                     <div class="col-6"></div>
                     <div class="col-xl-3">
-                        <form id="fruitform" action="Shop?action=loadHome" method="get">
-                            <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
-                                <label for="fruits">Order By</label>
-                                <select id="fruits" name="order" class="border-0 form-select-sm bg-light me-3">
+                        <form id="fruitform" action="Shop" method="get">
+                            <div class="bg-light ps-3 py-3 rounded d-flex align-items-center mb-4 row">
+                                <label class="col-xl-4" for="fruits">Order By</label>
+                                <select id="fruits" name="order" class="border-0 form-select-sm bg-light me-3 col-xl-4">
                                     <option value="">Nothing</option>
                                     <option value="asc">Price ↑</option>
                                     <option value="desc">Price ↓</option>
                                 </select>
-                                <button type="submit" class="btn btn-primary">Sort</button>
+                                <c:if test="${not empty categoryId}">
+                                    <input type="hidden" name="categoryId" value="${categoryId}">
+                                </c:if>                                
+                                <c:if test="${not empty keyword}">
+                                    <input type="hidden" name="keyword" value="${keyword}">
+                                </c:if>  
+                                <input type="hidden" name="priceRange" value="${priceRange}">
+                                <button type="submit" class="btn btn-primary col-xl-3">Sort</button>
                             </div>
                         </form>
                     </div>
@@ -53,15 +64,24 @@
                                 <div class="mb-3">
                                     <h4>Categories</h4>
                                     <ul class="list-unstyled fruite-categorie">
-                                        <c:forEach var="p" items="${result}" varStatus="loop">
-                                            <c:if test="${loop.index < 5}">
+                                        <li>
+                                            <div class="d-flex justify-content-between fruite-name">
+                                                <a href="${pageContext.request.contextPath}/Shop?action=loadHome&categoryId=0&priceRange=${priceRange}">
+                                                    <i class="fas fa-apple-alt me-2"></i>
+                                                    All
+                                                </a>
+<!--                                                        <span>${p.quantity}</span>-->
+                                            </div>
+                                        </li>
+                                        <c:forEach var="c" items="${cList}" varStatus="loop">
+                                            <c:if test="${loop.index < 3}">
                                                 <li>
                                                     <div class="d-flex justify-content-between fruite-name">
-                                                        <a href="${pageContext.request.contextPath}/ProductController?id=${p.productID}&action=loadProduct">
+                                                        <a href="${pageContext.request.contextPath}/Shop?action=loadHome&categoryId=${c.id}&priceRange=${priceRange}">
                                                             <i class="fas fa-apple-alt me-2"></i>
-                                                            ${p.fullName}
+                                                            ${c.fullName}
                                                         </a>
-                                                        <span>${p.quantity}</span>
+<!--                                                        <span>${p.quantity}</span>-->
                                                     </div>
                                                 </li>
                                             </c:if>
@@ -71,27 +91,41 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="mb-3">
-                                    <h4>Additional</h4>
-                                    <div class="mb-2">
-                                        <input type="radio" class="me-2" id="Categories-1" name="Categories-1" value="Beverages">
-                                        <label for="Categories-1"> Organic</label>
-                                    </div>
-                                    <div class="mb-2">
-                                        <input type="radio" class="me-2" id="Categories-2" name="Categories-1" value="Beverages">
-                                        <label for="Categories-2"> Fresh</label>
-                                    </div>
-                                    <div class="mb-2">
-                                        <input type="radio" class="me-2" id="Categories-3" name="Categories-1" value="Beverages">
-                                        <label for="Categories-3"> Sales</label>
-                                    </div>
-                                    <div class="mb-2">
-                                        <input type="radio" class="me-2" id="Categories-4" name="Categories-1" value="Beverages">
-                                        <label for="Categories-4"> Discount</label>
-                                    </div>
-                                    <div class="mb-2">
-                                        <input type="radio" class="me-2" id="Categories-5" name="Categories-1" value="Beverages">
-                                        <label for="Categories-5"> Expired</label>
-                                    </div>
+                                    <h4>Price range ($ / kg)</h4>
+                                    <form action="Shop" method="get" class="custom-form">    
+                                        <c:if test="${not empty categoryId}">
+                                            <input type="hidden" name="categoryId" value="${categoryId}">
+                                        </c:if>                                
+                                        <c:if test="${not empty keyword}">
+                                            <input type="hidden" name="keyword" value="${keyword}">
+                                        </c:if>   
+                                        <div class="mb-2">
+                                            <input type="radio" class="me-2" id="Categories-2" name="priceRange" value="2"
+                                                   <%= request.getAttribute("priceRange") != null && request.getAttribute("priceRange").equals("1") ? "checked" : "" %>>
+                                            <label for="Categories-1">Under 2 USD</label>
+                                        </div>
+                                        <div class="mb-2">
+                                            <input type="radio" class="me-2" id="Categories-2" name="priceRange" value="2"
+                                                   <%= request.getAttribute("priceRange") != null && request.getAttribute("priceRange").equals("2") ? "checked" : "" %>>
+                                            <label for="Categories-2">2 - 4 USD</label>
+                                        </div>
+                                        <div class="mb-2">
+                                            <input type="radio" class="me-2" id="Categories-3" name="priceRange" value="3"
+                                                   <%= request.getAttribute("priceRange") != null && request.getAttribute("priceRange").equals("3") ? "checked" : "" %>>  
+                                            <label for="Categories-3">4 - 6 USD</label>
+                                        </div>
+                                        <div class="mb-2">
+                                            <input type="radio" class="me-2" id="Categories-4" name="priceRange" value="4"
+                                                   <%= request.getAttribute("priceRange") != null && request.getAttribute("priceRange").equals("4") ? "checked" : "" %>>  
+                                            <label for="Categories-4">6 - 8 USD</label>
+                                        </div>
+                                        <div class="mb-2">
+                                            <input type="radio" class="me-2" id="Categories-5" name="priceRange" value="5"
+                                                   <%= request.getAttribute("priceRange") != null && request.getAttribute("priceRange").equals("5") ? "checked" : "" %>>  
+                                            <label for="Categories-5">Over 8 USD</label>
+                                        </div>
+                                        <button type="submit" class="btn btn-light col-md-4 border border-primary" style="width: 180px;">Choose</button>
+                                    </form>
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -125,9 +159,6 @@
                                         </c:if>
                                     </c:forEach>
                                 </ul>
-                                <div class="d-flex justify-content-center my-4">
-                                    <a href="#" class="btn border border-secondary px-4 py-3 rounded-pill text-primary w-100">Vew More</a>
-                                </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="position-relative">
@@ -154,9 +185,11 @@
                                             </div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                                                 <h4>${p.fullName}</h4>
-                                            <p>${p.description}</p>
+                                            <p class="limited-text">${p.description}</p>
                                             <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-5 fw-bold mb-0">${p.price} / kg</p>
+                                                <% String priceRange = request.getParameter("priceRange"); %>
+
+                                                <p class="text-dark fs-5 fw-bold mb-0">$ ${p.price} / kg</p>
                                                 <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
                                             </div>
                                         </div>
@@ -189,9 +222,17 @@
 
                                 <c:forEach begin="1" end="${numberOfPages}" varStatus="loop">
                                     <c:url var="pageUrl" value="Shop">
-                                        <c:param name="action" value="loadHome"/>
                                         <c:param name="page" value="${loop.index}"/>
-                                        <c:param name="order" value="${param.order}"/>
+                                        <c:if test="${not empty param.order}">
+                                            <c:param name="order" value="${param.order}"/>
+                                        </c:if>   
+                                        <c:if test="${not empty keyword}">
+                                            <c:param name="keyword" value="${keyword}"/>                                   
+                                        </c:if>   
+                                        <c:if test="${not empty categoryId}">
+                                            <c:param name="categoryId" value="${categoryId}"/>
+                                        </c:if>          
+                                        <c:param name="priceRange" value="${priceRange}"/>
                                     </c:url>
                                     <a href="${pageUrl}" class="rounded ${loop.index == currentPage ? 'active' : ''}">${loop.index}</a>
                                 </c:forEach>
@@ -206,5 +247,9 @@
             </div>
         </div>
     </div>
-    <!-- Fruits Shop End-->
-    <jsp:include page="/views/client/includes/footer.jsp" />
+</div>
+
+
+
+<!-- Fruits Shop End-->
+<jsp:include page="/views/client/includes/footer.jsp" />

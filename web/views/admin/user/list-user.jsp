@@ -72,7 +72,7 @@
                                 <td>${user.address}</td>
                                 <td>${user.role}</td>
                                 <td>
-                                    <img class="avatar avatar-lg" src="${user.avatarURL}" alt="Avatar">
+                                    <img class="avatar avatar-lg" src="${pageContext.request.contextPath}/${user.avatarURL}" alt="Avatar">
                                 </td>
                                 <td>
                                     <div class="btn-group" role="group">

@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.User;
 
 public class ReviewDao extends Connector implements GenericDao<Review> {
 
@@ -123,7 +124,7 @@ public class ReviewDao extends Connector implements GenericDao<Review> {
 
     public List<Review> getReviewsByProductId(int productId) {
         List<Review> reviews = new ArrayList<>();
-        String query = "SELECT r.ReviewID, r.ProductID, r.UserID, r.Description, u.FirstName, u.LastName "
+        String query = "SELECT r.ReviewID, r.ProductID, r.UserID, r.Description, u.FirstName, u.LastName, u.AvatarURL "
                 + "FROM Review r "
                 + "JOIN [User] u ON r.UserID = u.UserID "
                 + "WHERE r.ProductID = ?";
@@ -138,6 +139,12 @@ public class ReviewDao extends Connector implements GenericDao<Review> {
                 review.setProductID(rs.getInt("ProductID"));
                 review.setUserID(rs.getInt("UserID"));
                 review.setDescription(rs.getString("Description"));
+
+                User user = new User();
+                user.setFirstName(rs.getString("FirstName"));
+                user.setLastName(rs.getString("LastName"));
+                user.setAvatarURL(rs.getString("AvatarURL"));
+                review.setUser(user);
 
                 reviews.add(review);
             }

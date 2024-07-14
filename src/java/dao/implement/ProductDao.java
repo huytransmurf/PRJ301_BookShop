@@ -136,14 +136,21 @@ public class ProductDao extends Connector implements IProductDao {
 
     @Override
     public boolean delete(int id) {
-        String query = "DELETE FROM Product WHERE ProductID = ?";
+            String deleteCartItemQuery = "DELETE FROM CartItem WHERE ProductID = ?";
+            String deleteProductQuery = "DELETE FROM Product WHERE ProductID = ?";
 
-        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnect()) {
+            // Xóa các bản ghi liên quan trong bảng CartItem trước
+            try (PreparedStatement stmt = conn.prepareStatement(deleteCartItemQuery)) {
+                stmt.setInt(1, id);
+                stmt.executeUpdate();
+            }
 
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
-            System.out.println("Product with ID " + id + " deleted successfully.");
-            return true;
+            // Xóa các bản ghi liên quan trong bảng Cart
+            try (PreparedStatement stmt = conn.prepareStatement(deleteProductQuery)) {
+                stmt.setInt(1, id);
+                stmt.executeUpdate();
+            }
 
         } catch (SQLException e) {
             System.out.println("Error deleting product with ID " + id + ": " + e.getMessage());
@@ -404,13 +411,67 @@ public class ProductDao extends Connector implements IProductDao {
         return result;
     }
 
-    public List<Product> getPaginatedProductsDynamic(String orderBy, String sortColumn, int offset, int limit) {
+    public List<Product> getPaginatedProductsDynamic(double low, double high, int categoryID, String orderBy, String sortColumn, int offset, int limit) {
         List<Product> products = new ArrayList<>();
-        String query = "SELECT * FROM [Product] ORDER BY " + sortColumn + " " + orderBy + " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+
+        String query;
+
+        if (categoryID == 0) {
+            query = "SELECT * FROM [Product] WHERE Price >= ? AND Price < ? ORDER BY " + sortColumn + " " + orderBy + " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+        } else {
+            query = "SELECT * FROM [Product] WHERE CategoryID = ? AND Price >= ? AND Price < ? ORDER BY " + sortColumn + " " + orderBy + " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+        }
 
         try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setInt(1, offset);
-            stmt.setInt(2, limit);
+            int paramIndex = 1;
+            if (categoryID != 0) {
+                stmt.setInt(paramIndex++, categoryID);
+            }
+            stmt.setDouble(paramIndex++, low);
+            stmt.setDouble(paramIndex++, high);
+            stmt.setInt(paramIndex++, offset);
+            stmt.setInt(paramIndex++, limit);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Product product = new Product();
+                product.setProductID(rs.getInt("ProductID"));
+                product.setBestSeller(rs.getBoolean("isBestSeller"));
+                product.setFullName(rs.getString("FullName"));
+                product.setDescription(rs.getString("Description"));
+                product.setQuantity(rs.getInt("Quantity"));
+                product.setQuantitySold(rs.getInt("QuantitySold"));
+                product.setImageURL(rs.getString("ImageURL"));
+                product.setCategoryID(rs.getInt("CategoryID"));
+                product.setPrice(rs.getDouble("Price"));
+                product.setDiscount(rs.getInt("discount"));
+
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching paginated products: " + e.getMessage());
+        }
+
+        return products;
+    }
+
+    public List<Product> getPaginatedProductsDynamicByKeyword(String keyword, double low, double high, String orderBy, String sortColumn, int offset, int limit) {
+        List<Product> products = new ArrayList<>();
+
+        String query;
+
+        query = "SELECT * FROM Product WHERE (FullName LIKE ? OR description LIKE ?) AND Price >= ? AND Price < ? ORDER BY " + sortColumn + " " + orderBy + " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
+            int paramIndex = 1;
+            stmt.setString(paramIndex++, "%" + keyword + "%");
+            stmt.setString(paramIndex++, "%" + keyword + "%");
+            stmt.setDouble(paramIndex++, low);
+            stmt.setDouble(paramIndex++, high);
+            stmt.setInt(paramIndex++, offset);
+            stmt.setInt(paramIndex++, limit);
+
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -468,14 +529,41 @@ public class ProductDao extends Connector implements IProductDao {
     }
 
     @Override
-    public int getQuantityByCateID(int categoryID) {
+    public int getQuantityByCateID(int categoryID, double low, double high) {
         int n = 0;
         try {
+
             String query = "SELECT COUNT(*) AS number\n"
                     + "FROM Product\n"
-                    + "WHERE CategoryID = ?;";
+                    + "WHERE CategoryID = ? AND Price >= ? AND Price < ?";
             PreparedStatement ps = getConnect().prepareStatement(query);
             ps.setInt(1, categoryID);
+            ps.setDouble(2, low);
+            ps.setDouble(3, high);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                n = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error get quantity by category!!");
+        }
+        return n;
+    }
+
+    public int getQuantityByKeyword(String keyword, double low, double high) {
+        int n = 0;
+        try {
+
+            String query = "SELECT COUNT(*) AS number\n"
+                    + "FROM Product\n"
+                    + "WHERE (fullname LIKE ? OR description LIKE ?) AND Price >= ? AND Price < ?";
+            PreparedStatement ps = getConnect().prepareStatement(query);
+            ps.setString(1, "%" + keyword + "%");
+            ps.setString(2, "%" + keyword + "%");
+            ps.setDouble(3, low);
+            ps.setDouble(4, high);
+
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 n = rs.getInt(1);
@@ -514,4 +602,29 @@ public class ProductDao extends Connector implements IProductDao {
         return products;
     }
     
+    public Product getProductByID(int productID) {
+        Product product = new Product();
+        try {
+            String query = "SELECT * from Product \n"
+                    + "where ProductID = ?;";
+            PreparedStatement ps = getConnect().prepareStatement(query);
+            ps.setInt(1, productID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                product.setProductID(rs.getInt("ProductID"));
+                product.setBestSeller(rs.getBoolean("isBestSeller"));
+                product.setFullName(rs.getString("FullName"));
+                product.setDescription(rs.getString("Description"));
+                product.setQuantity(rs.getInt("Quantity"));
+                product.setQuantitySold(rs.getInt("QuantitySold"));
+                product.setImageURL(rs.getString("ImageURL"));
+                product.setCategoryID(rs.getInt("CategoryID"));
+                product.setPrice(rs.getDouble("Price"));
+                product.setDiscount(rs.getInt("discount"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error get Product by ProductID!!");
+        }
+        return product;
+    }
 }
