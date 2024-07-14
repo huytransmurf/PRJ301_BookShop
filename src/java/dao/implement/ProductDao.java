@@ -485,4 +485,33 @@ public class ProductDao extends Connector implements IProductDao {
         }
         return n;
     }
+
+    public List<Product> getProductsByUserID(int userID) {
+        List<Product> products = new ArrayList<>();
+        String query = "SELECT p.ImageURL, p.FullName, ci.Quantity, p.Price ,ci.productID" +
+                       "FROM CartItem ci " +
+                       "JOIN Cart c ON ci.CartID = c.CartID " +
+                       "JOIN Product p ON ci.ProductID = p.ProductID " +
+                       "WHERE c.UserID = ?";
+
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, userID);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Product product = new Product();
+                product.setImageURL(rs.getString("ImageURL"));
+                product.setFullName(rs.getString("FullName"));
+                product.setQuantity(rs.getInt("Quantity"));
+                product.setPrice(rs.getDouble("Price"));
+                product.setProductID(rs.getInt("productID"));
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching products for user with ID " + userID + ": " + e.getMessage());
+        }
+
+        return products;
+    }
+    
 }
