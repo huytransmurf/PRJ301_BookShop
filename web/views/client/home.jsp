@@ -172,7 +172,7 @@
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruit</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>${p.fullName}</h4>
+                                                <h4 class="limited-text">${p.fullName}</h4>
                                                 <p class="limited-text">${p.description}</p>
                                                 <div class="d-flex justify-content-between align-items-center">                                              
                                                     <p class="text-dark fs-5 fw-bold mb-0">$ ${p.price} / kg</p>                            
@@ -200,7 +200,7 @@
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Vegetable</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>${p.fullName}</h4>
+                                                <h4 class="limited-text">${p.fullName}</h4>
                                                 <p>${p.description}</p>
                                                 <div class="d-flex justify-content-between  align-items-center">
                                                     <p class="text-dark fs-5 fw-bold mb-0">$ ${p.price} / kg</p>
@@ -228,7 +228,7 @@
                                             </div>
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Nuts</div>
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>${p.fullName}</h4>
+                                                <h4 class="limited-text">${p.fullName}</h4>
                                                 <p>${p.description}</p>
                                                 <div class="d-flex justify-content-between  align-items-center">
                                                     <p class="text-dark fs-5 fw-bold mb-0">$ ${p.price} / kg</p>

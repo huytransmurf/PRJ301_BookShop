@@ -3,7 +3,7 @@
     Created on : Jul 10, 2024, 4:02:17 PM
     Author     : LENOVO
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,19 +50,19 @@
             <div class="container topbar bg-primary d-none d-lg-block">
                 <div class="d-flex justify-content-between">
                     <div class="top-info ps-2">
-                        <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">123 Street, New York</a></small>
-                        <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">Email@Example.com</a></small>
+                        <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="${pageContext.request.contextPath}/views/client/pages/contact.jsp" class="text-white">Ngu Hang Son, Da Nang</a></small>
+                        <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="${pageContext.request.contextPath}/views/client/pages/contact.jsp" class="text-white">Example@fpt.edu.vn</a></small>
                     </div>
                     <div class="top-link pe-2">
-                        <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
-                        <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
-                        <a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>
+                        <a href="${pageContext.request.contextPath}/views/client/pages/contact.jsp" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
+                        <a href="${pageContext.request.contextPath}/views/client/pages/contact.jsp" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
+                        <a href="${pageContext.request.contextPath}/views/client/pages/contact.jsp" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>
                     </div>
                 </div>
             </div>
             <div class="container px-0">
                 <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                    <a href="Home" class="navbar-brand"><h1 class="text-primary display-6">Fruitables</h1></a>
+                    <a href="${pageContext.request.contextPath}/Home" class="navbar-brand"><h1 class="text-primary display-6">Fruitables</h1></a>
                     <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="fa fa-bars text-primary"></span>
                     </button>
@@ -73,9 +73,8 @@
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                    <a href="cart.jsp" class="dropdown-item">Cart</a>
-                                    <a href="testimonial.jsp" class="dropdown-item">Testimonial</a>
-                                    <a href="404.jsp" class="dropdown-item">404 Page</a>
+                                    <a href="${pageContext.request.contextPath}/views/client/pages/cart.jsp" class="dropdown-item">Cart</a>
+                                    <a href="${pageContext.request.contextPath}/views/client/pages/testimonial.jsp" class="dropdown-item">Testimonial</a>
                                 </div>
                             </div>
 
@@ -94,17 +93,33 @@
                                 });
                             </script>
 
-                            <a href="contact.jsp" class="nav-item nav-link">Contact</a>
+                            <a href="${pageContext.request.contextPath}/views/client/pages/contact.jsp" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="d-flex m-3 me-0">
                             <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
-                            <a href="cart.jsp" class="position-relative me-4 my-auto">
+                            <a href="${pageContext.request.contextPath}/views/client/pages/cart.jsp" class="position-relative me-4 my-auto">
                                 <i class="fa fa-shopping-bag fa-2x"></i>
                                 <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
                             </a>
-                            <a href="#" class="my-auto">
-                                <i class="fas fa-user fa-2x"></i>
-                            </a>
+                            <c:choose>
+                                <c:when test="${sessionScope.user == null}">
+                                    <a href="${pageContext.request.contextPath}/views/client/pages/login.jsp" class="my-auto">
+                                        <i class="fas fa-user fa-1x"></i>    Login
+                                    </a>
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="dropdown">
+                                        <a href="#" class="dropbtn my-auto">
+                                            <i class="fas fa-user fa-2x"></i>
+                                        </a>
+                                        <div class="dropdown-content">
+                                            <a href="${pageContext.request.contextPath}/views/client/pages/myProfile.jsp">My Profile</a>
+                                            <a href="${pageContext.request.contextPath}/views/client/pages/orderHistory.jsp">Order History</a>
+                                            <a href="">Logout</a>
+                                        </div>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </div>
                 </nav>
@@ -123,7 +138,7 @@
 
                     <form action="Shop" class="modal-body d-flex align-items-center">
                         <div class="input-group w-75 mx-auto d-flex">
-                            
+
                             <input type="search" class="form-control p-3" placeholder="Keywords" aria-describedby="search-icon-1" name="keyword">
                             <input type="hidden" name="action" value="searchName">
                             <button type="submit" href="shop.jsp" id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></button>
