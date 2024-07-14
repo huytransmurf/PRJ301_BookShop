@@ -404,13 +404,27 @@ public class ProductDao extends Connector implements IProductDao {
         return result;
     }
 
-    public List<Product> getPaginatedProductsDynamic(String orderBy, String sortColumn, int offset, int limit) {
+    public List<Product> getPaginatedProductsDynamic(double low, double high, int categoryID, String orderBy, String sortColumn, int offset, int limit) {
         List<Product> products = new ArrayList<>();
-        String query = "SELECT * FROM [Product] ORDER BY " + sortColumn + " " + orderBy + " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+
+        String query;
+
+        if (categoryID == 0) {
+            query = "SELECT * FROM [Product] WHERE Price >= ? AND Price < ? ORDER BY " + sortColumn + " " + orderBy + " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+        } else {
+            query = "SELECT * FROM [Product] WHERE CategoryID = ? AND Price >= ? AND Price < ? ORDER BY " + sortColumn + " " + orderBy + " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+        }
 
         try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setInt(1, offset);
-            stmt.setInt(2, limit);
+            int paramIndex = 1;
+            if (categoryID != 0) {
+                stmt.setInt(paramIndex++, categoryID);
+            }
+            stmt.setDouble(paramIndex++, low);
+            stmt.setDouble(paramIndex++, high);
+            stmt.setInt(paramIndex++, offset);
+            stmt.setInt(paramIndex++, limit);
+
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
