@@ -14,7 +14,6 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import model.User;
 
-
 /**
  *
  * @author LAPTOP ACER
@@ -31,7 +30,6 @@ public class LoginServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -44,7 +42,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
 
     /**
@@ -55,40 +53,39 @@ public class LoginServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   @Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-                String username = req.getParameter("username");
-	        
-	        String password = req.getParameter("password");
-	        
-	        
-	        String alertMsg="";
-	        
-	        if(username.isEmpty() || password.isEmpty()){
-	            alertMsg = "Username and password can't be empty!";
-	            req.setAttribute("alert", alertMsg);
-	            req.getRequestDispatcher("/views/client/pages/login.jsp").forward(req, resp);
-	            return;
-	        }
-	      
-	        UserDao userDao = new UserDao();
-	        
-	        User user = userDao.getUserByEmail(username);
-		
-	        if(user!=null && password.equals(user.getPassword())){
-	            HttpSession session = req.getSession(true);
-	            session.setAttribute("account", user);       
-	            if(user.getRole().equals("Admin")) {
-				resp.sendRedirect("views/admin/index.jsp");
-			}else {
-				resp.sendRedirect(req.getContextPath()+"/Home");
-			}
-	        }else{
-	            alertMsg = "Username or password isn't correct";
-	            req.setAttribute("alert", alertMsg);
-	            req.getRequestDispatcher("/views/client/pages/login.jsp").forward(req, resp);
-	        }
-	    }
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String username = req.getParameter("username");
+
+        String password = req.getParameter("password");
+
+        String alertMsg = "";
+
+        if (username == null || password == null) {
+            alertMsg = "Username and password can't be empty!";
+            req.setAttribute("alert", alertMsg);
+            req.getRequestDispatcher("/views/client/pages/login.jsp").forward(req, resp);
+            return;
+        }
+
+        UserDao userDao = new UserDao();
+
+        User user = userDao.getUserByEmail(username);
+
+        if (user != null && password.equals(user.getPassword())) {
+            HttpSession session = req.getSession(true);
+            session.setAttribute("account", user);
+            if ("Admin".equals(user.getRole())) {
+                resp.sendRedirect("views/admin/index.jsp");
+            } else {
+                resp.sendRedirect(req.getContextPath() + "/Home");
+            }
+        } else {
+            alertMsg = "Username or password isn't correct";
+            req.setAttribute("alert", alertMsg);
+            req.getRequestDispatcher("/views/client/pages/login.jsp").forward(req, resp);
+        }
+    }
     /**
      * Returns a short description of the servlet.
      *

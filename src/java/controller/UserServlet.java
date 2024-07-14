@@ -1,16 +1,22 @@
 package controller;
 
+import dao.implement.ProductDao;
 import dao.implement.UserDao;
 import model.User;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
 
 import java.io.IOException;
 import java.util.List;
+import model.Product;
+import utils.ImageUploadUtil;
 
 @WebServlet(name = "UserServlet", urlPatterns = {"/UserServlet"})
 public class UserServlet extends HttpServlet {
@@ -42,9 +48,7 @@ public class UserServlet extends HttpServlet {
             case "add":
                 createNewUser(request, response);
                 break;
-            case "delete":
-                deleteUserById(request, response);
-                break;
+           
             case "update":
                 updateUserById(request, response);
                 break;
@@ -69,18 +73,7 @@ public class UserServlet extends HttpServlet {
         response.sendRedirect("UserServlet?action=list-users-admin");
     }
 
-    private void deleteUserById(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            String userIdToDelete = request.getParameter("UserId");
-            int userId = Integer.parseInt(userIdToDelete);
-            UserDao userDao = new UserDao();
-            userDao.delete(userId);
-            response.sendRedirect("UserServlet?action=list");
-        } catch (NumberFormatException e) {
-            // Xử lý lỗi số liệu không hợp lệ
-            response.sendRedirect("error.jsp");
-        }
-    }
+  
 
     private void updateUserById(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -89,13 +82,18 @@ public class UserServlet extends HttpServlet {
         String address = request.getParameter("address");
         String role = request.getParameter("role");
         String avatarURL = request.getParameter("avatarURL");
+        String password = request.getParameter("password");
+        String email = request.getParameter("email");
 
         User user = new User(id, firstName, lastName, address, role, avatarURL);
+        user.setPassword(password);
+        user.setEmail(email);
         UserDao userDao = new UserDao();
 
         userDao.update(user);
 
-        response.sendRedirect("UserServlet?action=list-users-admin");
+        response.sendRedirect("UserServlet?action=detail");
+
     }
 
     private void getListUsers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -114,21 +112,23 @@ public class UserServlet extends HttpServlet {
 
         int totalPages = (int) Math.ceil((double) totalUsers / PAGE_SIZE);
 
-            request.setAttribute("users", users);
+        request.setAttribute("users", users);
         request.setAttribute("currentPage", currentPage);
         request.setAttribute("totalPages", totalPages);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/user/list-user.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher(request.getContextPath() + "views/admin/user/list-user.jsp");
         dispatcher.forward(request, response);
     }
 
     private void getUserById(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
+        HttpSession session = request.getSession(false);
+
+        User u = (User) session.getAttribute("account");
 
         UserDao userDao = new UserDao();
-        User user = userDao.getById(id);
+        User user = userDao.getById(u.getId());
 
         request.setAttribute("user", user);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("user_detail.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher( "/views/client/pages/user/profile.jsp");
         dispatcher.forward(request, response);
     }
 }

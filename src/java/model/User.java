@@ -22,7 +22,6 @@ public class User {
         this.avatarURL = avatarURL;
     }
 
-    
     public User(int id, String firstName, String lastName, String address, String role, String avatarURL) {
         this.id = id;
         this.firstName = firstName;
@@ -30,6 +29,16 @@ public class User {
         this.address = address;
         this.role = role;
         this.avatarURL = avatarURL;
+    }
+
+    public User(int id, String firstName, String lastName, String address, String role, String avatarURL, String password) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.role = role;
+        this.avatarURL = avatarURL;
+        this.password = password;
     }
 
     public User(int id, String firstName, String lastName, String address, String role, String avatarURL, String email, String password) {
@@ -112,5 +121,4 @@ public class User {
         return "User{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", role=" + role + ", avatarURL=" + avatarURL + ", email=" + email + ", password=" + password + '}';
     }
 
-    
 }

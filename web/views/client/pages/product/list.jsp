@@ -30,7 +30,6 @@
                             <div class="input-group w-100 mx-auto d-flex">
                                 <input type="search" name="keyword" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1" required 
                                        value="<%= request.getAttribute("keyword") != null ? request.getAttribute("keyword") : "" %>">
-                                <input type="hidden" name="priceRange" value="${priceRange}">
                                 <button type="submit" id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></button>
                             </div>
                         </form>
@@ -66,7 +65,7 @@
                                     <ul class="list-unstyled fruite-categorie">
                                         <li>
                                             <div class="d-flex justify-content-between fruite-name">
-                                                <a href="${pageContext.request.contextPath}/Shop?action=loadHome&categoryId=0&priceRange=${priceRange}">
+                                                <a href="${pageContext.request.contextPath}/Shop?action=loadHome&categoryId=0">
                                                     <i class="fas fa-apple-alt me-2"></i>
                                                     All
                                                 </a>
@@ -77,7 +76,7 @@
                                             <c:if test="${loop.index < 3}">
                                                 <li>
                                                     <div class="d-flex justify-content-between fruite-name">
-                                                        <a href="${pageContext.request.contextPath}/Shop?action=loadHome&categoryId=${c.id}&priceRange=${priceRange}">
+                                                        <a href="${pageContext.request.contextPath}/Shop?action=loadHome&categoryId=${c.id}">
                                                             <i class="fas fa-apple-alt me-2"></i>
                                                             ${c.fullName}
                                                         </a>

@@ -48,6 +48,24 @@ public class ProductDao extends Connector implements IProductDao {
         return products;
     }
 
+     // Hàm tính tổng số sản phẩm
+    public int getTotalProducts() {
+        int totalProducts = 0;
+        String query = "SELECT COUNT(*) AS TotalProducts FROM Product";
+
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
+
+            if (rs.next()) {
+                totalProducts = rs.getInt("TotalProducts");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error fetching total products: " + e.getMessage());
+        }
+
+        return totalProducts;
+    }
+    
     @Override
     public Product getById(int id) {
         Product product = null;

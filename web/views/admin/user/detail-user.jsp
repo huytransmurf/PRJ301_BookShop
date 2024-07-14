@@ -152,4 +152,20 @@
         </main>
 
         <jsp:include page="../includes/footer.jsp" />
-
+        <script>
+            document.getElementById('btnEditProfile').addEventListener('click', function () {
+                // Toggle display of edit profile form
+                var editForm = document.getElementById('editProfileForm');
+                editForm.style.display = (editForm.style.display === 'block') ? 'none' : 'block';
+                // Update form fields with current profile details (if needed)
+                var fullName = document.getElementById('fullName');
+                var age = document.getElementById('age');
+                var location = document.getElementById('location');
+                var interests = document.getElementById('interests');
+                // Replace default values with actual profile data here
+                fullName.value = "User Full Name";
+                age.value = "30";
+                location.value = "City, Country";
+                interests.value = "Reading, Traveling";
+            });
+        </script>

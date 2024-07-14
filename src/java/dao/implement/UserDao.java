@@ -40,6 +40,23 @@ public class UserDao extends Connector implements GenericDao<User> {
         return users;
     }
 
+    public int getTotalCustomers() {
+        int totalCustomers = 0;
+        String query = "SELECT COUNT(*) AS TotalCustomers FROM Customer";
+
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
+
+            if (rs.next()) {
+                totalCustomers = rs.getInt("TotalCustomers");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error fetching total customers: " + e.getMessage());
+        }
+
+        return totalCustomers;
+    }
+    
     @Override
     public User getById(int id) {
         User user = null;
@@ -57,7 +74,8 @@ public class UserDao extends Connector implements GenericDao<User> {
                         rs.getString("LastName"),
                         rs.getString("Address"),
                         rs.getString("Role"),
-                        rs.getString("AvatarURL")
+                        rs.getString("AvatarURL"), 
+                        rs.getString("Password")
                 );
             }
 
@@ -257,5 +275,22 @@ public class UserDao extends Connector implements GenericDao<User> {
             ps.execute();
         } catch (Exception e) {
         }
+    }
+    
+    public boolean updateImageUrl(User user) {
+        String query = "UPDATE [User] set AvatarURL = ? WHERE UserID = ?";
+
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, user.getAvatarURL());
+            stmt.setInt(2, user.getId());
+            stmt.executeUpdate();
+
+            System.out.println("User updated successfully.");
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println("Error updating user with ID " + user.getId() + ": " + e.getMessage());
+        }
+        return false;
     }
 }

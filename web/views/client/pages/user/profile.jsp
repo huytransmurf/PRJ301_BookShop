@@ -42,17 +42,13 @@
                                 <i class="fas fa-lock me-2"></i>
                                 <strong>Password: ********* </strong>
                             </p>
-                            <p>
+                            <p style="margin-bottom: 10px">
                                 <i class="fas fa-user me-2"></i>
                                 <strong>Name:</strong> ${user.firstName} ${user.lastName}
                             </p>
                             <p>
                                 <i class="fas fa-map-marker-alt me-2"></i>
                                 <strong>Address:</strong> ${user.address}
-                            </p>
-                            <p>
-                                <i class="fas fa-user-tag me-2"></i>
-                                <strong>Role:</strong> ${user.role}
                             </p>
                         </div>
                         </ul>
@@ -76,7 +72,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="Profile" method="post">
+                <form action="UserServlet?action=update" method="post">
+                    <input hidden="true" type="text" class="form-control" name="id" value="${user.id}" required>
                     <div class="mb-3">
                         <label for="firstName" class="form-label">First Name</label>
                         <input type="text" class="form-control" id="firstName" name="firstName" value="${user.firstName}" required>
@@ -91,8 +88,12 @@
                     </div>
                     <div class="mb-3">
                         <label for="address" class="form-label">Address</label>
-                        <input type="text" class="form-control" id="password" name="password" value="${user.address}" required>
+                        <input type="text" class="form-control" id="address" name="address" value="${user.address}" required>
                     </div>
+                    <input hidden="true" type="text" class="form-control" id="role" name="role" value="${user.role}" >                       
+                    <input hidden="true" type="text" class="form-control" id="email" name="email" value="${user.email}" >
+                    <input hidden="true" type="text" class="form-control" id="avatarURL" name="avatarURL" value="${user.avatarURL}" >
+                    <input hidden="true" type="text" class="form-control" name="action" value="update" required>                  
                     <button type="submit" class="btn btn-primary">Save Changes</button>
                 </form>
             </div>
@@ -109,11 +110,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="Profile?action=changePicture" method="post" enctype="multipart/form-data">
+                <form action="UploadImage" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="profilePicture" class="form-label">Choose New Picture</label>
-                        <input type="file" class="form-control" id="profilePicture" name="profilePicture" required>
+                        <input type="file" class="form-control" id="imgFile" name="imgFile" required>
                     </div>
+                    <input type="number" class="form-control" name="id" value="${user.id}" required>
                     <button type="submit" class="btn btn-primary">Upload Picture</button>
                 </form>
             </div>
