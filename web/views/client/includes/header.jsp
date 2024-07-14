@@ -146,10 +146,9 @@
                                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-user fa-2x"></i>${sessionScope.account.firstName}</a>
                                     <div class="dropdown-menu m-0 bg-secondary rounded-0">
                                         <c:if test="${sessionScope.account.role == 'Admin'}">
-                                        <a href="#" class="dropdown-item">
-                                            <i class="fa fa-lock fa-1x"></i>Admin
-                                        </a>
-
+                                            <a href="#" class="dropdown-item">
+                                                <i class="fa fa-lock fa-1x"></i>Admin
+                                            </a>
                                         </c:if>
                                         <a href="Profile" class="dropdown-item">
                                             <i class="fa fa-user-circle fa-1x"></i>Account
@@ -157,12 +156,7 @@
                                         <a href="LogoutServlet" class="dropdown-item">
                                             <i class="fas fa-sign-out-alt"></i>Log out
                                         </a> 
-                                        
-                                        <div class="dropdown-content">
-                                            <a href="${pageContext.request.contextPath}/views/client/pages/myProfile.jsp">My Profile</a>
-                                            <a href="${pageContext.request.contextPath}/views/client/pages/orderHistory.jsp">Order History</a>
-                                            <a href="${pageContext.request.contextPath}/LogoutServlet">Logout</a>
-                                        </div>
+
                                     </div>
                                 </div>
                             </c:if>

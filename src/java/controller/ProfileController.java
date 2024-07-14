@@ -43,15 +43,22 @@ public class ProfileController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession(false);
-        User u = (User) session.getAttribute("account");
-        u.setFirstName(request.getParameter("firstName"));
-        u.setLastName(request.getParameter("lastName"));
-        u.setPassword(request.getParameter("password"));
-        new UserDao().changeInfor(u);
-        session.setAttribute("account", u);
-        request.setAttribute("user", u);
-        request.getRequestDispatcher("/views/client/pages/user/profile.jsp").forward(request, response);
+        int id = Integer.parseInt(request.getParameter("id"));
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String address = request.getParameter("address");
+        String password = request.getParameter("password");
+        String avatarURL = request.getParameter("avatarURL");
+
+        User user = new User(id, firstName, lastName, address, avatarURL);
+        UserDao userDao = new UserDao();
+
+        if (userDao.update(user)) {
+            response.sendRedirect("/views/client/pages/user/profile.jsp" + id);
+        } else {
+            response.sendRedirect(request.getContextPath() + "/${pageContext.request.contextPath}/views/admin/others/error-500.jsp");
+
+        }
 
     }
 

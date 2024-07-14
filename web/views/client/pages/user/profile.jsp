@@ -20,9 +20,9 @@
             <div class="col-lg-3 d-flex align-items-stretch">
                 <div class="card mb-4 w-100">
                     <div class="card-body text-center">
-                        <img src="${pageContext.request.contextPath}/views/client/asset/img/avatar.jpg" class="img-fluid rounded-circle mb-3" alt="Profile Picture" width="150">
+                        <img src="${pageContext.request.contextPath}/${user.avatarURL}" class="img-fluid rounded-circle mb-3" alt="Profile Picture" width="150">
                         <h5 class="card-title">${user.firstName}</h5>
-                        <button class="btn btn-secondary w-100" data-bs-toggle="modal" data-bs-target="#changePictureModal">Thêm ảnh</button>
+                        <button class="btn btn-secondary w-100" data-bs-toggle="modal" data-bs-target="#changePictureModal">Add avatar</button>
                     </div>
                 </div>
             </div>
@@ -56,25 +56,12 @@
                             </p>
                         </div>
                         </ul>
-                        <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#editProfileModal">Edit Profile Detail</button>
+                        <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#editProfileModal">Edit Profile</button>
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-3 d-flex align-items-stretch">
-                <div class="card mb-4 w-100">
-                    <div class="card-body text-center">
-                        <h4 class="card-title">Profile Overview</h4>
-                        <div class="profile-detail">
-                            <p><strong>Name:</strong> John Doe</p>
-                            <p><strong>Address:</strong> Danang</p>
-                            <p><strong>Role:</strong> Customer</p>
-                            <!-- Additional details -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Profile Details and Overview End -->
+
         </div>
     </div>
 </div>
@@ -90,7 +77,6 @@
             </div>
             <div class="modal-body">
                 <form action="Profile" method="post">
-                    <!-- Form fields for editing profile details -->
                     <div class="mb-3">
                         <label for="firstName" class="form-label">First Name</label>
                         <input type="text" class="form-control" id="firstName" name="firstName" value="${user.firstName}" required>
@@ -103,7 +89,10 @@
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="password" value="${user.password}" required>
                     </div>
-                    <!-- Additional fields -->
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="password" name="password" value="${user.address}" required>
+                    </div>
                     <button type="submit" class="btn btn-primary">Save Changes</button>
                 </form>
             </div>
