@@ -8,7 +8,7 @@ public class User {
     private String address;
     private String role;
     private String avatarURL;
-    private String userName;
+    private String email;
     private String password;
 
     public User(int id, String firstName, String lastName, String address, String role, String avatarURL) {
@@ -20,14 +20,14 @@ public class User {
         this.avatarURL = avatarURL;
     }
 
-    public User(int id, String firstName, String lastName, String address, String role, String avatarURL, String userName, String password) {
+    public User(int id, String firstName, String lastName, String address, String role, String avatarURL, String email, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.role = role;
         this.avatarURL = avatarURL;
-        this.userName = userName;
+        this.email = email;
         this.password = password;
     }
 
@@ -79,12 +79,12 @@ public class User {
         this.avatarURL = avatarURL;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setEmail(String userName) {
+        this.email = userName;
     }
 
     public String getPassword() {
@@ -97,13 +97,8 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{"
-                + "id=" + id
-                + ", firstName='" + firstName + '\''
-                + ", lastName='" + lastName + '\''
-                + ", address='" + address + '\''
-                + ", role='" + role + '\''
-                + ", avatarURL='" + avatarURL + '\''
-                + '}';
+        return "User{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", role=" + role + ", avatarURL=" + avatarURL + ", email=" + email + ", password=" + password + '}';
     }
+
+    
 }

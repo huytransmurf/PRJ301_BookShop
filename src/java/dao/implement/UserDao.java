@@ -27,7 +27,9 @@ public class UserDao extends Connector implements GenericDao<User> {
                         rs.getString("LastName"),
                         rs.getString("Address"),
                         rs.getString("Role"),
-                        rs.getString("AvatarURL")
+                        rs.getString("AvatarURL"),
+                        rs.getString("Email"),
+                        rs.getString("Password")
                 );
                 users.add(user);
             }
@@ -211,13 +213,13 @@ public class UserDao extends Connector implements GenericDao<User> {
         return total;
     }
 
-    public User getUserByUsername(String username) {
+    public User getUserByEmail(String email) {
         User user = null;
-        String query = "SELECT * FROM [User] WHERE userName = ?";
+        String query = "SELECT * FROM [User] WHERE Email = ?";
 
         try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
-            stmt.setString(1, username);
+            stmt.setString(1, email);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
@@ -228,13 +230,13 @@ public class UserDao extends Connector implements GenericDao<User> {
                         rs.getString("Address"),
                         rs.getString("Role"),
                         rs.getString("AvatarURL"),
-                        rs.getString("userName"),
-                        rs.getString("password")
+                        rs.getString("Email"),
+                        rs.getString("Password")
                 );
             }
 
         } catch (SQLException e) {
-            System.out.println("Error fetching user with username " + username + ": " + e.getMessage());
+            System.out.println("Error fetching user with username " + email + ": " + e.getMessage());
         }
 
         return user;

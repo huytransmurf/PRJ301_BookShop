@@ -4,6 +4,7 @@
     Author     : LENOVO
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,7 +74,8 @@
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                    <a href="cart.jsp" class="dropdown-item">Cart</a>
+                                    <a href="Order" class="dropdown-item">Order</a>
+                                    <a href="Cart" class="dropdown-item">Cart</a>
                                     <a href="testimonial.jsp" class="dropdown-item">Testimonial</a>
                                     <a href="404.jsp" class="dropdown-item">404 Page</a>
                                 </div>
@@ -98,13 +100,29 @@
                         </div>
                         <div class="d-flex m-3 me-0">
                             <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
-                            <a href="cart.jsp" class="position-relative me-4 my-auto">
+                            <a href="Cart" class="position-relative me-4 my-auto">
                                 <i class="fa fa-shopping-bag fa-2x"></i>
                                 <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
                             </a>
-                            <a href="#" class="my-auto">
-                                <i class="fas fa-user fa-2x"></i>
-                            </a>
+
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-user fa-2x"></i></a>
+                                <div class="dropdown-menu m-0 bg-secondary rounded-0">
+                                    <c:if test="${not empty sessionScope.account}">
+                                        <a href="LogoutServlet" class="dropdown-item">
+                                            <i class="fas fa-sign-out-alt"></i>Log out
+                                        </a> 
+                                        <a href="#" class="dropdown-item">
+                                            <i class="fas fa-user-circle-alt fa-1x"> </i>Account
+                                        </a> 
+                                    </c:if>
+                                    <c:if test="${empty sessionScope.account}">
+                                        <a href="views/client/pages/login.jsp" class="dropdown-item">
+                                            <i class="fas fa-sign-in-alt fa-1x"></i> Log in
+                                        </a>
+                                    </c:if>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </nav>
@@ -123,7 +141,7 @@
 
                     <form action="Shop" class="modal-body d-flex align-items-center">
                         <div class="input-group w-75 mx-auto d-flex">
-                            
+
                             <input type="search" class="form-control p-3" placeholder="Keywords" aria-describedby="search-icon-1" name="keyword">
                             <input type="hidden" name="action" value="searchName">
                             <button type="submit" href="shop.jsp" id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></button>
