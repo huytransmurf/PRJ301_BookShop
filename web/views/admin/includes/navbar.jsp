@@ -514,7 +514,7 @@
                                                 <li class="nav-item">
                                                     <a
                                                         class="nav-link"
-                                                        href="${pageContext.request.contextPath}/views/admin/review/manage-review.jsp"
+                                                        href="${pageContext.request.contextPath}/GetAllOrder"
                                                         title="Manage Reviews"
                                                         >
                                                         <span
@@ -551,7 +551,7 @@
                                         <li class="nav-item">
                                             <a
                                                 class="js-nav-tooltip-link nav-link"
-                                                href="${pageContext.request.contextPath}/views/client/home.jsp"
+                                                href="${pageContext.request.contextPath}/Home"
                                                 title="Welcome page"
                                                 data-placement="left"
                                                 >
