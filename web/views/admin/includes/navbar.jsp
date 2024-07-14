@@ -514,7 +514,7 @@
                                                 <li class="nav-item">
                                                     <a
                                                         class="nav-link"
-                                                        href="${pageContext.request.contextPath}/views/admin/review/manage-review.jsp"
+                                                        href="${pageContext.request.contextPath}/GetAllOrder"
                                                         title="Manage Reviews"
                                                         >
                                                         <span
