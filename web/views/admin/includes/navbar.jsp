@@ -540,7 +540,7 @@
                                         <li class="nav-item">
                                             <a
                                                 class="js-nav-tooltip-link nav-link"
-                                                href="${pageContext.request.contextPath}/views/client/home.jsp"
+                                                href="${pageContext.request.contextPath}/Home"
                                                 title="Welcome page"
                                                 data-placement="left"
                                                 >

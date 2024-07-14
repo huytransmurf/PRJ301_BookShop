@@ -241,4 +241,21 @@ public class UserDao extends Connector implements GenericDao<User> {
 
         return user;
     }
+
+    public void changeInfor(User u) {
+        String query = "update [User] \n"
+                + "set FirstName = ?, \n"
+                + "	 LastName = ?,\n"
+                + "	 Password = ?\n"
+                + "where UserID = ?";
+        try {
+            PreparedStatement ps = getConnect().prepareStatement(query);
+            ps.setString(1, u.getFirstName());
+            ps.setString(2, u.getLastName());
+            ps.setString(3, u.getPassword());
+            ps.setInt(4, u.getId());
+            ps.execute();
+        } catch (Exception e) {
+        }
+    }
 }

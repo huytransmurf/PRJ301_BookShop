@@ -20,8 +20,8 @@
             <div class="col-lg-3 d-flex align-items-stretch">
                 <div class="card mb-4 w-100">
                     <div class="card-body text-center">
-                        <img src="path/to/profile-picture.jpg" class="img-fluid rounded-circle mb-3" alt="Profile Picture" width="150">
-                        <h5 class="card-title">John Doe</h5>
+                        <img src="${pageContext.request.contextPath}/views/client/asset/img/avatar.jpg" class="img-fluid rounded-circle mb-3" alt="Profile Picture" width="150">
+                        <h5 class="card-title">${user.firstName}</h5>
                         <button class="btn btn-secondary w-100" data-bs-toggle="modal" data-bs-target="#changePictureModal">Thêm ảnh</button>
                     </div>
                 </div>
@@ -36,23 +36,23 @@
                         <div class="profile-detail mb-4">
                             <p>
                                 <i class="fas fa-envelope me-2"></i>
-                                <strong>Email: Quang@</strong>
+                                <strong>Email: ${user.email}</strong>
                             </p>
                             <p>
                                 <i class="fas fa-lock me-2"></i>
-                                <strong>Security: </strong>
+                                <strong>Password: ********* </strong>
                             </p>
                             <p>
                                 <i class="fas fa-user me-2"></i>
-                                <strong>Name:</strong> John Doe
+                                <strong>Name:</strong> ${user.firstName} ${user.lastName}
                             </p>
                             <p>
                                 <i class="fas fa-map-marker-alt me-2"></i>
-                                <strong>Address:</strong> Danang
+                                <strong>Address:</strong> ${user.address}
                             </p>
                             <p>
                                 <i class="fas fa-user-tag me-2"></i>
-                                <strong>Role:</strong> Customer
+                                <strong>Role:</strong> ${user.role}
                             </p>
                         </div>
                         </ul>
@@ -89,19 +89,19 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="Profile?action=editDetail" method="post">
+                <form action="Profile" method="post">
                     <!-- Form fields for editing profile details -->
                     <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" value="John Doe" required>
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="firstName" name="firstName" value="${user.firstName}" required>
                     </div>
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" value="john.doe@example.com" required>
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" name="lastName" value="${user.lastName}" required>
                     </div>
                     <div class="mb-3">
-                        <label for="phone" class="form-label">Phone</label>
-                        <input type="text" class="form-control" id="phone" name="phone" value="+123456789" required>
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" value="${user.password}" required>
                     </div>
                     <!-- Additional fields -->
                     <button type="submit" class="btn btn-primary">Save Changes</button>
