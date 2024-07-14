@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.List;
+
 public class Product {
 
     private int productID;
@@ -16,8 +18,8 @@ public class Product {
     private int categoryID;
     private double price;
     private int discount;
+    private List<Review> reviews;
 
-    // Constructors
     public Product() {
     }
 
@@ -113,6 +115,14 @@ public class Product {
 
     public void setDiscount(int discount) {
         this.discount = discount;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
     }
 
     // toString method

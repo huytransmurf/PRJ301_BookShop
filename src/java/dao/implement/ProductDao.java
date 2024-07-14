@@ -449,6 +449,46 @@ public class ProductDao extends Connector implements IProductDao {
         return products;
     }
 
+    public List<Product> getPaginatedProductsDynamicByKeyword(String keyword, double low, double high, String orderBy, String sortColumn, int offset, int limit) {
+        List<Product> products = new ArrayList<>();
+
+        String query;
+
+        query = "SELECT * FROM Product WHERE (FullName LIKE ? OR description LIKE ?) AND Price >= ? AND Price < ? ORDER BY " + sortColumn + " " + orderBy + " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
+            int paramIndex = 1;
+            stmt.setString(paramIndex++, "%" + keyword + "%");
+            stmt.setString(paramIndex++, "%" + keyword + "%");
+            stmt.setDouble(paramIndex++, low);
+            stmt.setDouble(paramIndex++, high);
+            stmt.setInt(paramIndex++, offset);
+            stmt.setInt(paramIndex++, limit);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Product product = new Product();
+                product.setProductID(rs.getInt("ProductID"));
+                product.setBestSeller(rs.getBoolean("isBestSeller"));
+                product.setFullName(rs.getString("FullName"));
+                product.setDescription(rs.getString("Description"));
+                product.setQuantity(rs.getInt("Quantity"));
+                product.setQuantitySold(rs.getInt("QuantitySold"));
+                product.setImageURL(rs.getString("ImageURL"));
+                product.setCategoryID(rs.getInt("CategoryID"));
+                product.setPrice(rs.getDouble("Price"));
+                product.setDiscount(rs.getInt("discount"));
+
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching paginated products: " + e.getMessage());
+        }
+
+        return products;
+    }
+
     @Override
     public List<Product> searchByCategory(int categoryID) {
         List<Product> products = new ArrayList<>();
@@ -482,14 +522,41 @@ public class ProductDao extends Connector implements IProductDao {
     }
 
     @Override
-    public int getQuantityByCateID(int categoryID) {
+    public int getQuantityByCateID(int categoryID, double low, double high) {
         int n = 0;
         try {
+
             String query = "SELECT COUNT(*) AS number\n"
                     + "FROM Product\n"
-                    + "WHERE CategoryID = ?;";
+                    + "WHERE CategoryID = ? AND Price >= ? AND Price < ?";
             PreparedStatement ps = getConnect().prepareStatement(query);
             ps.setInt(1, categoryID);
+            ps.setDouble(2, low);
+            ps.setDouble(3, high);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                n = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error get quantity by category!!");
+        }
+        return n;
+    }
+
+    public int getQuantityByKeyword(String keyword, double low, double high) {
+        int n = 0;
+        try {
+
+            String query = "SELECT COUNT(*) AS number\n"
+                    + "FROM Product\n"
+                    + "WHERE (fullname LIKE ? OR description LIKE ?) AND Price >= ? AND Price < ?";
+            PreparedStatement ps = getConnect().prepareStatement(query);
+            ps.setString(1, "%" + keyword + "%");
+            ps.setString(2, "%" + keyword + "%");
+            ps.setDouble(3, low);
+            ps.setDouble(4, high);
+
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 n = rs.getInt(1);

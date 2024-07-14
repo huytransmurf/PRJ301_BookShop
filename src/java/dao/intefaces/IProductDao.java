@@ -20,5 +20,5 @@ public interface IProductDao extends GenericDao<Product> {
     List<Product> searchByName(String name);
     List<Product> searchByCategory(int categoryID);
     List<Product> getPaginatedProducts(int offset, int limit);
-    int getQuantityByCateID(int categoryID);
+    int getQuantityByCateID(int categoryID, double low, double high);
 }

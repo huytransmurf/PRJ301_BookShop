@@ -33,7 +33,43 @@
         <link type="text/css" href="${pageContext.request.contextPath}/views/client/asset/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Template Stylesheet -->
+
         <link type="text/css" href="${pageContext.request.contextPath}/views/client/asset/css/style.css" rel="stylesheet">
+        <style>
+            .custom-form {
+                padding: 20px;
+                background-color: #f9f9f9;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                max-width: 220px;
+                font-family: 'Arial', sans-serif;
+            }
+            .custom-form div.mb-2 {
+                padding: 10px 0;
+            }
+            .custom-form input[type="radio"] {
+                accent-color: #81c408;
+            }
+            .custom-form label {
+                margin-left: 10px;
+                color: #555;
+                font-size: 18px;
+                font-weight: 500;
+            }
+            .custom-form button {
+                background-color: #81c408;
+                color: #fff;
+                font-size: 18px;
+                font-weight: 500;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                margin-top: 20px;
+            }
+            .custom-form button:hover {
+                background-color: #6da306;
+            }
+        </style>
     </head>
 
     <body>
@@ -123,7 +159,7 @@
 
                     <form action="Shop" class="modal-body d-flex align-items-center">
                         <div class="input-group w-75 mx-auto d-flex">
-                            
+
                             <input type="search" class="form-control p-3" placeholder="Keywords" aria-describedby="search-icon-1" name="keyword">
                             <input type="hidden" name="action" value="searchName">
                             <button type="submit" href="shop.jsp" id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></button>
