@@ -122,4 +122,7 @@ public class CategoryDao extends Connector implements ICategoryDao {
         }
         return cateMap;
     }
+
+
+
 }

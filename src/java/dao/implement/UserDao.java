@@ -40,6 +40,23 @@ public class UserDao extends Connector implements GenericDao<User> {
         return users;
     }
 
+    public int getTotalCustomers() {
+        int totalCustomers = 0;
+        String query = "SELECT COUNT(*) AS TotalCustomers FROM Customer";
+
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
+
+            if (rs.next()) {
+                totalCustomers = rs.getInt("TotalCustomers");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error fetching total customers: " + e.getMessage());
+        }
+
+        return totalCustomers;
+    }
+    
     @Override
     public User getById(int id) {
         User user = null;

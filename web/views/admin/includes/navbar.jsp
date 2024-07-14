@@ -514,7 +514,7 @@
                                                 <li class="nav-item">
                                                     <a
                                                         class="nav-link"
-                                                        href="${pageContext.request.contextPath}/GetAllOrder"
+                                                        href="${pageContext.request.contextPath}/GetReviewByProductIdServlet?id=0"
                                                         title="Manage Reviews"
                                                         >
                                                         <span

@@ -143,7 +143,7 @@
                                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-user fa-1x"></i>${sessionScope.account.firstName}</a>
                                     <div class="dropdown-menu m-0 bg-secondary rounded-0">
                                         <c:if test="${sessionScope.account.role == 'Admin'}">
-                                            <a href="#" class="dropdown-item">
+                                            <a href="${pageContext.request.contextPath}/AdminServlet" class="dropdown-item">
                                                 <i class="fa fa-lock fa-1x"></i>Admin
                                             </a>
                                         </c:if>

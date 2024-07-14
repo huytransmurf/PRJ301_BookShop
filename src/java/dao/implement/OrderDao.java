@@ -36,7 +36,45 @@ public class OrderDao extends Connector implements GenericDao<Order> {
 
         return orders;
     }
+    
+    
+      public double getTotalOrderCost() {
+        double totalCost = 0;
+        String query = "SELECT SUM(OD.Quantity * P.Price) AS TotalCost "
+                + "FROM OrderDetail OD "
+                + "JOIN Product P ON OD.ProductId = P.ProductId";
 
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
+
+            if (rs.next()) {
+                totalCost = rs.getDouble("TotalCost");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error calculating total order cost: " + e.getMessage());
+        }
+
+        return totalCost;
+    }
+
+
+     public int getTotalOrders() {
+        int totalOrders = 0;
+        String query = "SELECT COUNT(*) AS TotalOrders FROM [Order]";
+
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
+
+            if (rs.next()) {
+                totalOrders = rs.getInt("TotalOrders");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error fetching total orders: " + e.getMessage());
+        }
+
+        return totalOrders;
+    }
+    
     @Override
     public Order getById(int id) {
         Order order = null;
