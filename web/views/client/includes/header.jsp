@@ -131,7 +131,7 @@
 
                             <a href="${pageContext.request.contextPath}/views/client/pages/contact.jsp" class="nav-item nav-link">Contact</a>
                         </div>
-                        <div class="d-flex m-3 me-0">
+                        <div class="d-flex m-3 me-0 align-items-center">
                             <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
 
                             <a href="${pageContext.request.contextPath}/views/client/pages/cart.jsp" class="position-relative me-4 my-auto">
@@ -140,13 +140,12 @@
                             </a>
                             <c:if test="${not empty sessionScope.account}">
                                 <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-user fa-2x"></i>${sessionScope.account.firstName}</a>
+                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-user fa-1x"></i>${sessionScope.account.firstName}</a>
                                     <div class="dropdown-menu m-0 bg-secondary rounded-0">
                                         <c:if test="${sessionScope.account.role == 'Admin'}">
                                             <a href="#" class="dropdown-item">
                                                 <i class="fa fa-lock fa-1x"></i>Admin
                                             </a>
-
                                         </c:if>
                                         <a href="Profile" class="dropdown-item">
                                             <i class="fa fa-user-circle fa-1x"></i>Account

@@ -96,10 +96,10 @@ VALUES ('Fruits', 'Fresh fruits and dried fruits'),
        ('Nuts', 'Healthy nuts and treats');
 GO
 INSERT INTO [User] (FirstName, LastName, Address, Role, AvatarURL, Email, Password)
-VALUES ('Quang', 'Hoang', 'Dannang', 'Customer', '/assets/images/emilyjohnson.jpg', 'quang@gmail', '123'),
-		('Huy', 'Tran', 'Dannang', 'Customer', '/assets/images/emilyjohnson.jpg', 'huy@gmail', '123'),
-		('Loi', 'Le', 'Dannang', 'Customer', '/assets/images/emilyjohnson.jpg', 'loi@gmail', '123'),
-		('Trong', 'Nguyen', 'Dannang', 'Customer', '/assets/images/emilyjohnson.jpg', 'trong@gmail', '123'),
+VALUES ('Quang', 'Hoang', 'Dannang', 'Customer', '/views/client/asset/img/emilyjohnson.jpg', 'quang@gmail', '123'),
+		('Huy', 'Tran', 'Dannang', 'Customer', '/views/client/asset/img/emilyjohnson.jpg', 'huy@gmail', '123'),
+		('Loi', 'Le', 'Dannang', 'Customer', '/views/client/asset/img/emilyjohnson.jpg', 'loi@gmail', '123'),
+		('Trong', 'Nguyen', 'Dannang', 'Customer', '/views/client/asset/img/emilyjohnson.jpg', 'trong@gmail', '123'),
        ('Dat', 'Nguyen', 'Dannang', 'Admin', 'storage/images/taoanhdep_thay_tu_50818.png','dat@gmail', '123');
 GO
 
@@ -206,3 +206,6 @@ WHERE ProductID IN (1, 4, 7, 12, 15, 18, 22, 25, 28, 30);
 SELECT COUNT(*) AS number
 FROM Product
 WHERE CategoryID = 1;
+
+
+;
