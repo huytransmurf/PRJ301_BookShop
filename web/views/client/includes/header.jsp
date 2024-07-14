@@ -110,10 +110,7 @@
                                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
                                     <a href="Order" class="dropdown-item">Order</a>
                                     <a href="Cart" class="dropdown-item">Cart</a>
-                                    <a href="testimonial.jsp" class="dropdown-item">Testimonial</a>
-                                    <a href="404.jsp" class="dropdown-item">404 Page</a>
-                                    <a href="${pageContext.request.contextPath}/views/client/pages/cart.jsp" class="dropdown-item">Cart</a>
-                                    <a href="${pageContext.request.contextPath}/views/client/pages/testimonial.jsp" class="dropdown-item">Testimonial</a>
+                                    <a href="${pageContext.request.contextPath}/ReviewServlet" class="dropdown-item">Testimonial</a>
                                 </div>
                             </div>
 
@@ -149,6 +146,7 @@
                                             <a href="#" class="dropdown-item">
                                                 <i class="fa fa-lock fa-1x"></i>Admin
                                             </a>
+
                                         </c:if>
                                         <a href="Profile" class="dropdown-item">
                                             <i class="fa fa-user-circle fa-1x"></i>Account
@@ -156,6 +154,7 @@
                                         <a href="LogoutServlet" class="dropdown-item">
                                             <i class="fas fa-sign-out-alt"></i>Log out
                                         </a> 
+
 
                                     </div>
                                 </div>
@@ -184,13 +183,11 @@
                     <form action="Shop" class="modal-body d-flex align-items-center">
                         <div class="input-group w-75 mx-auto d-flex">
 
-                            <input type="search" class="form-control p-3" placeholder="Keywords" aria-describedby="search-icon-1" name="keyword">
+                            <input type="search" class="form-control p-3" placeholder="Keywords" aria-describedby="search-icon-1" name="keyword" required>
                             <input type="hidden" name="action" value="searchName">
-                            <button type="submit" href="shop.jsp" id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></button>
+                            <button type="submit" id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></button>
                         </div>
                     </form>
-
-
                 </div>
             </div>
         </div>
