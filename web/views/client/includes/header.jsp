@@ -107,10 +107,7 @@
                                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
                                     <a href="Order" class="dropdown-item">Order</a>
                                     <a href="Cart" class="dropdown-item">Cart</a>
-                                    <a href="testimonial.jsp" class="dropdown-item">Testimonial</a>
-                                    <a href="404.jsp" class="dropdown-item">404 Page</a>
-                                    <a href="${pageContext.request.contextPath}/views/client/pages/cart.jsp" class="dropdown-item">Cart</a>
-                                    <a href="${pageContext.request.contextPath}/views/client/pages/testimonial.jsp" class="dropdown-item">Testimonial</a>
+                                    <a href="${pageContext.request.contextPath}/ReviewServlet" class="dropdown-item">Testimonial</a>
                                 </div>
                             </div>
 
@@ -150,9 +147,9 @@
                                             <i class="fas fa-user fa-2x"></i>
                                         </a>
                                         <div class="dropdown-content">
-                                            <a href="${pageContext.request.contextPath}/views/client/pages/myProfile.jsp">My Profile</a>
-                                            <a href="${pageContext.request.contextPath}/views/client/pages/orderHistory.jsp">Order History</a>
-                                            <a href="">Logout</a>
+                                            <a class="dropdown-item" href="${pageContext.request.contextPath}/views/client/pages/myProfile.jsp">My Profile</a>
+                                            <a class="dropdown-item" href="${pageContext.request.contextPath}/views/client/pages/orderHistory.jsp">Order History</a>
+                                            <a class="dropdown-item" href="">Log Out</a>
                                         </div>
                                     </div>
                                 </c:otherwise>
@@ -176,13 +173,11 @@
                     <form action="Shop" class="modal-body d-flex align-items-center">
                         <div class="input-group w-75 mx-auto d-flex">
 
-                            <input type="search" class="form-control p-3" placeholder="Keywords" aria-describedby="search-icon-1" name="keyword">
+                            <input type="search" class="form-control p-3" placeholder="Keywords" aria-describedby="search-icon-1" name="keyword" required>
                             <input type="hidden" name="action" value="searchName">
-                            <button type="submit" href="shop.jsp" id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></button>
+                            <button type="submit" id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></button>
                         </div>
                     </form>
-
-
                 </div>
             </div>
         </div>

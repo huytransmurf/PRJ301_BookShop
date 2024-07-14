@@ -28,7 +28,9 @@
                     <div class="col-xl-3">
                         <form action="Shop?action=search" method="get" class="search-form">
                             <div class="input-group w-100 mx-auto d-flex">
-                                <input type="search" name="keyword" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1" required>
+                                <input type="search" name="keyword" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1" required 
+                                       value="<%= request.getAttribute("keyword") != null ? request.getAttribute("keyword") : "" %>">
+                                <input type="hidden" name="priceRange" value="${priceRange}">
                                 <button type="submit" id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></button>
                             </div>
                         </form>
@@ -64,7 +66,7 @@
                                     <ul class="list-unstyled fruite-categorie">
                                         <li>
                                             <div class="d-flex justify-content-between fruite-name">
-                                                <a href="${pageContext.request.contextPath}/Shop?action=loadHome&categoryId=0">
+                                                <a href="${pageContext.request.contextPath}/Shop?action=loadHome&categoryId=0&priceRange=${priceRange}">
                                                     <i class="fas fa-apple-alt me-2"></i>
                                                     All
                                                 </a>
@@ -98,23 +100,28 @@
                                             <input type="hidden" name="keyword" value="${keyword}">
                                         </c:if>   
                                         <div class="mb-2">
-                                            <input type="radio" class="me-2" id="Categories-1" name="priceRange" value="1">
+                                            <input type="radio" class="me-2" id="Categories-2" name="priceRange" value="2"
+                                                   <%= request.getAttribute("priceRange") != null && request.getAttribute("priceRange").equals("1") ? "checked" : "" %>>
                                             <label for="Categories-1">Under 2 USD</label>
                                         </div>
                                         <div class="mb-2">
-                                            <input type="radio" class="me-2" id="Categories-2" name="priceRange" value="2">
+                                            <input type="radio" class="me-2" id="Categories-2" name="priceRange" value="2"
+                                                   <%= request.getAttribute("priceRange") != null && request.getAttribute("priceRange").equals("2") ? "checked" : "" %>>
                                             <label for="Categories-2">2 - 4 USD</label>
                                         </div>
                                         <div class="mb-2">
-                                            <input type="radio" class="me-2" id="Categories-3" name="priceRange" value="3">
+                                            <input type="radio" class="me-2" id="Categories-3" name="priceRange" value="3"
+                                                   <%= request.getAttribute("priceRange") != null && request.getAttribute("priceRange").equals("3") ? "checked" : "" %>>  
                                             <label for="Categories-3">4 - 6 USD</label>
                                         </div>
                                         <div class="mb-2">
-                                            <input type="radio" class="me-2" id="Categories-4" name="priceRange" value="4">
+                                            <input type="radio" class="me-2" id="Categories-4" name="priceRange" value="4"
+                                                   <%= request.getAttribute("priceRange") != null && request.getAttribute("priceRange").equals("4") ? "checked" : "" %>>  
                                             <label for="Categories-4">6 - 8 USD</label>
                                         </div>
                                         <div class="mb-2">
-                                            <input type="radio" class="me-2" id="Categories-5" name="priceRange" value="5">
+                                            <input type="radio" class="me-2" id="Categories-5" name="priceRange" value="5"
+                                                   <%= request.getAttribute("priceRange") != null && request.getAttribute("priceRange").equals("5") ? "checked" : "" %>>  
                                             <label for="Categories-5">Over 8 USD</label>
                                         </div>
                                         <button type="submit" class="btn btn-light col-md-4 border border-primary" style="width: 180px;">Choose</button>
@@ -152,9 +159,6 @@
                                         </c:if>
                                     </c:forEach>
                                 </ul>
-                                <div class="d-flex justify-content-center my-4">
-                                    <a href="#" class="btn border border-secondary px-4 py-3 rounded-pill text-primary w-100">Vew More</a>
-                                </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="position-relative">
@@ -220,7 +224,7 @@
                                     <c:url var="pageUrl" value="Shop">
                                         <c:param name="page" value="${loop.index}"/>
                                         <c:if test="${not empty param.order}">
-                                        <c:param name="order" value="${param.order}"/>
+                                            <c:param name="order" value="${param.order}"/>
                                         </c:if>   
                                         <c:if test="${not empty keyword}">
                                             <c:param name="keyword" value="${keyword}"/>                                   
