@@ -1,70 +1,64 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller;
 
+import dao.implement.CartDao;
+import dao.implement.ProductDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
+import model.Product;
+import model.User;
 
-
-/**
- *
- * @author LAPTOP ACER
- */
 @WebServlet(name = "CartController", urlPatterns = {"/Cart"})
 public class CartController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-   
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-        request.getRequestDispatcher("views/client/pages/cart.jsp").forward(request, response);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        User user = (User) session.getAttribute("account");
+        if (user != null) {
+            ProductDao pDAO = new ProductDao();
+            List<Product> products = pDAO.getProductsByUserID(user.getId());
+
+            request.setAttribute("products", products);
+
+            request.getRequestDispatcher("/views/client/pages/cart.jsp").forward(request, response);
+        }
+
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        User user = (User) session.getAttribute("account");
+        String action = request.getParameter("action");
+
+        if (user != null) {
+            switch (action) {
+
+            case "delete" -> {
+                int productId = Integer.parseInt(request.getParameter("productId"));
+                int userId = user.getId();
+
+                CartDao cartDao = new CartDao();
+                boolean result = cartDao.deleteCartItemByUserIdAndProductId(userId, productId);
+
+                if (result) {
+                    request.getRequestDispatcher("${pageContext.request.contextPath}/Cart").forward(request, response);// Redirect to refresh the cart page
+                } else {
+                    // Handle error
+                    response.getWriter().write("Failed to delete the item.");
+                }
+            }
+            default -> {
+            }
+        }
+        } else {
+            response.sendRedirect("Login"); // Redirect to login page if user is not logged in
+        }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-
 }

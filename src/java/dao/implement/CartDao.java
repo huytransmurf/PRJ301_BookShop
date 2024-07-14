@@ -111,4 +111,30 @@ public class CartDao extends Connector implements GenericDao<Cart> {
         }
         return false;
     }
+    public boolean deleteCartItemByUserIdAndProductId(int userId, int productId) {
+        String query = "DELETE CI FROM CartItem CI " +
+                       "JOIN Cart C ON CI.CartID = C.CartID " +
+                       "WHERE C.UserID = ? AND CI.ProductID = ?";
+
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, userId);
+            stmt.setInt(2, productId);
+
+            int rowsAffected = stmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("CartItem deleted successfully.");
+                return true;
+            } else {
+                System.out.println("No CartItem found with the given UserID and ProductID.");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error deleting CartItem with UserID " + userId + " and ProductID " + productId + ": " + e.getMessage());
+        }
+        return false;
+    }
+    public static void main(String[] args) {
+        boolean isDeleted = new CartDao().deleteCartItemByUserIdAndProductId(2,2);
+    }
 }
