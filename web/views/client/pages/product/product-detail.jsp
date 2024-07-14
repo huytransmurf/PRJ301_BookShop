@@ -121,16 +121,16 @@
                             <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
 
 
-                                <c:forEach var="review" items="${reviews}">
+                                <c:forEach var="r" items="${reviews}">
 
                                     <div class="d-flex">
-                                        <img src="img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
+                                        <img src="${pageContext.request.contextPath}${r.user.avatarURL}" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
                                         <div class="">
                                             <div class="d-flex justify-content-between">
-                                                <h5>Sam Peters</h5>
+                                                <h5>${r.user.firstName} ${r.user.lastName}</h5>
 
                                             </div>
-                                            <p class="text-dark">review </p>
+                                            <p class="text-dark">${r.description}</p>
                                         </div>
                                     </div>
                                 </c:forEach>
@@ -139,21 +139,21 @@
 
                         </div>
                     </div>
-                    <form action="#">
+                    <form action="${pageContext.request.contextPath}/ReviewServlet" method="POST">
                         <h4 class="mb-5 fw-bold">Leave a Reply</h4>
                         <div class="row g-4">
 
                             <div class="col-lg-12">
                                 <div class="border-bottom rounded my-4">
-                                    <textarea name="" id="" class="form-control border-0" cols="30" rows="8" placeholder="Your Review *" spellcheck="false"></textarea>
+                                    <textarea name="cmt" class="form-control border-0" cols="30" rows="8" placeholder="Your Review *" spellcheck="false"></textarea>
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="d-flex justify-content-between py-3 mb-5">
                                     <div class="d-flex align-items-center">
-
+                                        <input type="hidden" name="productId" value="${product.productID}">
                                     </div>
-                                    <a href="#" class="btn border border-secondary text-primary rounded-pill px-4 py-3"> Post Comment</a>
+                                    <button type="submit" class="btn border border-seacondary text-primary rounded-pill px-4 py-3">Post Comment</button>
                                 </div>
                             </div>
                         </div>
@@ -163,10 +163,14 @@
             <div class="col-lg-4 col-xl-3">
                 <div class="row g-4 fruite">
                     <div class="col-lg-12">
-                        <div class="input-group w-100 mx-auto d-flex mb-4">
-                            <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
-                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
-                        </div>
+                        <form action="Shop?action=search" method="get" class="search-form">
+                            <div class="input-group w-100 mx-auto d-flex">
+                                <input type="search" name="keyword" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1" required 
+                                       value="<%= request.getAttribute("keyword") != null ? request.getAttribute("keyword") : "" %>">
+                                <input type="hidden" name="priceRange" value="${priceRange}">
+                                <button type="submit" id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></button>
+                            </div>
+                        </form>
                         <div class="mb-4">
                             <h4>Categories</h4>
                             <ul class="list-unstyled fruite-categorie">
@@ -217,9 +221,6 @@
                                 </c:if>
                             </c:forEach>
                         </ul>
-                    </div>
-                    <div class="d-flex justify-content-center my-4">
-                        <a href="#" class="btn border border-secondary px-4 py-3 rounded-pill text-primary w-100">Vew More</a>
                     </div>
                 </div>
                 <div class="col-lg-12">

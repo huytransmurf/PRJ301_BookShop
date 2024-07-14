@@ -43,8 +43,7 @@ public class ProductController extends HttpServlet {
         String id = request.getParameter("id");
         Product product = new ProductDao().getById(Integer.parseInt(id));
         
-        ReviewDao reviewDao =  new ReviewDao();
-        List<Review> reviews = reviewDao.getReviewsByProductId(product.getProductID());
+        List<Review> reviews = new ReviewDao().getReviewsByProductId(Integer.parseInt(id));
         request.setAttribute("reviews", reviews );
         request.setAttribute("product", product);
         request.setAttribute("products", products);
