@@ -108,8 +108,8 @@
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                    <a href="Order" class="dropdown-item">Order</a>
-                                    <a href="Cart" class="dropdown-item">Cart</a>
+                                    <a href="${pageContext.request.contextPath}/Order" class="dropdown-item">Order</a>
+                                    <a href="${pageContext.request.contextPath}/Cart" class="dropdown-item">Cart</a>
                                     <a href="${pageContext.request.contextPath}/ReviewServlet" class="dropdown-item">Testimonial</a>
                                 </div>
                             </div>
@@ -149,7 +149,7 @@
                                         <a href="UserServlet?action=detail" class="dropdown-item">
                                             <i class="fa fa-user-circle fa-1x"></i>Account
                                         </a> 
-                                        <a href="LogoutServlet" class="dropdown-item">
+                                        <a href="${pageContext.request.contextPath}/LogoutServlet" class="dropdown-item">
                                             <i class="fas fa-sign-out-alt"></i>Log out
                                         </a> 
 
