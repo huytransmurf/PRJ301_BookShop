@@ -6,15 +6,8 @@
         <div class="form-container sign-in-container">
             <form action="${pageContext.request.contextPath}/Login" method="post">
                 <h1>Sign in</h1>
-                <div class="social-container">
-                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-                <span>or use your account</span>
                 <input type="email" name="username" placeholder="Email" required />
                 <input type="password" name="password" placeholder="Password" required />
-                <a href="#">Forgot your password?</a>
                 <button type="submit">Sign In</button>
                 <c:if test="${alert != null}">
                     <p style="color: red;">"${alert}"</p>
@@ -22,17 +15,11 @@
             </form>
         </div>
         <div class="form-container sign-up-container">
-            <form action="#">
+            <form action="${pageContext.request.contextPath}/RegisterServlet" method="post">
                 <h1>Create Account</h1>
-                <div class="social-container">
-                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-                <span>or use your email for registration</span>
-                <input type="text" placeholder="Name" />
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
+                <input type="text" name="name" placeholder="Name" pattern="(\S+\s){1,}\S+" title="Please enter at least two words separated by space" required/>
+                <input type="email" name="email" placeholder="Email" required/>
+                <input type="password" name="password" placeholder="Password" required/>
                 <button>Sign Up</button>
             </form>
         </div>
