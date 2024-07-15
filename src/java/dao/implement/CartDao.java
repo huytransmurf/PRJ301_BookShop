@@ -96,15 +96,21 @@ public class CartDao extends Connector implements GenericDao<Cart> {
 
     @Override
     public boolean delete(int id) {
-        String query = "DELETE FROM Cart WHERE CartID = ?";
+        String deleteCartItemsQuery = "DELETE FROM Cart WHERE CartID = ?";
+        String deleteCartQuery = "DELETE FROM Cart WHERE CartID = ?";
 
-        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnect()) {
+            // Xóa các bản ghi liên quan trong bảng CartItem trước
+            try (PreparedStatement stmt = conn.prepareStatement(deleteCartItemsQuery)) {
+                stmt.setInt(1, id);
+                stmt.executeUpdate();
+            }
 
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
-
-            System.out.println("Cart deleted successfully.");
-            return true;
+            // Xóa các bản ghi liên quan trong bảng Cart
+            try (PreparedStatement stmt = conn.prepareStatement(deleteCartQuery)) {
+                stmt.setInt(1, id);
+                stmt.executeUpdate();
+            }
 
         } catch (SQLException e) {
             System.out.println("Error deleting cart with ID " + id + ": " + e.getMessage());
@@ -134,7 +140,26 @@ public class CartDao extends Connector implements GenericDao<Cart> {
         }
         return false;
     }
-    public static void main(String[] args) {
-        boolean isDeleted = new CartDao().deleteCartItemByUserIdAndProductId(2,2);
+    
+    public Cart getCartByUserId(int id) {
+        Cart cart = null;
+        String query = "SELECT * FROM Cart WHERE UserId = ?";
+
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                cart = new Cart();
+                cart.setId(rs.getInt("CartID"));
+                cart.setUserID(rs.getInt("UserID"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error fetching cart with ID " + id + ": " + e.getMessage());
+        }
+
+        return cart;
     }
 }

@@ -56,7 +56,7 @@ public class UserDao extends Connector implements GenericDao<User> {
 
         return totalCustomers;
     }
-    
+
     @Override
     public User getById(int id) {
         User user = null;
@@ -74,7 +74,7 @@ public class UserDao extends Connector implements GenericDao<User> {
                         rs.getString("LastName"),
                         rs.getString("Address"),
                         rs.getString("Role"),
-                        rs.getString("AvatarURL"), 
+                        rs.getString("AvatarURL"),
                         rs.getString("Password")
                 );
             }
@@ -88,7 +88,7 @@ public class UserDao extends Connector implements GenericDao<User> {
 
     @Override
     public boolean insert(User user) {
-        String query = "INSERT INTO [User] (FirstName, LastName, Address, Role, AvatarURL) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO [User] (FirstName, LastName, Address, Role, AvatarURL, Email, Password) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
@@ -97,6 +97,8 @@ public class UserDao extends Connector implements GenericDao<User> {
             stmt.setString(3, user.getAddress());
             stmt.setString(4, user.getRole());
             stmt.setString(5, user.getAvatarURL());
+            stmt.setString(6, user.getEmail());
+            stmt.setString(7, user.getPassword());
             stmt.executeUpdate();
 
             System.out.println("User inserted successfully.");
@@ -276,7 +278,7 @@ public class UserDao extends Connector implements GenericDao<User> {
         } catch (Exception e) {
         }
     }
-    
+
     public boolean updateImageUrl(User user) {
         String query = "UPDATE [User] set AvatarURL = ? WHERE UserID = ?";
 
@@ -292,5 +294,76 @@ public class UserDao extends Connector implements GenericDao<User> {
             System.out.println("Error updating user with ID " + user.getId() + ": " + e.getMessage());
         }
         return false;
+    }
+
+    public int getUserIdByFirstName(String firstName) {
+        int userId = -1; // Default value if no user is found
+        String query = "SELECT UserID FROM [User] WHERE FirstName = ?";
+
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, firstName);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                userId = rs.getInt("UserID");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error fetching user ID with first name " + firstName + ": " + e.getMessage());
+        }
+
+        return userId;
+    }
+
+    public int register(User user) {
+        String query = "INSERT INTO [User] (FirstName, LastName, Address, Role, AvatarURL, Email, Password) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        int userId = -1;
+
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
+            stmt.setString(1, user.getFirstName());
+            stmt.setString(2, user.getLastName());
+            stmt.setString(3, user.getAddress());
+            stmt.setString(4, user.getRole());
+            stmt.setString(5, user.getAvatarURL());
+            stmt.setString(6, user.getEmail());
+            stmt.setString(7, user.getPassword());
+
+            int affectedRows = stmt.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Creating user failed, no rows affected.");
+            }
+
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    userId = generatedKeys.getInt(1);
+                    System.out.println("User inserted successfully with ID: " + userId);
+                } else {
+                    throw new SQLException("Creating user failed, no ID obtained.");
+                }
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error inserting user: " + e.getMessage());
+        }
+
+        return userId;
+    }
+
+    public static void main(String[] args) {
+        // Khởi tạo các biến
+        String firstName = "LOI";
+        String lastName = "Doe";
+        String email = "john.doe@example.com";
+        String password = "securepassword";
+
+        // Tạo một đối tượng UserDao
+        UserDao userDao = new UserDao();
+
+        // Tạo một đối tượng User mới để đăng ký
+        User newUser = new User(0, firstName, lastName, "", "", "", email, password);
+
+        int userId = userDao.register(newUser);
+        System.out.println("User registered successfully with ID: " + userId);
     }
 }

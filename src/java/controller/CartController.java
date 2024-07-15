@@ -1,6 +1,7 @@
 package controller;
 
 import dao.implement.CartDao;
+import dao.implement.CartItemDao;
 import dao.implement.ProductDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,6 +11,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
+import model.Cart;
+import model.CartItem;
 import model.Product;
 import model.User;
 
@@ -21,10 +24,14 @@ public class CartController extends HttpServlet {
         HttpSession session = request.getSession(false);
         User user = (User) session.getAttribute("account");
         if (user != null) {
-            ProductDao pDAO = new ProductDao();
-            List<Product> products = pDAO.getProductsByUserID(user.getId());
+            CartDao pDAO = new CartDao();
+            Cart cart = pDAO.getCartByUserId(user.getId());
 
-            request.setAttribute("products", products);
+            CartItemDao cartItemDao = new CartItemDao();
+
+            List<CartItem> cartItems = cartItemDao.getCartItemByCartId(cart.getId());
+
+            request.setAttribute("cartItems", cartItems);
 
             request.getRequestDispatcher("/views/client/pages/cart.jsp").forward(request, response);
         }
@@ -34,21 +41,18 @@ public class CartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-        User user = (User) session.getAttribute("account");
         String action = request.getParameter("action");
 
-        if (user != null) {
-            switch (action) {
+        switch (action) {
 
             case "delete" -> {
-                int productId = Integer.parseInt(request.getParameter("productId"));
-                int userId = user.getId();
+                int cartId = Integer.parseInt(request.getParameter("id"));
 
-                CartDao cartDao = new CartDao();
-                boolean result = cartDao.deleteCartItemByUserIdAndProductId(userId, productId);
+                CartItemDao cartDao = new CartItemDao();
+                boolean result = cartDao.delete(cartId);
 
                 if (result) {
-                    request.getRequestDispatcher("${pageContext.request.contextPath}/Cart").forward(request, response);// Redirect to refresh the cart page
+                response.sendRedirect(request.getContextPath() + "/Cart");
                 } else {
                     // Handle error
                     response.getWriter().write("Failed to delete the item.");
@@ -57,8 +61,6 @@ public class CartController extends HttpServlet {
             default -> {
             }
         }
-        } else {
-            response.sendRedirect("Login"); // Redirect to login page if user is not logged in
-        }
+
     }
 }

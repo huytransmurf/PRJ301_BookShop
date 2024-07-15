@@ -12,7 +12,13 @@
     </ol>
 </div>
 <!-- Single Page Header End -->
-
+<c:if test="${not empty sessionScope.message}">
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        ${sessionScope.message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <c:remove var="message" scope="session"/>
+</c:if>
 <!-- Single Product Start -->
 <div class="container-fluid py-5 mt-5">
     <div class="container py-5">
