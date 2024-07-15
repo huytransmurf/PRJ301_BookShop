@@ -6,7 +6,8 @@ public class OrderDetail {
     private int productID;
     private int quantity;
     private double cost;
-
+    private Product product;
+    
     public OrderDetail() {
     }
 
@@ -56,6 +57,14 @@ public class OrderDetail {
 
     public void setCost(double cost) {
         this.cost = cost;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override

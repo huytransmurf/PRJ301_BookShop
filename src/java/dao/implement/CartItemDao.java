@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.CartItem;
+import model.Product;
 
 public class CartItemDao extends Connector implements GenericDao<CartItem> {
 
@@ -17,9 +18,7 @@ public class CartItemDao extends Connector implements GenericDao<CartItem> {
         List<CartItem> cartItems = new ArrayList<>();
         String query = "SELECT * FROM CartItem";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
                 CartItem cartItem = new CartItem();
@@ -43,8 +42,7 @@ public class CartItemDao extends Connector implements GenericDao<CartItem> {
         CartItem cartItem = null;
         String query = "SELECT * FROM CartItem WHERE CartItemID = ?";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -69,8 +67,7 @@ public class CartItemDao extends Connector implements GenericDao<CartItem> {
     public boolean insert(CartItem cartItem) {
         String query = "INSERT INTO CartItem (Quantity, TotalCost, CartID, ProductID) VALUES (?, ?, ?, ?)";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setInt(1, cartItem.getQuantity());
             stmt.setDouble(2, cartItem.getTotalCost());
@@ -90,8 +87,7 @@ public class CartItemDao extends Connector implements GenericDao<CartItem> {
     public boolean update(CartItem cartItem) {
         String query = "UPDATE CartItem SET Quantity = ?, TotalCost = ?, CartID = ?, ProductID = ? WHERE CartItemID = ?";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setInt(1, cartItem.getQuantity());
             stmt.setDouble(2, cartItem.getTotalCost());
@@ -112,8 +108,61 @@ public class CartItemDao extends Connector implements GenericDao<CartItem> {
     public boolean delete(int id) {
         String query = "DELETE FROM CartItem WHERE CartItemID = ?";
 
-        try (Connection conn = getConnect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+
+            System.out.println("Cart item deleted successfully.");
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Error deleting cart item with ID " + id + ": " + e.getMessage());
+        }
+        return false;
+    }
+
+    public List<CartItem> getCartItemByCartId(int cartId) {
+        List<CartItem> cartItems = new ArrayList<>();
+        String query = "SELECT ci.CartItemID, ci.Quantity, ci.TotalCost, ci.CartID, ci.ProductID, "
+                + "p.ProductID, p.FullName, p.Description, p.Price, p.ImageURL "
+                + "FROM CartItem ci "
+                + "JOIN Product p ON ci.ProductID = p.ProductID "
+                + "WHERE ci.CartID = ?";
+
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, cartId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    CartItem cartItem = new CartItem();
+                    cartItem.setId(rs.getInt("CartItemID"));
+                    cartItem.setQuantity(rs.getInt("Quantity"));
+                    cartItem.setTotalCost(rs.getDouble("TotalCost"));
+                    cartItem.setCartID(rs.getInt("CartID"));
+                    cartItem.setProductID(rs.getInt("ProductID"));
+
+                    Product product = new Product();
+                    product.setProductID(rs.getInt("ProductID"));
+                    product.setFullName(rs.getString("FullName"));
+                    product.setDescription(rs.getString("Description"));
+                    product.setPrice(rs.getDouble("Price"));
+                    product.setImageURL(rs.getString("ImageURL"));
+                    
+                    cartItem.setProduct(product);
+
+                    cartItems.add(cartItem);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching cart items: " + e.getMessage());
+        }
+
+        return cartItems;
+    }
+    
+    public boolean deleteCartItemByCartId(int id) {
+        String query = "DELETE FROM CartItem WHERE CartID = ?";
+
+        try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setInt(1, id);
             stmt.executeUpdate();

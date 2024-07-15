@@ -406,7 +406,7 @@
                                                 <li class="nav-item">
                                                     <a
                                                         class="nav-link active"
-                                                        href="${pageContext.request.contextPath}/views/admin/index.jsp"
+                                                        href="${pageContext.request.contextPath}/AdminServlet"
                                                         title="Overview"
                                                         >
                                                         <span
@@ -443,7 +443,6 @@
                                                                 <span class="text-truncate">Products</span>
                                                             </a>
                                                         </li>
-
 
                                                     </ul>
                                                 </li>
