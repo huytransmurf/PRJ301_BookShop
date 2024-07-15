@@ -236,7 +236,7 @@ public class OrderDao extends Connector implements GenericDao<Order> {
 
     public int getTotalOrderCount() {
         int totalCount = 0;
-        String query = "SELECT COUNT(*) FROM Order";
+        String query = "SELECT COUNT(*) FROM [Order]";
 
         try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
             if (rs.next()) {

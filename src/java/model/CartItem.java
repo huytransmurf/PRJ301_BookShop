@@ -6,7 +6,8 @@ public class CartItem {
     private double totalCost;
     private int cartID;
     private int productID;
-
+    private Product product;
+    
     public CartItem() {
     }
 
@@ -57,6 +58,16 @@ public class CartItem {
     public void setProductID(int productID) {
         this.productID = productID;
     }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+    
+    
 
     @Override
     public String toString() {

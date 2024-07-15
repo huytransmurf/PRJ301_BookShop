@@ -4,7 +4,6 @@
 
 <jsp:include page="/views/client/includes/header.jsp"/>
 
-<!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
     <h1 class="text-center text-white display-6">Cart</h1>
     <ol class="breadcrumb justify-content-center mb-0">
@@ -19,66 +18,51 @@
 <div class="container-fluid py-5">
     <div class="container py-5">
         <div class="table-responsive">
-            <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Products</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Total</th>
-                    <th scope="col">Handle</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="product" items="${products}">
+            <form action="${pageContext.request.contextPath}/CreateOrder" method="post">
+                <table class="table">
+                    <thead>
                         <tr>
-                            <th scope="row">
-                                <div class="d-flex align-items-center">
-                                    <img src="${pageContext.request.contextPath}${product.imageURL}" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
-                                </div>
-                            </th>
-                            <td>
-                                <p class="mb-0 mt-4">${product.fullName}</p>
-                            </td>
-                            <td>
-                                <p class="mb-0 mt-4"><fmt:formatNumber value="${product.price}" type="currency" currencySymbol="$" minFractionDigits="2" maxFractionDigits="2"/></p>
-                            </td>
-                            <td>
-                                <div class="input-group quantity mt-4" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border">
-                                            <i class="fa fa-minus"></i>
-                                        </button>
+                            <th scope="col">Products</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Handle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="cartItem" items="${cartItems}">
+                            <tr>
+                                <th scope="row">
+                                    <div class="d-flex align-items-center">
+                                        <img src="${pageContext.request.contextPath}/${cartItem.product.imageURL}" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
                                     </div>
-                                    <input type="text" class="form-control form-control-sm text-center border-0" value="${product.quantity}">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <p class="mb-0 mt-4"><fmt:formatNumber value="${product.price * product.quantity}" type="currency" currencySymbol="$" minFractionDigits="2" maxFractionDigits="2"/></p>
-                            </td>
-                            <td>
-                                <form action="Cart" method="post">
-                                    <input type="hidden" name="productId" value="${product.productID}">
-                                    <input type="hidden" name="action" value="delete">
-                                    <button type="submit" class="btn btn-md rounded-circle bg-light border mt-4">
+                                </th>
+                                <td>
+                                    <p class="mb-0 mt-4">${cartItem.product.fullName}</p>
+                                </td>
+                                <td>
+                                    <p class="mb-0 mt-4"><fmt:formatNumber value="${cartItem.product.price}" type="currency" currencySymbol="$" minFractionDigits="2" maxFractionDigits="2"/></p>
+                                </td>
+                                <td style="padding-top: 28px;">
+                                    <input type="number" name="quantity_${cartItem.product.productID}" value="${cartItem.quantity}" min="1" max="999" required>
+                                </td>
+                                <td>
+                                    <p class="mb-0 mt-4"><fmt:formatNumber value="${cartItem.product.price * cartItem.quantity}" type="currency" currencySymbol="$" minFractionDigits="2" maxFractionDigits="2"/></p>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-md rounded-circle bg-light border mt-4 delete-btn">
                                         <i class="fa fa-times text-danger"></i>
                                     </button>
-                                </form>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-        </div>
-        <div class="mt-5">
-            <input type="text" class="border-0 border-bottom rounded me-5 py-3 mb-4" placeholder="Coupon Code">
-            <button class="btn border-secondary rounded-pill px-4 py-3 text-primary" type="button">Apply Coupon</button>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+                <div class="mt-5">
+                    <button type="submit" class="btn btn-primary rounded-pill px-4 py-3 text-white ms-3">Proceed to Checkout</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
