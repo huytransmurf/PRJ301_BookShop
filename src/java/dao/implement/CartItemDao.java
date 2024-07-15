@@ -83,6 +83,56 @@ public class CartItemDao extends Connector implements GenericDao<CartItem> {
         return false;
     }
 
+    public boolean insertCartItem(int userID, int quantity, int productID) {
+        double price = 0.0;
+        int cartID = 0;
+        String getPriceQuery = "SELECT Price FROM Product WHERE ProductID = ?";
+        String getCartIDQuery = "SELECT CartID FROM Cart WHERE UserID = ?";
+        String insertCartItemQuery = "INSERT INTO CartItem (Quantity, TotalCost, CartID, ProductID) VALUES (?, ?, ?, ?)";
+
+        try (Connection conn = getConnect(); PreparedStatement getPriceStmt = conn.prepareStatement(getPriceQuery); PreparedStatement getCartIDStmt = conn.prepareStatement(getCartIDQuery); PreparedStatement insertStmt = conn.prepareStatement(insertCartItemQuery)) {
+
+            // Get product price
+            getPriceStmt.setInt(1, productID);
+            try (ResultSet rs = getPriceStmt.executeQuery()) {
+                if (rs.next()) {
+                    price = rs.getDouble("Price");
+                } else {
+                    System.out.println("Product not found with ID: " + productID);
+                    return false;
+                }
+            }
+
+            // Get cart ID
+            getCartIDStmt.setInt(1, userID);
+            try (ResultSet rs = getCartIDStmt.executeQuery()) {
+                if (rs.next()) {
+                    cartID = rs.getInt("CartID");
+                } else {
+                    System.out.println("Cart not found for user with ID: " + userID);
+                    return false;
+                }
+            }
+
+            // Calculate total cost
+            double totalCost = price * quantity;
+
+            // Insert cart item
+            insertStmt.setInt(1, quantity);
+            insertStmt.setDouble(2, totalCost);
+            insertStmt.setInt(3, cartID);
+            insertStmt.setInt(4, productID);
+            insertStmt.executeUpdate();
+
+            System.out.println("Cart item inserted successfully.");
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println("Error inserting cart item: " + e.getMessage());
+        }
+        return false;
+    }
+
     @Override
     public boolean update(CartItem cartItem) {
         String query = "UPDATE CartItem SET Quantity = ?, TotalCost = ?, CartID = ?, ProductID = ? WHERE CartItemID = ?";
@@ -109,6 +159,7 @@ public class CartItemDao extends Connector implements GenericDao<CartItem> {
         String query = "DELETE FROM CartItem WHERE CartItemID = ?";
 
         try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
+
 
             stmt.setInt(1, id);
             stmt.executeUpdate();
@@ -164,6 +215,7 @@ public class CartItemDao extends Connector implements GenericDao<CartItem> {
 
         try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
+
             stmt.setInt(1, id);
             stmt.executeUpdate();
 
@@ -173,5 +225,8 @@ public class CartItemDao extends Connector implements GenericDao<CartItem> {
             System.out.println("Error deleting cart item with ID " + id + ": " + e.getMessage());
         }
         return false;
+    }
+    public static void main(String[] args) {
+        boolean isInserted = new CartItemDao().insertCartItem(1,5,3);
     }
 }
