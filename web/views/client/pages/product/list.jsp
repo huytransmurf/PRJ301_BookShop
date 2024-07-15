@@ -189,7 +189,7 @@
                                                 <% String priceRange = request.getParameter("priceRange"); %>
 
                                                 <p class="text-dark fs-5 fw-bold mb-0">$ ${p.price} / kg</p>
-                                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                <a href="${pageContext.request.contextPath}/ProductController?id=${p.productID}&action=loadProduct" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
                                             </div>
                                         </div>
                                     </div>
