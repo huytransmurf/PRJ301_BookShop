@@ -63,7 +63,7 @@ public class AddToCartServlet extends HttpServlet {
         User account = (User) session.getAttribute("account");
         
         if (account == null) {
-            response.sendRedirect("login.jsp"); // Redirect to login page if user is not logged in
+            response.sendRedirect(request.getContextPath() + "/views/client/pages/login.jsp"); // Redirect to login page if user is not logged in
             return;
         }
 
