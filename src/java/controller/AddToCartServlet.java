@@ -59,7 +59,7 @@ public class AddToCartServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
         User account = (User) session.getAttribute("account");
         
         if (account == null) {
@@ -72,23 +72,24 @@ public class AddToCartServlet extends HttpServlet {
         int productId = Integer.parseInt(request.getParameter("productId"));
         int productQuantity = Integer.parseInt(request.getParameter("productQuantity"));
 
-        // Kiểm tra số lượng sản phẩm
+        // Check product quantity
         int totalProductCount = pDao.getTotalProductCount();
         if (productQuantity > totalProductCount) {
-            request.setAttribute("errorMessage", "Số lượng sản phẩm vượt quá giới hạn cho phép.");
-            request.getRequestDispatcher("error.jsp").forward(request, response);
+            session.setAttribute("message", "Số lượng sản phẩm vượt quá giới hạn cho phép.");
+            response.sendRedirect("ProductDetail.jsp"); // Redirect back to the product detail page
             return;
         }
 
-        // Insert sản phẩm vào giỏ hàng
+        // Insert product into cart
         int userId = account.getId();
         boolean isInserted = ciDao.insertCartItem(userId, productQuantity, productId);
 
         if (isInserted) {
-            response.sendRedirect("cart.jsp"); // Redirect to cart page after successful insertion
+            session.setAttribute("message", "Thêm vào giỏ hàng thành công!");
         } else {
-            request.setAttribute("errorMessage", "Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng.");
-            request.getRequestDispatcher("error.jsp").forward(request, response);
+            session.setAttribute("message", "Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng.");
         }
+        
+        response.sendRedirect(request.getContextPath()+"/ProductController?id="+productId+"&action=loadProduct"); // Redirect back to the product detail page
     }
 }

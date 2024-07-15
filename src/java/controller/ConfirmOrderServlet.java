@@ -89,6 +89,6 @@ public class ConfirmOrderServlet extends HttpServlet {
         request.setAttribute("orderDetails", orderDetails);
 
         // Redirect to order details page
-        request.getRequestDispatcher("/orderDetails.jsp").forward(request, response);
+        response.sendRedirect(request.getContextPath()+"/Home");
     }
 }

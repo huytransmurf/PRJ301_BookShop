@@ -159,7 +159,10 @@ public class CartItemDao extends Connector implements GenericDao<CartItem> {
         String query = "DELETE FROM CartItem WHERE CartItemID = ?";
 
         try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
+<<<<<<< HEAD
+=======
 
+>>>>>>> 9b7b1ae5b72cdafffc76d1cf535068dfef27225c
 
             stmt.setInt(1, id);
             stmt.executeUpdate();
@@ -214,7 +217,10 @@ public class CartItemDao extends Connector implements GenericDao<CartItem> {
         String query = "DELETE FROM CartItem WHERE CartID = ?";
 
         try (Connection conn = getConnect(); PreparedStatement stmt = conn.prepareStatement(query)) {
+<<<<<<< HEAD
+=======
 
+>>>>>>> 9b7b1ae5b72cdafffc76d1cf535068dfef27225c
 
             stmt.setInt(1, id);
             stmt.executeUpdate();
@@ -226,7 +232,5 @@ public class CartItemDao extends Connector implements GenericDao<CartItem> {
         }
         return false;
     }
-    public static void main(String[] args) {
-        boolean isInserted = new CartItemDao().insertCartItem(1,5,3);
-    }
+  
 }
