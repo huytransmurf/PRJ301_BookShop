@@ -76,7 +76,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = req.getSession(true);
             session.setAttribute("account", user);
             if ("Admin".equals(user.getRole())) {
-                resp.sendRedirect("views/admin/index.jsp");
+                resp.sendRedirect(req.getContextPath()+"/AdminServlet");
             } else {
                 resp.sendRedirect(req.getContextPath() + "/Home");
             }

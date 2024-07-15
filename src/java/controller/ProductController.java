@@ -38,6 +38,8 @@ public class ProductController extends HttpServlet {
 
 
     private void getProductById(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       
+        
         List<Product> products = new ProductDao().getAll();
         List<Product> features = new ProductDao().getFeatureProduct();
         String id = request.getParameter("id");

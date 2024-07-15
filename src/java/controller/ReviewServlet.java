@@ -54,8 +54,9 @@ public class ReviewServlet extends HttpServlet {
 
         HttpSession session = request.getSession(false);
         User user = (User) session.getAttribute("account");
+        request.setAttribute("name", user.getFirstName() + user.getLastName());
      
-        new ReviewDao().insert(new Review(0, cmt, 1, Integer.parseInt(productId)));
+        new ReviewDao().insert(new Review(0, cmt, user.getId(), Integer.parseInt(productId)));
         response.sendRedirect("/PRJ301_BookShop/ProductController?id=" + productId + "&action=loadProduct");
     }
 
