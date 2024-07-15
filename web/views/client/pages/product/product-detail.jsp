@@ -49,14 +49,14 @@
                             <p class="mb-4">${product.description}</p>
                             <div class="input-group quantity mb-5" style="width: 100px;">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
+                                    <button type="button" class="btn btn-sm btn-minus rounded-circle bg-light border" >
                                         <i class="fa fa-minus"></i>
                                     </button>
                                 </div>
                                 <c:set var="maxQuantity" value="${product.quantity}" />
                                 <input type="text" class="form-control form-control-sm text-center border-0" name="productQuantity" value="1"/> 
                                 <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                    <button type="button" class="btn btn-sm btn-plus rounded-circle bg-light border">
                                         <i class="fa fa-plus"></i>
                                     </button>
                                 </div>  

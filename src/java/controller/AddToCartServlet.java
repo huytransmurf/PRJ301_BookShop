@@ -61,9 +61,9 @@ public class AddToCartServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         User account = (User) session.getAttribute("account");
-        
+
         if (account == null) {
-            response.sendRedirect("login.jsp"); // Redirect to login page if user is not logged in
+            response.sendRedirect(request.getContextPath() + "/views/client/pages/login.jsp"); // Redirect to login page if user is not logged in
             return;
         }
 
@@ -89,7 +89,7 @@ public class AddToCartServlet extends HttpServlet {
         } else {
             session.setAttribute("message", "Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng.");
         }
-        
-        response.sendRedirect(request.getContextPath()+"/ProductController?id="+productId+"&action=loadProduct"); // Redirect back to the product detail page
+
+        response.sendRedirect(request.getContextPath() + "/ProductController?id=" + productId + "&action=loadProduct"); // Redirect back to the product detail page
     }
 }
